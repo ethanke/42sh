@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Tue Nov 17 11:29:13 2015 Gaëtan Léandre
-** Last update Sat Apr  9 04:06:19 2016 Gaëtan Léandre
+** Last update Thu May 26 03:39:19 2016 Gaëtan Léandre
 */
 
 #ifndef 		_LIST_

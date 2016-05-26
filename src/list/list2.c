@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 21:31:45 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:10:14 2016 Gaëtan Léandre
+** Last update Thu May 26 03:39:00 2016 Gaëtan Léandre
 */
 
 #include "list.h"
