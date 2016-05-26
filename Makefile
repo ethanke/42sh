@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Thu May 26 02:33:47 2016 Victor Sousa
+## Last update Thu May 26 04:18:57 2016 Gaëtan Léandre
 ##
 
 NAME	=	42sh
@@ -42,7 +42,9 @@ SRC		+=	$(LISTDIR)/list.c			\
 			$(LISTDIR)/list2.c
 
 ## BUILTIN ##
-SRC		+=	$(BLTINDIR)/builds.c
+SRC		+=	$(BLTINDIR)/builds.c			\
+			$(BLTINDIR)/cd.c			\
+			$(BLTINDIR)/echo.c
 
 ## UTILS ##
 SRC		+=	$(UTILSDIR)/utils.c			\
