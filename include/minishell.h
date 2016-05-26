@@ -5,20 +5,21 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Tue Apr 12 18:36:07 2016 Gaëtan Léandre
+** Last update Thu May 26 02:25:39 2016 Victor Sousa
 */
 
 #ifndef 		_MINISHELL_
 # define 		_MINISHELL_
 
-#include 		<sys/types.h>
-#include 		<stdio.h>
-#include 		<sys/wait.h>
-#include		<signal.h>
-#include 		<dirent.h>
-#include 		<unistd.h>
-#include 		"list.h"
-#include 		"get_next_line.h"
+# include		<string.h>
+# include 		<sys/types.h>
+# include 		<stdio.h>
+# include 		<sys/wait.h>
+# include		<signal.h>
+# include 		<dirent.h>
+# include 		<unistd.h>
+# include 		"list.h"
+# include 		"get_next_line.h"
 
 void			disp_pwd(char *pwd);
 void			find_name(t_dlist *dlist, char **cmd);
@@ -33,6 +34,7 @@ void			my_putchar(char c);
 void			my_putstr(char *str);
 int			my_strcmp(char *a, char *b);
 char			*my_strcat(char *a, char *b);
+char			*strdup(char *str);
 char			*my_strcat_no_free(char *a, char *b);
 void			my_env(t_dlist *dlist);
 void			my_setenv(t_dlist *dlist, char *name, char *params);

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Thu May 26 00:08:24 2016 Victor Sousa
-** Last update Thu May 26 00:08:25 2016 Victor Sousa
+** Last update Thu May 26 02:25:48 2016 Victor Sousa
 */
 
 #include	"minishell.h"
@@ -27,10 +27,7 @@ char		*modular_pwd(char boolean, char *new_pwd)
     {
       if (pwd != NULL)
 	free(pwd);
-      if ((pwd = malloc(my_strlen(new_pwd) + 1)) == NULL)
-	return (NULL);
-      pwd[0] = '\0';
-      pwd = my_strcat_no_free(pwd, new_pwd);
+      pwd = strdup(new_pwd);
     }
   return (pwd);
 }
