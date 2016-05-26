@@ -8,7 +8,7 @@
 ## Last update Tue Apr 12 18:24:42 2016 Gaëtan Léandre
 ##
 
-NAME	=	mysh
+NAME	=	42sh
 
 SRC	=	src/main.c			\
 		src/list.c			\
@@ -21,7 +21,9 @@ SRC	=	src/main.c			\
 		src/my_getnbr.c			\
 		src/utils2.c			\
 		src/list2.c			\
-		src/pipe.c
+		src/pipe.c			\
+		src/sighandler.c		\
+		src/modular_var.c
 
 OBJ	=	$(SRC:.c=.o)
 

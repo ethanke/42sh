@@ -80,3 +80,31 @@ char			*my_strcat(char *a, char *b)
   free(b);
   return (str);
 }
+
+char			*my_strcat_no_free(char *a, char *b)
+{
+  int			size;
+  char			*str;
+  int			i;
+  int			j;
+
+  size = my_strlen(a) + my_strlen(b) + 2;
+  if ((str = malloc(size)) == NULL)
+    return (NULL);
+  i = 0;
+  while (a[i])
+    {
+      str[i] = a[i];
+      i++;
+    }
+  str[i++] = '/';
+  j = 0;
+  while (b[j])
+    {
+      str[i] = b[j];
+      i++;
+      j++;
+    }
+  str[i] = '\0';
+  return (str);
+}

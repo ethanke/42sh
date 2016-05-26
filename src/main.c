@@ -99,8 +99,9 @@ int			main(int ac, char **av, char **env)
   if ((dlist = create_dlist()) == NULL)
     return (-1);
   get_env(env, dlist);
-  disp_pwd(dlist->pwd);
-  signal(SIGINT, SIG_IGN);
+  modular_pwd(1, dlist->pwd);
+  disp_pwd(modular_pwd(0, NULL));
+  signal(SIGINT, sighandler);
   while ((cmd = get_next_line(0)) != NULL)
     {
       i = -1;
@@ -108,7 +109,8 @@ int			main(int ac, char **av, char **env)
       while (test && test[++i])
 	make_pipe(test[i], dlist);
       free_tabs(test);
-      disp_pwd(dlist->pwd);
+      modular_pwd(1, dlist->pwd);
+      disp_pwd(modular_pwd(0, NULL));
     }
   my_putchar('\n');
   return (0);

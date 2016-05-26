@@ -33,6 +33,7 @@ void			my_putchar(char c);
 void			my_putstr(char *str);
 int			my_strcmp(char *a, char *b);
 char			*my_strcat(char *a, char *b);
+char			*my_strcat_no_free(char *a, char *b);
 void			my_env(t_dlist *dlist);
 void			my_setenv(t_dlist *dlist, char *name, char *params);
 void			my_unsetenv(t_dlist *dlist, char *name);
@@ -47,5 +48,8 @@ void			my_exit(t_dlist *dlist, char **cmd);
 void			exec_pipe(t_dlist *dlist, char **pipe, int size);
 void			make_command(char *cmd, t_dlist *dlist);
 void			make_pipe(char *cmd, t_dlist *dlist);
+void			sighandler(int sig);
+int		        modular_prog_status(char boolean, int value);
+char		        *modular_pwd(char boolean, char *new_pwd);
 
 #endif			/*_MINISHELL_*/
