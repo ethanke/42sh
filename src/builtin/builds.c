@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:48:02 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:08:46 2016 Gaëtan Léandre
+** Last update Thu May 26 03:49:19 2016 Tanguy LELIEVRE
 */
 
 #include 		"main.h"
@@ -71,16 +71,30 @@ void			my_unsetenv(t_dlist *dlist, char *name)
     }
 }
 
-void			my_exit(t_dlist *dlist, char **cmd)
+int			check_cmd(char *str)
+{
+  int			i;
+
+  i = 0;
+  while (str[i])
+    {
+      if (str[i] < '0' || str[i] > '9')
+	return (-1);
+      i++;
+    }
+  return (0);
+}
+
+int			my_exit(t_dlist *dlist, char **cmd)
 {
   int	last;
 
   if (cmd[1] == NULL)
     last = 0;
-  else if (cmd[2] != NULL)
+  else if (cmd[2] != NULL || check_cmd(cmd[1]) == -1)
     {
       my_putstr("error : Expression syntax\n");
-      return;
+      return (0);
     }
   else
     last = my_getnbr(cmd[1]);

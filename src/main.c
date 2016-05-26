@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Tue Apr 12 18:35:56 2016 Gaëtan Léandre
+** Last update Thu May 26 03:42:39 2016 Tanguy LELIEVRE
 */
 
 #include 		"main.h"
@@ -29,7 +29,7 @@ int			test_build(t_dlist *dlist, char **cmd)
 
   i = 1;
   if (my_strcmp(cmd[0], "exit") == 1 || my_strcmp(cmd[0], "quit") == 1)
-    my_exit(dlist, cmd);
+    return (my_exit(dlist, cmd));
   else if (my_strcmp(cmd[0], "env") == 1 && cmd[1] == NULL)
     {
       my_env(dlist);
