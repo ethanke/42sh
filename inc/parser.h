@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Wed May 25 16:54:05 2016 Ethan Kerdelhue
+** Last update Thu May 26 05:58:24 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_PARSER_
@@ -13,8 +13,8 @@
 
 #define			CMD		0
 #define			OPT		1
-#define			INS		2
-#define			SKI		3
+#define			SEP		2
+#define			SKI		-1
 
 #include		<stdlib.h>
 #include		<unistd.h>
@@ -31,11 +31,13 @@ typedef struct		s_pile
 
 typedef struct		s_parser
 {
+  char			**opt;
+  char			**sep;
   char			**path;
   t_pile		*pile;
 }			t_parser;
 
-char		**my_str_to_wordtab(char *s, char *delim);
+char		**str_to_wordtab(char *s, char *delim);
 char		*my_strcat(char *s1, char *s2);
 char		*get_next_line(int fd);
 

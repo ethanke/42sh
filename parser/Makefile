@@ -5,21 +5,21 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Wed May 25 16:52:16 2016 Ethan Kerdelhue
+## Last update Thu May 26 05:57:00 2016 Kerdelhue Ethan
 ##
 
 NAME	=	mysh
 
 SRC	= 	main.c			\
-		../src/get_next_line.c	\
-		my_str_to_wordtab.c	\
+		../src/utils/get_next_line.c	\
+		../src/utils/str_to_wordtab.c	\
 		my_strcat.c
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-Werror -Wall -Wextra		\
+CFLAGS	=	-Wall -Wextra		\
 		-W -ansi -pedantic		\
-		-I../include -g3
+		-I../inc -g3
 
 all	:	$(NAME)
 
