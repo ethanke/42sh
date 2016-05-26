@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:49:20 2016 Gaëtan Léandre
-** Last update Thu May 26 05:08:33 2016 Gaëtan Léandre
+** Last update Thu May 26 05:54:06 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -98,7 +98,6 @@ void			dlist_to_char(t_dlist *dlist)
   list = dlist->start;
   if ((dlist->env = malloc((dlist->size + 1) * sizeof(char *))) == NULL)
     exit(EXIT_FAILURE);
-  dlist->path = NULL;
   while (list != NULL)
     {
       dlist->env[i] = compil_env(list, dlist, 0);

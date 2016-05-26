@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May 26 03:05:28 2016 Gaëtan Léandre
-** Last update Thu May 26 05:11:28 2016 Gaëtan Léandre
+** Last update Thu May 26 05:50:49 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -59,7 +59,8 @@ int			my_cd(t_dlist *dlist, char *command)
     return (0);
   if (chdir(new) == -1)
     my_printf(2, "bash: cd: %s: No such file or directory\n", command);
+  else
+    change_pwd(dlist);
   free(new);
-  change_pwd(dlist);
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Thu May 26 05:14:00 2016 Gaëtan Léandre
+** Last update Thu May 26 05:25:22 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -101,6 +101,7 @@ int			main(int ac, char **av, char **env)
   if ((dlist = create_dlist()) == NULL)
     return (-1);
   get_env(env, dlist);
+  modular_pwd(1, dlist->pwd);
   disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
   while ((cmd = get_next_line(0)) != NULL)
