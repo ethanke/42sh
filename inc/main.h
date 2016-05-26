@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Thu May 26 04:14:52 2016 Gaëtan Léandre
+** Last update Thu May 26 04:21:05 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -48,7 +48,7 @@ void			dlist_to_char(t_dlist *dlist);
 int			get_env(char **env, t_dlist *dlist);
 char			*my_strcpy(char *str);
 int			my_getnbr(const char *str);
-void			my_exit(t_dlist *dlist, char **cmd);
+int			my_exit(t_dlist *dlist, char **cmd);
 void			exec_pipe(t_dlist *dlist, char **pipe, int size);
 void			make_command(char *cmd, t_dlist *dlist);
 void			make_pipe(char *cmd, t_dlist *dlist);
