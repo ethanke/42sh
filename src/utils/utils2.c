@@ -8,7 +8,7 @@
 ** Last update Sat Apr  9 04:04:14 2016 Gaëtan Léandre
 */
 
-#include "minishell.h"
+#include "main.h"
 
 char	*my_strcpy(char *str)
 {

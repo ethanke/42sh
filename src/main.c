@@ -8,7 +8,7 @@
 ** Last update Tue Apr 12 18:35:56 2016 Gaëtan Léandre
 */
 
-#include 		"minishell.h"
+#include 		"main.h"
 
 int			launch_setenv(t_dlist *dlist, char **cmd)
 {

@@ -8,7 +8,7 @@
 ** Last update Sat Apr  9 04:09:00 2016 Gaëtan Léandre
 */
 
-#include 		"minishell.h"
+#include 		"main.h"
 
 void			free_tabs(char **str)
 {

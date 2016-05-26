@@ -8,7 +8,7 @@
 ** Last update Tue Apr 12 00:37:41 2016 Gaëtan Léandre
 */
 
-#include 		"minishell.h"
+#include 		"main.h"
 
 int			my_strlen(char *str)
 {

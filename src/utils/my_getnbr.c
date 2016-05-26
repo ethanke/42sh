@@ -8,7 +8,7 @@
 ** Last update Sat Apr  9 04:11:05 2016 Gaëtan Léandre
 */
 
-#include 		"minishell.h"
+#include 		"main.h"
 
 int			verif(int number, char add, int less)
 {

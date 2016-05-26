@@ -5,10 +5,10 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Thu May 26 00:08:24 2016 Victor Sousa
-** Last update Thu May 26 02:25:48 2016 Victor Sousa
+** Last update Thu May 26 02:27:53 2016 Victor Sousa
 */
 
-#include	"minishell.h"
+#include	"main.h"
 
 int             modular_prog_status(char boolean, int value)
 {

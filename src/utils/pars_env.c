@@ -8,7 +8,7 @@
 ** Last update Sat Apr  9 04:11:53 2016 Gaëtan Léandre
 */
 
-#include 		"minishell.h"
+#include 		"main.h"
 
 char			*get_name(char *str)
 {

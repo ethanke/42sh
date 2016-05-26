@@ -8,7 +8,7 @@
 ** Last update Tue Apr 12 18:35:52 2016 Gaëtan Léandre
 */
 
-#include	"minishell.h"
+#include	"main.h"
 
 int		last_pipe(char *cmd, int *pip, t_dlist *dlist)
 {

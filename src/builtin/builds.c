@@ -8,7 +8,7 @@
 ** Last update Sat Apr  9 04:08:46 2016 Gaëtan Léandre
 */
 
-#include 		"minishell.h"
+#include 		"main.h"
 
 void			my_env(t_dlist *dlist)
 {

@@ -8,7 +8,7 @@
 ** Last update Wed May 25 23:43:26 2016 Victor Sousa
 */
 
-#include		"minishell.h"
+#include		"main.h"
 
 void            sighandler(int sig)
 {

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Thu May 26 02:25:39 2016 Victor Sousa
+** Last update Thu May 26 02:38:45 2016 Victor Sousa
 */
 
 #ifndef 		_MINISHELL_
@@ -18,6 +18,8 @@
 # include		<signal.h>
 # include 		<dirent.h>
 # include 		<unistd.h>
+# include		"my_printf.h"
+# include		"my_sprintf.h"
 # include 		"list.h"
 # include 		"get_next_line.h"
 
