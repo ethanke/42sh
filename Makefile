@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Thu May 26 04:18:57 2016 Gaëtan Léandre
+## Last update Thu May 26 05:28:22 2016 
 ##
 
 NAME	=	42sh
@@ -32,7 +32,7 @@ RM              =       rm -f
 CC              =       gcc
 CFLAGS		=	-W -Wall -Wextra -Werror		\
 			-ansi -pedantic				\
-			-I$(INCDIR)
+			-I$(INCDIR) -ggdb -g3
 
 ##  MAIN  ##
 SRC             =       $(SRCDIR)/main.c

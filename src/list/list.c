@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Tue Nov 17 11:33:39 2015 Gaëtan Léandre
-** Last update Sat Apr  9 04:10:08 2016 Gaëtan Léandre
+** Last update Thu May 26 05:18:26 2016 Gaëtan Léandre
 */
 
 #include 		"list.h"
@@ -19,6 +19,8 @@ t_dlist			*create_dlist()
   list->size = 0;
   list->start = NULL;
   list->end = NULL;
+  list->pwd = NULL;
+  list->path = NULL;
   return (list);
 }
 
