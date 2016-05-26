@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Thu May 26 04:21:05 2016 Gaëtan Léandre
+** Last update Thu May 26 04:50:46 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -57,5 +57,7 @@ int		        modular_prog_status(char boolean, int value);
 char		        *modular_pwd(char boolean, char *new_pwd);
 char			*find_with_name(t_dlist *dlist, char *name);
 char			*my_strcat_first(char *a, char *b);
+int			my_cd(t_dlist *dlist, char *command);
+char			*my_strcat_no_free_b(char *a, char *b);
 
 #endif			/*_MINISHELL_*/

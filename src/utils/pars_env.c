@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:49:20 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:11:53 2016 Gaëtan Léandre
+** Last update Thu May 26 05:08:33 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -75,18 +75,17 @@ char			*compil_env(t_list *list, t_dlist *dlist, int i)
       i++;
     }
   str[i++] = '=';
-  j = 0;
-  while (j < my_strlen(list->params))
-    {
-      str[i] = list->params[j];
-      i++;
-      j++;
-    }
+  j = -1;
+  while (++j < my_strlen(list->params))
+    str[i++] = list->params[j];
   str[i] = '\0';
   if (my_strcmp("PATH", list->name) == 1)
     dlist->path = str_to_wordtab(list->params, ":");
   else if (my_strcmp("PWD", list->name) == 1)
-    dlist->pwd = list->params;
+    {
+      dlist->pwd = list->params;
+      modular_pwd(1, list->params);
+    }
   return (str);
 }
 

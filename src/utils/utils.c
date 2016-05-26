@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:46:33 2016 Gaëtan Léandre
-** Last update Thu May 26 04:14:39 2016 Gaëtan Léandre
+** Last update Thu May 26 04:50:29 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -127,6 +127,33 @@ char			*my_strcat_no_free(char *a, char *b)
       i++;
     }
   str[i++] = '/';
+  j = 0;
+  while (b[j])
+    {
+      str[i] = b[j];
+      i++;
+      j++;
+    }
+  str[i] = '\0';
+  return (str);
+}
+
+char			*my_strcat_no_free_b(char *a, char *b)
+{
+  int			size;
+  char			*str;
+  int			i;
+  int			j;
+
+  size = my_strlen(a) + my_strlen(b) + 1;
+  if ((str = malloc(size)) == NULL)
+    return (NULL);
+  i = 0;
+  while (a[i])
+    {
+      str[i] = a[i];
+      i++;
+    }
   j = 0;
   while (b[j])
     {

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May 26 03:05:28 2016 Gaëtan Léandre
-** Last update Thu May 26 04:18:09 2016 Gaëtan Léandre
+** Last update Thu May 26 05:11:28 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -24,7 +24,19 @@ char			*find_with_name(t_dlist *dlist, char *name)
   return (NULL);
 }
 
-void			my_cd(t_dlist *dlist, char *command)
+void			change_pwd(t_dlist *dlist)
+{
+  char			pwd[1024];
+  char			*home;
+
+  if (getcwd(pwd, 1024) == NULL)
+    return;
+  if ((home = find_with_name(dlist, "PWD")) != NULL)
+    my_setenv(dlist, "OLDPWD", home);
+  my_setenv(dlist, "PWD", pwd);
+}
+
+int			my_cd(t_dlist *dlist, char *command)
 {
   int			i;
   char			*home;
@@ -36,14 +48,18 @@ void			my_cd(t_dlist *dlist, char *command)
   if (command[i] == '~' && (home = find_with_name(dlist, "HOME")) != NULL)
     {
       while (command[++i] && command[i] == '/');
-      if ((new = my_strcat_no_free(home, "/")) == NULL)
-	return;
-      new = my_strcat_first(new, &command[i]);
+      new = my_strcat_no_free(home, &command[i]);
     }
+  else if (my_strcmp(command, "-") == 1
+	   && (home = find_with_name(dlist, "OLDPWD")) != NULL)
+    new = my_strcat_no_free_b("", home);
   else
-    new = my_strcat_no_free("", &command[i]);
+    new = my_strcat_no_free_b("", &command[i]);
   if (new == NULL)
-    return;
-  chdir(new);
+    return (0);
+  if (chdir(new) == -1)
+    my_printf(2, "bash: cd: %s: No such file or directory\n", command);
   free(new);
+  change_pwd(dlist);
+  return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Thu May 26 03:42:39 2016 Tanguy LELIEVRE
+** Last update Thu May 26 04:38:45 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -48,6 +48,8 @@ int			test_build(t_dlist *dlist, char **cmd)
 	}
       return (0);
     }
+  else if (my_strcmp(cmd[0], "cd") == 1)
+    return (my_cd(dlist, cmd[1]));
   return (1);
 }
 
