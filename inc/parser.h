@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Tue May 31 14:23:22 2016 Ethan Kerdelhue
+** Last update Tue May 31 16:02:20 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_PARSER_
@@ -43,6 +43,7 @@ typedef struct		s_cmd
   char			token;
 }			t_cmd;
 
+char	        *my_strcat_wm(char *s, char *s2);
 int		add_node(t_pile *pile, char token, char *content);
 int		my_strlen(char *str);
 char		**str_to_wordtab(char *s, char *delim);

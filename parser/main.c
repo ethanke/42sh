@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed May 25 07:06:35 2016 Kerdelhue Ethan
-** Last update Tue May 31 14:34:46 2016 Ethan Kerdelhue
+** Last update Tue May 31 16:33:25 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
@@ -14,7 +14,7 @@ int		my_strlen(char *str)
 {
   int		i;
 
-   i = 0;
+  i = 0;
   while (str[i])
     i++;
   return (i);
@@ -162,6 +162,13 @@ int		get_parse(char *str, t_parser *parser)
   int 		i;
 
   i = 0;
+  printf("%s\n", str);
+  if (my_strlen(str) != 8)
+    {
+      printf("%d\n", my_strlen(str));
+      puts("mega zeub");
+      exit(1);
+    }
   tmp = pre_parse(str, parser);
   puts(tmp);
   tab = str_to_wordtab(tmp, " \t\n");

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Tue May 31 14:39:43 2016 Ethan Kerdelhue
+** Last update Tue May 31 16:27:07 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
@@ -19,6 +19,13 @@ int		count_size_sep(char *str, char **sep)
   i = -1;
   j = 0;
   size = my_strlen(str);
+  int x;
+  x = 0;
+  while (str[x])
+    {
+     printf("%d\n", str[x++]); 
+    }
+  printf("=%s= %d_ %d\n", str, size, strlen(str));
   while (str[++i])
     {
       j = 0;
@@ -69,6 +76,7 @@ char		*epur_sep(char *str, char **delim, int i, int k)
 
 if ((new = malloc(count_size_sep(str, delim) + 1)) == NULL)
     return (NULL);
+    printf("%d -%s-\n", count_size_sep(str, delim) + 1, str);
   while (str[++i])
     {
       flag = 1;
@@ -77,13 +85,13 @@ if ((new = malloc(count_size_sep(str, delim) + 1)) == NULL)
 	  if (my_strncmp(str + i, delim[j], my_strlen(delim[j])) == 0)
 	    {
 	      new[k] = '\0';
-	      new = my_strcat(new, my_strcat(" ", my_strcat(delim[j], " ")));
+	      new = my_strcat_wm(new, my_strcat(" ", my_strcat(delim[j], " ")));
 	      k += my_strlen(delim[j]) + 2;
 	      i += my_strlen(delim[j]) - 1;
 	      flag = 0;
 	    }
       if (flag)
-	new[k++] = str[i];
+        new[k++] = str[i];
     }
   new[k] = 0;
 printf("NEW -> %s \n", new);
