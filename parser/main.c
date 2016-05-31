@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed May 25 07:06:35 2016 Kerdelhue Ethan
-** Last update Thu May 26 06:01:19 2016 Ethan Kerdelhue
+** Last update Tue May 31 14:34:46 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
@@ -20,19 +20,17 @@ int		my_strlen(char *str)
   return (i);
 }
 
-static char 			*my_strcat_custom(char *dest, char *src)
+char	*my_strcat_wm(char *s, char *s2)
 {
-  int len;
-  int i;
+  int	i;
+  int	j;
 
-  len = my_strlen(dest);
-  i = 0;
-  while (src[i])
-    {
-      dest[len + i] = src[i];
-      i = i + 1;
-    }
-  return (dest);
+  i = my_strlen(s);
+  j = 0;
+  while (s2[j])
+    s[i++] = s2[j++];
+  s[i] = '\0';
+  return (s);
 }
 
 int			my_strncmp(char *s1, char *s2, int n)
@@ -44,9 +42,7 @@ int			my_strncmp(char *s1, char *s2, int n)
       n--;
     }
   if (!n)
-    {
-      return (n);
-    }
+    return (n);
   return (*s1 - *s2);
 }
 
@@ -86,31 +82,6 @@ void		my_putstr(char *str)
   write(1, str, my_strlen(str));
 }
 
-char		*epur_string(char *str)
-{
-  char		*new;
-  int		i;
-  int		j;
-
-  i = 0;
-  j = 0;
-  if ((new = malloc(my_strlen(str) + 1)) == NULL)
-    return (0);
-  while (str[i] == ' ')
-    i++;
-  while (str[i])
-    {
-      if (str[i] != ' ' || (str[i] == ' ' && str[i - 1] != ' '))
-	{
-	  new[j] = str[i];
-	  j++;
-	}
-      i++;
-    }
-  new[j] = 0;
-  return (new);
-}
-
 int		iscmd(char *str, t_parser *parser)
 {
   int		i;
@@ -128,56 +99,6 @@ int		iscmd(char *str, t_parser *parser)
 	    return (1);
 	  i++;
 	}
-    }
-  return (0);
-}
-
-int		issep(char *str, t_parser *parser)
-{
-  int		i;
-
-  i = 0;
-  while (parser->sep[i])
-    {
-      if (my_strncmp(parser->sep[i], str, my_strlen(str)) == 0)
-	return (1);
-      i++;
-    }
-  return (0);
-}
-
-int		isopt(char *str, t_parser *parser)
-{
-  int		i;
-
-  i = 0;
-  while (parser->opt[i])
-    {
-      if (my_strncmp(parser->opt[i], str, my_strlen(str)) == 0)
-	return (1);
-      i++;
-    }
-  return (0);
-}
-
-int		opt_parsing(char **tab, t_parser *parser, int i, char *flag)
-{
-  if (isopt(tab[i], parser) == 1)
-    {
-      if (add_node(parser->pile, OPT, tab[i]) == -1)
-	return (-1);
-      *flag = 0;
-    }
-  return (0);
-}
-
-int		sep_parsing(char **tab, t_parser *parser, int i, char *flag)
-{
-  if (issep(tab[i], parser) == 1)
-    {
-      if (add_node(parser->pile, SEP, tab[i]) == -1)
-	  return (-1);
-      *flag = 0;
     }
   return (0);
 }
@@ -223,69 +144,14 @@ int		start_parsing(char **tab, t_parser *parser)
   return (0);
 }
 
-int		count_size_sep(char *str, char **sep)
-{
-  int		i;
-  int		j;
-  int		size;
-
-  i = -1;
-  j = 0;
-  size = my_strlen(str);
-  while (str[++i])
-    {
-      j = 0;
-      while (sep[j])
-	{
-	  if (my_strncmp(&str[i], sep[j], my_strlen(sep[j])) == 0)
-	    size += 2;
-	  j++;
-	}
-    }
-  return (size);
-}
-
-char		*epur_sep(char *str, char **delim)
-{
-  int		i;
-  int		j;
-  int		k;
-  char		*new;
-  char		flag;
-
-  i = -1;
-  k = 0;
-  if ((new = malloc(count_size_sep(str, delim) + 1)) == NULL)
-    return (NULL);
-  while (str[++i])
-    {
-      flag = 1;
-      j = -1;
-      while (delim[++j])
-	{
-	  if (my_strncmp(str + i, delim[j], my_strlen(delim[j])) == 0)
-	    {
-	      new[k] = '\0';
-	      new = my_strcat(new, my_strcat(" ", my_strcat(delim[j], " ")));
-	      k += my_strlen(delim[j]) + 2;
-	      i += my_strlen(delim[j]) - 1;
-	      flag = 0;
-	    }
-	}
-      if (flag)
-	new[k++] = str[i];
-    }
-  new[k] = 0;
-  return (new);
-}
-
 char		*pre_parse(char *str, t_parser *parser)
 {
   char		*new;
 
   new = epur_string(str);
-  new = epur_sep(new, parser->sep);
-  new = epur_sep(new, parser->opt);
+  new = epur_sep(new, parser->sep, -1, 0);
+  printf("%s\n", str);
+  /* new = epur_opt(new, parser->opt, -1, 0); */
   return (new);
 }
 
@@ -293,16 +159,17 @@ int		get_parse(char *str, t_parser *parser)
 {
   char		*tmp;
   char		**tab;
+  int 		i;
 
+  i = 0;
   tmp = pre_parse(str, parser);
+  puts(tmp);
   tab = str_to_wordtab(tmp, " \t\n");
 
-  printf("\npriting word tab of cmd separated by ' '\n");
-  int i = 0;
+  printf("priting word tab of cmd separated by ' '\n");
   while (tab[i])
     printf("%s\n", tab[i++]);
   printf("done\n");
-
   start_parsing(tab, parser);
   return (0);
 }
@@ -333,10 +200,10 @@ int		print_list(t_pile *pile)
   return (0);
 }
 
-void                    clear_list(t_pile *list)
+void          	clear_list(t_pile *list)
 {
- t_pile                *tmp;
- t_pile                *tmpnext;
+ t_pile         *tmp;
+ t_pile         *tmpnext;
 
  tmp = list;
  while (tmp != NULL)
@@ -345,40 +212,11 @@ void                    clear_list(t_pile *list)
      free(tmp);
      tmp = tmpnext;
    }
- return;
 }
 
-char			**load_sep()
+int		free_for_all(char **tab)
 {
-  char			**tab;
-
-  if ((tab = malloc(sizeof(char *) * 4)) == NULL)
-    return (NULL);
-  tab[0] = ";";
-  tab[1] = "||";
-  tab[2] = "&&";
-  tab[3] = NULL;
-  return (tab);
-}
-
-char			**load_opt()
-{
-  char			**tab;
-
-  if ((tab = malloc(sizeof(char *) * 6)) == NULL)
-    return (NULL);
-  tab[0] = "|";
-  tab[1] = "<<";
-  tab[2] = ">>";
-  tab[3] = "<";
-  tab[4] = ">";
-  tab[5] = NULL;
-  return (tab);
-}
-
-int			free_for_all(char **tab)
-{
-  int			i;
+  int		i;
 
   i = -1;
   while (tab[++i])

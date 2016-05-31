@@ -5,14 +5,17 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Thu May 26 05:57:00 2016 Kerdelhue Ethan
+## Last update Tue May 31 06:50:27 2016 Kerdelhue Ethan
 ##
 
 NAME	=	mysh
 
-SRC	= 	main.c			\
+SRC	= 	main.c				\
 		../src/utils/get_next_line.c	\
 		../src/utils/str_to_wordtab.c	\
+		sep.c				\
+		epur.c				\
+		opt.c				\
 		my_strcat.c
 
 OBJ	=	$(SRC:.c=.o)
