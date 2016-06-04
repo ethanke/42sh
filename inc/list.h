@@ -33,7 +33,7 @@ typedef struct		s_dlist
 
 t_dlist			*create_dlist();
 t_list			*create_list(char *name, char *params);
-void			free_tabs(char **str);
+void			free_tables(char **str);
 void			insert_list_end(t_list *list, t_dlist *dlist);
 t_list			*pop_list_start(t_dlist *dlist);
 void			remove_list(t_dlist *dlist);

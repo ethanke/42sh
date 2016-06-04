@@ -80,7 +80,7 @@ char			*compil_env(t_list *list, t_dlist *dlist, int i)
     str[i++] = list->params[j];
   str[i] = '\0';
   if (my_strcmp("PATH", list->name) == 1)
-    dlist->path = str_to_wordtab(list->params, ":");
+    dlist->path = str_to_wordtable(list->params, ":");
   else if (my_strcmp("PWD", list->name) == 1)
     {
       dlist->pwd = list->params;

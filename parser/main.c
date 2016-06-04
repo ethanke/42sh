@@ -57,22 +57,22 @@ void		my_putstr(char *str)
   write(1, str, my_strlen(str));
 }
 
-int		start_parsing(char **tab, t_parser *parser)
+int		start_parsing(char **table, t_parser *parser)
 {
   int		i;
   char		flag;
 
   i = 0;
   flag = 0;
-  while (tab[i])
+  while (table[i])
     {
-      if ((special_case(tab, parser, i, &flag)) == -1)
+      if ((special_case(table, parser, i, &flag)) == -1)
 	return (-1);
-      if ((opt_parsing(tab ,parser, i, &flag)) == -1)
+      if ((opt_parsing(table ,parser, i, &flag)) == -1)
 	return (-1);
-      if ((sep_parsing(tab, parser, i, &flag)) == -1)
+      if ((sep_parsing(table, parser, i, &flag)) == -1)
 	return (-1);
-      if ((cmd_parsing(tab, parser, i, &flag)) == -1)
+      if ((cmd_parsing(table, parser, i, &flag)) == -1)
 	return (-1);
       i++;
     }
@@ -89,44 +89,44 @@ char		*pre_parse(char *str, t_parser *parser)
   return (new);
 }
 
-int		tablen(char **tab)
+int		tablelen(char **table)
 {
   int		i;
 
   i = 0;
-  while (tab[i])
+  while (table[i])
     i++;
   return (i);
 }
 
-int		print_tab(char **tab)
+int		print_table(char **table)
 {
   int		i;
 
   i = 0;
-  while (tab[i])
+  while (table[i])
     {
-      puts(tab[i]);
+      puts(table[i]);
       i++;
     }
   return (0);
 }
 
-int		add_line_tab(char **tab, char *line)
+int		add_line_table(char **table, char *line)
 {
   int		i;
   char		**new;
 
-  if ((new = malloc(tablen(tab) + 2)) == NULL)
+  if ((new = malloc(tablelen(table) + 2)) == NULL)
     return (-1);
-  while (tab[i])
+  while (table[i])
     {
-      new[i] = my_strdup(tab[i]);
+      new[i] = my_strdup(table[i]);
       i++;
     }
   new[i] = my_strdup(line);
   free(line);
-  free_for_all(tab);
+  free_for_all(table);
   return (new);
 }
 
@@ -158,14 +158,14 @@ int		end_parsing(t_parser *parser)
 int		get_parse(char *str, t_parser *parser)
 {
   char		*tmp;
-  char		**tab;
+  char		**table;
   int 		i;
   t_cmd		**cmd;
 
   i = 0;
   tmp = pre_parse(str, parser);
-  tab = str_to_wordtab(tmp, " \t\n");
-  start_parsing(tab, parser);
+  table = str_to_wordtable(tmp, " \t\n");
+  start_parsing(table, parser);
   puts(" CMD TREATMENT ----> ");
   end_parsing(parser);
   return (0);
@@ -211,14 +211,14 @@ void          	clear_list(t_pile *list)
    }
 }
 
-int		free_for_all(char **tab)
+int		free_for_all(char **table)
 {
   int		i;
 
   i = -1;
-  while (tab[++i])
-    free(tab[i]);
-  free(tab);
+  while (table[++i])
+    free(table[i]);
+  free(table);
   return (0);
 }
 
@@ -233,7 +233,7 @@ int		main(int ac, char **av, char **env)
   parser->sep = load_sep();
   parser->opt = load_opt();
   parser->pile = init_list();
-  parser->path = str_to_wordtab(get_path(env), ":");
+  parser->path = str_to_wordtable(get_path(env), ":");
   while (1)
     {
       parser->pile = init_list();

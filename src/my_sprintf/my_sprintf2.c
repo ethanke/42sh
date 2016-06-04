@@ -42,5 +42,5 @@ char			*va_my_putunbr_s(va_list ap)
 
 char			*va_my_disp_unp_s(va_list ap)
 {
-  return (disp_unprintable_s(va_arg(ap, char*)));
+  return (disp_unprintablele_s(va_arg(ap, char*)));
 }

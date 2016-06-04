@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Tue May 31 16:42:38 2016 Ethan Kerdelhue
+** Last update Sat Jun  4 07:10:32 2016 Victor Sousa
 */
 
 #ifndef 		_MINISHELL_
@@ -22,15 +22,16 @@
 # include		"my_sprintf.h"
 # include 		"list.h"
 # include 		"get_next_line.h"
+# include		"prompt.h"
 
 void			disp_pwd(char *pwd);
 void			find_name(t_dlist *dlist, char **cmd);
 void			launch(t_dlist *dlist, char **cmd);
-void			free_tabs(char **str);
+void			free_tables(char **str);
 void			free_env(t_dlist *dlist);
 int			count_words(char *str, char c);
 int			get_size_word(char *str, char c);
-char			**str_to_wordtab(char *str, char *separate);
+char			**str_to_wordtable(char *str, char *separate);
 int			my_strlen(char *str);
 void			my_putchar(char c);
 void			my_putstr(char *str);

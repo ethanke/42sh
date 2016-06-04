@@ -14,8 +14,8 @@ void			remove_list(t_dlist *dlist)
 {
   t_list		*next;
 
-  free_tabs(dlist->env);
-  free_tabs(dlist->path);
+  free_tables(dlist->env);
+  free_tables(dlist->path);
   while (dlist->start != NULL)
     {
       next = pop_list_start(dlist);

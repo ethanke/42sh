@@ -107,7 +107,7 @@ void			make_pipe(char *cmd, t_dlist *dlist)
   char			**pipe;
   int			size;
 
-  pipe = str_to_wordtab(cmd, "|");
+  pipe = str_to_wordtable(cmd, "|");
   size = 0;
   while (pipe[size])
     size++;
@@ -115,5 +115,5 @@ void			make_pipe(char *cmd, t_dlist *dlist)
     make_command(pipe[0], dlist);
   else
     exec_pipe(dlist, pipe, size);
-  free_tabs(pipe);
+  free_tables(pipe);
 }

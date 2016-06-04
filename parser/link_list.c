@@ -42,7 +42,7 @@ t_pile			*init_list()
 }
 
 int			add_node_cmd(t_cmd_list *cmd,
-					  char **tab,
+					  char **table,
 					  char token)
 {
   t_cmd_list			*tmp;

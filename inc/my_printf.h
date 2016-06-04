@@ -27,9 +27,9 @@ typedef struct	s_print
 }		t_print;
 
 int		my_printf(int fd, char *str, ...);
-t_fonct		*init_struct(t_fonct *tab);
-int		chose_function(char c, t_fonct *tab);
-int		print_fct(va_list ap, t_fonct *tab, char *str, t_print pri);
+t_fonct		*init_struct(t_fonct *table);
+int		chose_function(char c, t_fonct *table);
+int		print_fct(va_list ap, t_fonct *table, char *str, t_print pri);
 
 void		va_my_putchar(int fd, va_list ap);
 void		va_my_putstr(int fd, va_list ap);
@@ -52,7 +52,7 @@ int		positif(int nbr, int test);
 
 void		my_put_unbr_in(int fd, unsigned int nbr);
 
-void		disp_unprintable_in(int fd, char *str);
+void		disp_unprintablele_in(int fd, char *str);
 
 int		my_strlen(char *str);
 void		my_putnbr_base_in(int fd, int nbr, char *base, int taille);

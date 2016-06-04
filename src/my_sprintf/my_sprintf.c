@@ -15,38 +15,38 @@ char			*va_my_putfnbr_s(va_list ap)
   return (my_put_fnbr_s(va_arg(ap, double)));
 }
 
-static t_sfonct		*init_sstruct(t_sfonct *tab, char *flag, int nb_flag)
+static t_sfonct		*init_sstruct(t_sfonct *table, char *flag, int nb_flag)
 {
   int			i;
 
   i = -1;
-  if ((tab = malloc(12 * sizeof(t_sfonct))) == NULL)
+  if ((table = malloc(12 * sizeof(t_sfonct))) == NULL)
     return (NULL);
   while (++i < nb_flag)
-    tab[i].flag = flag[i];
-  (tab[0].f) = va_my_putchar_s;
-  (tab[1].f) = va_my_putstr_s;
-  (tab[2].f) = va_my_putnbr_s;
-  (tab[3].f) = va_my_putnbr_s;
-  (tab[4].f) = va_my_putunbr_s;
-  (tab[5].f) = va_my_octal_s;
-  (tab[6].f) = va_my_examin_s;
-  (tab[7].f) = va_my_examaj_s;
-  (tab[8].f) = va_my_bin_s;
-  (tab[9].f) = va_my_disp_unp_s;
-  (tab[10].f) = va_my_adress_s;
-  (tab[11].f) = va_my_putfnbr_s;
-  return (tab);
+    table[i].flag = flag[i];
+  (table[0].f) = va_my_putchar_s;
+  (table[1].f) = va_my_putstr_s;
+  (table[2].f) = va_my_putnbr_s;
+  (table[3].f) = va_my_putnbr_s;
+  (table[4].f) = va_my_putunbr_s;
+  (table[5].f) = va_my_octal_s;
+  (table[6].f) = va_my_examin_s;
+  (table[7].f) = va_my_examaj_s;
+  (table[8].f) = va_my_bin_s;
+  (table[9].f) = va_my_disp_unp_s;
+  (table[10].f) = va_my_adress_s;
+  (table[11].f) = va_my_putfnbr_s;
+  return (table);
 }
 
-static int			chose_ffunction(char c, t_sfonct *tab)
+static int			chose_ffunction(char c, t_sfonct *table)
 {
   int			i;
 
   i = 0;
   while (i < 12)
     {
-      if (c == tab[i].flag)
+      if (c == table[i].flag)
 	return (i);
       i++;
     }
@@ -55,7 +55,7 @@ static int			chose_ffunction(char c, t_sfonct *tab)
   return (-1);
 }
 
-static char			*print_ffct(va_list ap, t_sfonct *tab,
+static char			*print_ffct(va_list ap, t_sfonct *table,
 					   char *str, int *i)
 {
   int			fct;
@@ -68,7 +68,7 @@ static char			*print_ffct(va_list ap, t_sfonct *tab,
   wait = str[*i] == ' ' ? 1 : 0;
   while (str[*i] == ' ')
     (*i)++;
-  fct = chose_ffunction(str[*i], tab);
+  fct = chose_ffunction(str[*i], table);
   if (fct == -1)
     {
       result = my_strcatchar(result, '%');
@@ -78,34 +78,34 @@ static char			*print_ffct(va_list ap, t_sfonct *tab,
     }
   else if (fct > -1)
     result = ((wait == 1) ? (my_strcatchar(result, ' '))
-	      : (my_strcatprint(result, tab[fct].f(ap))));
+	      : (my_strcatprint(result, table[fct].f(ap))));
   return (result);
 }
 
 char			*my_sprintf(char *str, ...)
 {
   va_list		ap;
-  t_sfonct		*tab;
+  t_sfonct		*table;
   int	 		i;
   char			*result;
 
-  tab = NULL;
-  tab = init_sstruct(tab, "csiduoxXbspf", 12);
+  table = NULL;
+  table = init_sstruct(table, "csiduoxXbspf", 12);
   if ((result = malloc_and_init()) == NULL)
     return (NULL);
   i = 0;
-  if (str == NULL || tab == NULL)
+  if (str == NULL || table == NULL)
     return (NULL);
   va_start(ap, str);
   while (i < my_strlen(str))
     {
       if (str[i] == '%')
-	result = my_strcatprint(result, print_ffct(ap, tab, str, &i));
+	result = my_strcatprint(result, print_ffct(ap, table, str, &i));
       else
 	result = my_strcatchar(result, str[i]);
       i++;
     }
   va_end(ap);
-  free(tab);
+  free(table);
   return (result);
 }

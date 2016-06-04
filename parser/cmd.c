@@ -34,28 +34,28 @@ int		iscmd(char *str, t_parser *parser)
   return (0);
 }
 
-int		cmd_parsing(char **tab, t_parser *parser, int i, char *flag)
+int		cmd_parsing(char **table, t_parser *parser, int i, char *flag)
 {
   if (*flag == 1)
     {
-      if (add_node(parser->pile, OPT, tab[i]) == -1)
+      if (add_node(parser->pile, OPT, table[i]) == -1)
 	return (-1);
     }
-  else if (iscmd(tab[i], parser) == 1)
+  else if (iscmd(table[i], parser) == 1)
     {
-      if (add_node(parser->pile, CMD, tab[i]) == -1)
+      if (add_node(parser->pile, CMD, table[i]) == -1)
 	return (-1);
       *flag = 1;
     }
   return (0);
 }
 
-int		special_case(char **tab, t_parser *parser, int i, char *flag)
+int		special_case(char **table, t_parser *parser, int i, char *flag)
 {
   (void) flag;
   if (check_last(parser->pile) == 1 && *flag == 0)
     {
-      if (add_node(parser->pile, FIL, tab[i]) == -1)
+      if (add_node(parser->pile, FIL, table[i]) == -1)
 	return (-1);
     }
   return (0);

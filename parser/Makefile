@@ -12,7 +12,7 @@ NAME	=	mysh
 
 SRC	= 	main.c				\
 		../src/utils/get_next_line.c	\
-		../src/utils/str_to_wordtab.c	\
+		../src/utils/str_to_wordtable.c	\
 		sep.c				\
 		epur.c				\
 		opt.c				\

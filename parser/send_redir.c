@@ -41,12 +41,12 @@ int			what_redir(char **redir)
   return (one);
 }
 
-int			my_tabstrlen(char **tab)
+int			my_tablestrlen(char **table)
 {
   int			i;
 
   i = 0;
-  while (tab[i])
+  while (table[i])
     i++;
   return (i);
 }
@@ -57,7 +57,7 @@ char			**take_start(char **cmd)
   int			size;
   int			i;
 
-  size = my_tabstrlen(cmd);
+  size = my_tablestrlen(cmd);
   if (my_strcmp(cmd[size - 1], ">") == 0
       && my_strcmp(cmd[size - 1], ">>") == 0
       && my_strcmp(cmd[size - 1], "<") == 0
@@ -100,7 +100,7 @@ int			exec_redir(t_cmd *cmd)
   char			**start;
   char			*end;
 
-  pos = what_redir(cod->tab);
+  pos = what_redir(cod->table);
   result = 0;
   if (pos < 0)
     //erreur multiples redirections
@@ -108,7 +108,7 @@ int			exec_redir(t_cmd *cmd)
     //result = execution normale
   else
     {
-      start = take_start(cmd->tab);
+      start = take_start(cmd->table);
       end = take_end(cmd);
       (pos == 1 ? (result = right_redir(start, end)) :
        (pos == 2 ? (result = dright_redif(start, end)) :
