@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Thu May 26 00:08:24 2016 Victor Sousa
-** Last update Sat Jun  4 05:18:16 2016 
+** Last update Sat Jun  4 21:06:27 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -23,7 +23,7 @@ char            *my_strdup(char *str)
 {
   char          *result;
   int           i;
-  
+
   if ((result = malloc(1 + my_strlen(str))) == NULL)
     return (NULL);
   i = -1;
