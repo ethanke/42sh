@@ -39,7 +39,7 @@ char			*my_strcatnofree(char *a, char *b);
 char			*my_strcatchar(char *a, char b);
 char			*malloc_and_init();
 
-char			*disp_unprintable_s(char *str);
+char			*disp_unprintablele_s(char *str);
 char			*my_put_fnbr_s(float nbr);
 char			*my_put_nbr_s(int nbr);
 char			*my_putnbr_base_u_s(unsigned int nbr, char *base);

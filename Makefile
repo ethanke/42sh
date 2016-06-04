@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Thu May 26 05:28:22 2016 
+## Last update Sat Jun  4 08:04:41 2016 Victor Sousa
 ##
 
 NAME	=	42sh
@@ -32,7 +32,8 @@ RM              =       rm -f
 CC              =       gcc
 CFLAGS		=	-W -Wall -Wextra -Werror		\
 			-ansi -pedantic				\
-			-I$(INCDIR) -ggdb -g3
+			-I$(INCDIR) -ggdb -g3			\
+			-lcurses
 
 ##  MAIN  ##
 SRC             =       $(SRCDIR)/main.c
@@ -84,6 +85,32 @@ SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c       \
                         $(SPRTFDIR)/my_putnbr_base_add.c        \
                         $(SPRTFDIR)/my_put_fnbr.c               \
                         $(SPRTFDIR)/my_strcat.c
+
+## TERMCAP
+SRC		+=	src/cmd_input/getPromptInput.c				\
+			src/cmd_input/termcap/my_put_termcap.c		\
+			src/cmd_input/termcap/term_mode.c		\
+			src/cmd_input/termcap/term_init.c		\
+			src/cmd_input/termcap/term_cursor.c		\
+			src/cmd_input/termcap/term_refresh.c		\
+			src/cmd_input/termcap/term_cursor_position.c	\
+		      	src/cmd_input/termcap/term_get_size.c
+
+## MISC
+SRC		+=	src/cmd_input/misc/xfree.c			\
+			src/cmd_input/misc/str.c			\
+			src/cmd_input/misc/my_clear_screen.c		\
+			src/cmd_input/misc/get_env_var.c
+
+## STRING
+SRC		+=	src/cmd_input/string/concatString.c		\
+			src/cmd_input/string/formString.c		\
+			src/cmd_input/string/freeString.c		\
+			src/cmd_input/string/printString.c		\
+			src/cmd_input/string/pushChar.c			\
+			src/cmd_input/string/deleteCharAt.c		\
+			src/cmd_input/string/StringLenght.c		\
+			src/cmd_input/string/StringToArray.c
 
 
 OBJ             =       $(SRC:.c=.o)

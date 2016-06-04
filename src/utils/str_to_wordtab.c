@@ -1,5 +1,5 @@
 /*
-** str_to_wordtab.c for str_to_wordtab in /Users/leandr_g/Documents/Shared folder/PSU_2015_minishell2/src/
+** str_to_wordtable.c for str_to_wordtable in /Users/leandr_g/Documents/Shared folder/PSU_2015_minishell2/src/
 **
 ** Made by Gaëtan Léandre
 ** Login   <leandr_g@epitech.eu>
@@ -50,9 +50,9 @@ char			*size_word(char *str, char *separate, int *i)
   return (result);
 }
 
-char			**str_to_wordtab(char *str, char *separate)
+char			**str_to_wordtable(char *str, char *separate)
 {
-  char			**tab;
+  char			**table;
   int			words;
   int			i;
 
@@ -65,7 +65,7 @@ char			**str_to_wordtab(char *str, char *separate)
 	words++;
       i++;
     }
-  if (words == 0 || (tab = malloc(sizeof(char *) * (words + 1))) == NULL)
+  if (words == 0 || (table = malloc(sizeof(char *) * (words + 1))) == NULL)
     return (NULL);
   i = 0;
   words = 0;
@@ -73,13 +73,13 @@ char			**str_to_wordtab(char *str, char *separate)
     {
       if (is_separate(str[i], separate) == 0)
 	{
-	  if ((tab[words] = size_word(str, separate, &i)) == NULL)
+	  if ((table[words] = size_word(str, separate, &i)) == NULL)
 	    return (NULL);
 	  words++;
 	}
       else
 	i++;
     }
-  tab[words] = NULL;
-  return (tab);
+  table[words] = NULL;
+  return (table);
 }

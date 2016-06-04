@@ -10,7 +10,7 @@
 
 #include 		"main.h"
 
-void			free_tabs(char **str)
+void			free_tables(char **str)
 {
   int			i;
 

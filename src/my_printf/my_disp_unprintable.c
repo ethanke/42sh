@@ -1,5 +1,5 @@
 /*
-** my_disp_unprintable.c for my_printf in /home/leandr_g/rendu/Novembre_2015/PSU_2015_my_printf
+** my_disp_unprintablele.c for my_printf in /home/leandr_g/rendu/Novembre_2015/PSU_2015_my_printf
 **
 ** Made by Gaëtan Léandre
 ** Login   <leandr_g@epitech.net>
@@ -10,7 +10,7 @@
 
 #include "main.h"
 
-void	disp_unprintable_in(int fd, char *str)
+void	disp_unprintablele_in(int fd, char *str)
 {
   int	i;
 

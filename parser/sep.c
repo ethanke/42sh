@@ -24,11 +24,11 @@ int		issep(char *str, t_parser *parser)
   return (0);
 }
 
-int		sep_parsing(char **tab, t_parser *parser, int i, char *flag)
+int		sep_parsing(char **table, t_parser *parser, int i, char *flag)
 {
-  if (issep(tab[i], parser) == 1)
+  if (issep(table[i], parser) == 1)
     {
-      if (add_node(parser->pile, SEP, tab[i]) == -1)
+      if (add_node(parser->pile, SEP, table[i]) == -1)
 	  return (-1);
       *flag = 0;
     }
@@ -37,13 +37,13 @@ int		sep_parsing(char **tab, t_parser *parser, int i, char *flag)
 
 char			**load_sep()
 {
-  char			**tab;
+  char			**table;
 
-  if ((tab = malloc(sizeof(char *) * 4)) == NULL)
+  if ((table = malloc(sizeof(char *) * 4)) == NULL)
     return (NULL);
-  tab[0] = ";";
-  tab[1] = "||";
-  tab[2] = "&&";
-  tab[3] = NULL;
-  return (tab);
+  table[0] = ";";
+  table[1] = "||";
+  table[2] = "&&";
+  table[3] = NULL;
+  return (table);
 }

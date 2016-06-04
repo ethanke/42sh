@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Wed Jun  1 22:17:22 2016 Ethan Kerdelhue
+## Last update Sat Jun  4 12:51:33 2016 Kerdelhue Ethan
 ##
 
 NAME	=	mysh

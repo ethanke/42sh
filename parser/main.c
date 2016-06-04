@@ -5,14 +5,14 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed May 25 07:06:35 2016 Kerdelhue Ethan
-** Last update Sat Jun  4 12:31:23 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 01:04:15 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
 
-char    *my_strcpy(char *dest, char *src)
+char   		 	*my_strcpy(char *dest, char *src)
 {
-  int   i;
+  int   		i;
 
   i = 0;
   while (src[i])
@@ -24,7 +24,7 @@ char    *my_strcpy(char *dest, char *src)
   return (dest);
 }
 
-char	*my_strdup(char *str)
+char			*my_strdup(char *str)
 {
   char	*s;
 
@@ -34,9 +34,9 @@ char	*my_strdup(char *str)
   return (s);
 }
 
-int		my_strlen(char *str)
+int			my_strlen(char *str)
 {
-  int		i;
+  int			i;
 
   i = 0;
   while (str[i])
@@ -44,7 +44,7 @@ int		my_strlen(char *str)
   return (i);
 }
 
-char	*my_strcat_wm(char *s, char *s2)
+char			*my_strcat_wm(char *s, char *s2)
 {
   int	i;
   int	j;
@@ -57,7 +57,7 @@ char	*my_strcat_wm(char *s, char *s2)
   return (s);
 }
 
-int		my_strcmp(char *s1, char *s2)
+int			my_strcmp(char *s1, char *s2)
 {
   return ((my_strlen(s1) != my_strlen(s2)) ? (-1)
 	  : (my_strncmp(s1, s2, my_strlen(s1))));
@@ -76,15 +76,15 @@ int			my_strncmp(char *s1, char *s2, int n)
   return (*s1 - *s2);
 }
 
-void		my_putstr(char *str)
+void			my_putstr(char *str)
 {
   write(1, str, my_strlen(str));
 }
 
-int		start_parsing(char **tab, t_parser *parser)
+int			start_parsing(char **tab, t_parser *parser)
 {
-  int		i;
-  char		flag;
+  int			i;
+  char			flag;
 
   i = 0;
   flag = 0;
@@ -103,9 +103,9 @@ int		start_parsing(char **tab, t_parser *parser)
   return (0);
 }
 
-char		*pre_parse(char *str, t_parser *parser)
+char			*pre_parse(char *str, t_parser *parser)
 {
-  char		*new;
+  char			*new;
 
   new = epur_string(str);
   new = epur_sep(new, parser->sep, -1, 0);
@@ -113,9 +113,9 @@ char		*pre_parse(char *str, t_parser *parser)
   return (new);
 }
 
-int		tablen(char **tab)
+int			tablen(char **tab)
 {
-  int		i;
+  int			i;
 
   i = 0;
   while (tab[i])
@@ -123,9 +123,9 @@ int		tablen(char **tab)
   return (i);
 }
 
-int		print_tab(char **tab)
+int			print_tab(char **tab)
 {
-  int		i;
+  int			i;
 
   i = 0;
   while (tab[i])
@@ -136,14 +136,29 @@ int		print_tab(char **tab)
   return (0);
 }
 
-int		print_list(t_cmd *pile)
+int			list_len(t_cmd *cmd)
 {
-  t_cmd		*tmp;
+  t_cmd			*tmp;
+  int			i;
 
-  tmp = pile;
+  i = 0;
+  tmp = cmd;
   while (tmp)
     {
-      printf(" TOKEN : %c\n", tmp->token + 48);
+      i++;
+      tmp = tmp->next;
+    }
+  return (i);
+}
+
+int			print_list(t_cmd *pile)
+{
+  t_cmd			*tmp;
+
+  tmp = pile->next;
+  while (tmp)
+    {
+      printf("-%d- TOKEN : %c\n", list_len(pile),tmp->token + 48);
       puts("TAB : ");
       print_tab(tmp->cmd);
       tmp = tmp->next;
@@ -151,9 +166,9 @@ int		print_list(t_cmd *pile)
   return (0);
 }
 
-int		get_sep(t_parser *parser, char *str)
+int			get_sep(t_parser *parser, char *str)
 {
-  int		i;
+  int			i;
 
   i = 0;
   while (parser->sep[i])
@@ -167,9 +182,9 @@ int		get_sep(t_parser *parser, char *str)
   return (-1);
 }
 
-int		get_nb_sep(t_pile *pile)
+int			get_nb_sep(t_pile *pile)
 {
-  int		size;
+  int			size;
   t_pile	*tmp;
 
   tmp = pile;
@@ -183,9 +198,9 @@ int		get_nb_sep(t_pile *pile)
   return (size);
 }
 
-int		malloc_size_count(t_pile *pile)
+int			malloc_size_count(t_pile *pile)
 {
-  int		size;
+  int			size;
   t_pile	*tmp;
 
   tmp = pile;
@@ -198,29 +213,32 @@ int		malloc_size_count(t_pile *pile)
   return (size + 1);
 }
 
-int		end_parsing(t_parser *parser)
+t_cmd			*end_parsing(t_parser *parser)
 {
-  t_cmd		*cmd;
-  t_cmd		tmp;
+  t_cmd			*cmd;
+  t_cmd			tmp;
   t_pile	*pile;
-  int		i;
+  int			i;
+  char			flag;
 
+  flag = 0;
   i = 0;
   pile = parser->pile->next;
   cmd = init_list_cmd();
-  printf("MALLOC SIZE : %d\n", malloc_size_count(pile));
-  if ((tmp.cmd = malloc(sizeof(char *) * get_nb_sep(pile) + 2 * sizeof(void *))) == NULL)
+  if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
     return (0);
   while (pile != NULL)
     {
       tmp.token = 0;
       if (pile->token == SEP)
 	{
+	  flag = 1;
 	  tmp.token = get_sep(parser, pile->content);
+	  tmp.cmd[i] = 0;
 	  add_node_cmd(cmd, tmp.cmd, tmp.token);
 	  i = 0;
 	  free(tmp.cmd);
-	  if ((tmp.cmd = malloc(sizeof(char *) * get_nb_sep(pile) + 1)) == NULL)
+	  if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 1)) == NULL)
 	    return (0);
 	}
       else
@@ -228,31 +246,32 @@ int		end_parsing(t_parser *parser)
 	  tmp.cmd[i] = my_strdup(pile->content);
 	  i++;
 	}
-      puts(tmp.cmd[i]);
       pile = pile->next;
     }
-  print_list(cmd);
-  return (0);
+  add_node_cmd(cmd, tmp.cmd, tmp.token);
+  return (cmd);
 }
 
-int		get_parse(char *str, t_parser *parser)
+t_cmd			*get_parse(char *str, t_parser *parser)
 {
-  char		*tmp;
-  char		**tab;
-  t_cmd		**cmd;
+  char			*tmp;
+  char			**tab;
+  t_cmd			*cmd;
 
-  tmp = pre_parse(str, parser);
-  tab = str_to_wordtab(tmp, "  \t\n");
-  start_parsing(tab, parser);
-  printf(" CMD TREATMENT ----> ");
-  end_parsing(parser);
-  (void) tab;
-  return (0);
+  if ((tmp = pre_parse(str, parser)) == NULL)
+    return (NULL);
+  if ((tab = str_to_wordtable(tmp, "  \t\n")) == NULL)
+    return (NULL);
+  if ((start_parsing(tab, parser)) == NULL)
+    return (NULL);
+  if ((cmd = end_parsing(parser)) == NULL)
+    return (NULL);
+  return (cmd);
 }
 
-char		*get_path(char **env)
+char			*get_path(char **env)
 {
-  int		i;
+  int			i;
 
   i = -1;
   while (env[++i])
@@ -277,40 +296,13 @@ void          	clear_list(t_pile *list)
    }
 }
 
-int		free_for_all(char **tab)
+int			free_for_all(char **tab)
 {
-  int		i;
+  int			i;
 
   i = -1;
   while (tab[++i])
     free(tab[i]);
   free(tab);
-  return (0);
-}
-
-int		main(int ac, char **av, char **env)
-{
-  t_parser	*parser;
-  char		*str;
-
-  (void) ac;
-  (void) av;
-  parser = malloc(sizeof(t_parser));
-  parser->sep = load_sep();
-  parser->opt = load_opt();
-  parser->pile = init_list();
-  parser->path = str_to_wordtab(get_path(env), ":");
-  while (1)
-    {
-      parser->pile = init_list();
-      my_putstr("$>");
-      str = get_next_line(0);
-      get_parse(str, parser);
-      clear_list(parser->pile);
-      my_putstr("\n");
-      free(str);
-    }
-  free_for_all(parser->sep);
-  free_for_all(parser->opt);
   return (0);
 }

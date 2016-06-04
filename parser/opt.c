@@ -25,11 +25,11 @@ int		isopt(char *str, t_parser *parser)
   return (0);
 }
 
-int		opt_parsing(char **tab, t_parser *parser, int i, char *flag)
+int		opt_parsing(char **table, t_parser *parser, int i, char *flag)
 {
-  if (isopt(tab[i], parser) == 1)
+  if (isopt(table[i], parser) == 1)
     {
-      if (add_node(parser->pile, OPE, tab[i]) == -1)
+      if (add_node(parser->pile, OPE, table[i]) == -1)
 	return (-1);
       *flag = 0;
     }
@@ -38,15 +38,15 @@ int		opt_parsing(char **tab, t_parser *parser, int i, char *flag)
 
 char			**load_opt()
 {
-  char			**tab;
+  char			**table;
 
-  if ((tab = malloc(sizeof(char *) * 6)) == NULL)
+  if ((table = malloc(sizeof(char *) * 6)) == NULL)
     return (NULL);
-  tab[0] = "|";
-  tab[1] = "<<";
-  tab[2] = ">>";
-  tab[3] = "<";
-  tab[4] = ">";
-  tab[5] = NULL;
-  return (tab);
+  table[0] = "|";
+  table[1] = "<<";
+  table[2] = ">>";
+  table[3] = "<";
+  table[4] = ">";
+  table[5] = NULL;
+  return (table);
 }

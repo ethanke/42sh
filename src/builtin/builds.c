@@ -46,7 +46,7 @@ void			my_setenv(t_dlist *dlist, char *name, char *params)
     exit(EXIT_FAILURE);
   insert_list_end(list, dlist);
   free_env(dlist);
-  free_tabs(dlist->path);
+  free_tables(dlist->path);
   dlist_to_char(dlist);
 }
 
@@ -63,7 +63,7 @@ void			my_unsetenv(t_dlist *dlist, char *name)
 	  free(list->params);
 	  pop_list(list, dlist);
 	  free_env(dlist);
-	  free_tabs(dlist->path);
+	  free_tables(dlist->path);
 	  dlist_to_char(dlist);
 	  return;
 	}
@@ -98,7 +98,7 @@ int			my_exit(t_dlist *dlist, char **cmd)
     }
   else
     last = my_getnbr(cmd[1]);
-  free_tabs(cmd);
+  free_tables(cmd);
   remove_list(dlist);
   my_putstr("exit\n");
   exit(last);

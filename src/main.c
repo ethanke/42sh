@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Thu May 26 05:25:22 2016 Gaëtan Léandre
+** Last update Sat Jun  4 08:07:11 2016 Victor Sousa
 */
 
 #include 		"main.h"
@@ -80,13 +80,13 @@ void			make_command(char *cmd, t_dlist *dlist)
 {
   char			**test;
 
-  test = str_to_wordtab(cmd, " \t");
+  test = str_to_wordtable(cmd, " \t");
   if (test[0] == NULL)
     return;
   find_name(dlist, test);
   if (test_build(dlist, test) == 1)
     launch(dlist, test);
-  free_tabs(test);
+  free_tables(test);
 }
 
 int			main(int ac, char **av, char **env)
@@ -95,22 +95,37 @@ int			main(int ac, char **av, char **env)
   t_dlist		*dlist;
   char			*cmd;
   int			i;
+  t_edit_line		line;
 
   (void)ac;
   (void)av;
+  if ((line.fd_tty = open("/dev/tty", O_RDWR)) == -1)
+    return (-1);
+  my_put_termcap(line.fd_tty, NULL);
+  if (reset_save_mode(0, line.fd_tty) == EXIT_FAILURE)
+    {
+      dprintf(2, "Error SAVE termcap\n");
+      return (-1);
+    }
+  if (mode_raw(line.fd_tty) == EXIT_FAILURE)
+    {
+      dprintf(2, "Error mod_raw termcap\n");
+      return (-1);
+    }
   if ((dlist = create_dlist()) == NULL)
     return (-1);
   get_env(env, dlist);
   modular_pwd(1, dlist->pwd);
   disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
-  while ((cmd = get_next_line(0)) != NULL)
+  /*changer l'env que j'envoie*/
+  while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
       i = -1;
-      test = str_to_wordtab(cmd, ";");
+      test = str_to_wordtable(cmd, ";");
       while (test && test[++i])
 	make_pipe(test[i], dlist);
-      free_tabs(test);
+      free_tables(test);
       disp_pwd(modular_pwd(0, NULL));
     }
   my_putchar('\n');

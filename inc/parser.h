@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Sat Jun  4 04:52:30 2016 Ethan Kerdelhue
+** Last update Sat Jun  4 12:46:25 2016 Kerdelhue Ethan
 */
 
 #ifndef 		_PARSER_
@@ -52,13 +52,13 @@ typedef struct		s_parser
   t_cmd			**cmd;
 }			t_parser;
 
-int		print_tab(char **tab);
-int		free_for_all(char **tab);
+int		print_tab(char **table);
+int		free_for_all(char **table);
 int		check_last(t_pile *pile);
 char	        *my_strcat_wm(char *s, char *s2);
 int		add_node(t_pile *pile, char token, char *content);
 int		my_strlen(char *str);
-char		**str_to_wordtab(char *s, char *delim);
+char		**str_to_wordtable(char *s, char *delim);
 int		my_strncmp(char *s1, char *s2, int n);
 int		my_strcmp(char *s1, char *s2);
 char		*my_strcat(char *s1, char *s2);
@@ -66,12 +66,12 @@ char		*get_next_line(int fd);
 
 		/* OPT */
 int		isopt(char *str, t_parser *parser);
-int		opt_parsing(char **tab, t_parser *parser, int i, char *flag);
+int		opt_parsing(char **table, t_parser *parser, int i, char *flag);
 char		**load_opt();
 
 		/* SEP */
 int		issep(char *str, t_parser *parser);
-int		sep_parsing(char **tab, t_parser *parser, int i, char *flag);
+int		sep_parsing(char **table, t_parser *parser, int i, char *flag);
 char		**load_sep();
 
 		/* EPUR OPT */
@@ -82,12 +82,12 @@ char		*epur_string(char *str);
 		/* LINK LIST */
 int		add_node(t_pile *pile, char token, char *content);
 t_pile		*init_list();
-int		add_node_cmd(t_cmd *cmd, char **tab, char token);
+int		add_node_cmd(t_cmd *cmd, char **table, char token);
 t_cmd		*init_list_cmd();
 
 		/* CMD */
 int		iscmd(char *str, t_parser *parser);
-int		cmd_parsing(char **tab, t_parser *parser, int i, char *flag);
-int		special_case(char **tab, t_parser *parser, int i, char *flag);
+int		cmd_parsing(char **table, t_parser *parser, int i, char *flag);
+int		special_case(char **table, t_parser *parser, int i, char *flag);
 
 #endif			/*_PARSER_*/

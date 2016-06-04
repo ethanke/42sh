@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:09:42 2016 Gaëtan Léandre
+** Last update Thu May 26 03:07:44 2016 Victor Sousa
 */
 
 #include 		"get_next_line.h"
@@ -19,6 +19,7 @@ int			my_strlen_back(char *str)
     i++;
   return (i);
 }
+
 
 char			*withnt_back(char *stock)
 {
