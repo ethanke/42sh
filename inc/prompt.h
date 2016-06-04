@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Sat Jun  4 08:09:45 2016 Victor Sousa
+** Last update Sat Jun  4 21:07:58 2016 Victor Sousa
 */
 
 #ifndef 	PROMPT_H_
@@ -97,5 +97,6 @@ int		my_strncmp(char *s1, char *s2, int n);
 void		my_strncpy(char *dest, char *src, int n);
 char		*get_env_var(char *var, char **env);
 int		my_clear_screen(t_edit_line *line);
+int             modular_prog_status(char boolean, int value);
 
 #endif		/*PROMPT_H_*/

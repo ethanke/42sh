@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 03:48:45 2016 Victor Sousa
-** Last update Sat Jun  4 03:50:15 2016 Victor Sousa
+** Last update Sat Jun  4 21:25:20 2016 Victor Sousa
 */
 
 #include	"prompt.h"
@@ -21,8 +21,8 @@ int			mode_raw(int fd)
     }
   t.c_lflag = t.c_lflag & ~ICANON;
   t.c_lflag = t.c_lflag & ~ECHO;
-  t.c_cc[VMIN] = 1;
-  t.c_cc[VTIME] = 0;
+  t.c_cc[VMIN] = 0;
+  t.c_cc[VTIME] = 100;
   if (tcsetattr(fd, TCSANOW, &t) == -1)
     {
       perror("tcsetattr");

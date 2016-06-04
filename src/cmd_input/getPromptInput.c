@@ -5,10 +5,14 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Sat Jun  4 08:12:54 2016 Victor Sousa
+** Last update Sat Jun  4 21:34:47 2016 Victor Sousa
 */
 
 #include	"prompt.h"
+#include <time.h>
+#include <unistd.h>
+
+#include <poll.h>
 
 int	init_edition_line(char **env, t_edit_line *line)
 {
@@ -32,6 +36,8 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 {
   int		ret;
   char		buff[10];
+  struct pollfd pfd = {0,0,0};
+  int		pr;
 
   init_edition_line(env, line);
   ret = 1;
@@ -41,13 +47,26 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       term_refresh(line);
       printString(line->output_string);
       curseur(line->cur_pos_x, line->cur_pos_y);
-      if ((ret = read(0, buff, 9)) == -1)
-	break;
-      buff[ret] = '\0';
+
+      pfd.fd = STDIN_FILENO;
+      pfd.events = POLLIN;
+      pr = poll(&pfd, 1, 5000);
+
+      if (pr > 0)
+	{
+	  if ((ret = read(0, buff, 9)) == -1)
+	    break;
+	  buff[ret] = '\0';
+	}
+      else
+	{
+	  printf("\n");
+	  break;
+	}
 
       if (buff[0] == CTRLD && buff[1] == '\0')
 	{
-	  printf("\nctrl+d catched, leaving...\n");
+	  printf("\nctrl+ D catched, leaving...\n");
 	  freeString(line->output_string);
 	  return (NULL);
 	}
@@ -69,18 +88,18 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	}
       if (my_prompt_strcmp(buff, KEY_RIGHT) == 1)
 	{
-	  if (line->cur_pos_x < get_termsize_x() && line->cur_pos_x < StringLenght(line->output_string))
+	  if (line->cur_pos_x < get_termsize_x() && line->cur_pos_x < StringLenght(line->output_string) + line->start_pos_x)
 	    line->cur_pos_x++;
 	  continue;
 	}
       if (my_prompt_strcmp(buff, KEY_START) == 1)
   	{
-  	  line->cur_pos_x = 0;
+  	  line->cur_pos_x = line->start_pos_x;
   	  continue;
   	}
       if (my_prompt_strcmp(buff, KEY_END) == 1)
     	{
-    	  line->cur_pos_x = StringLenght(line->output_string);
+    	  line->cur_pos_x = StringLenght(line->output_string) + line->start_pos_x;
     	  continue;
     	}
       if (buff[0] == DEL && buff[1] == '\0')
