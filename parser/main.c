@@ -5,10 +5,34 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed May 25 07:06:35 2016 Kerdelhue Ethan
-** Last update Sat Jun  4 02:53:59 2016 Ethan Kerdelhue
+** Last update Sat Jun  4 12:31:23 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
+
+char    *my_strcpy(char *dest, char *src)
+{
+  int   i;
+
+  i = 0;
+  while (src[i])
+    {
+      dest[i] = src[i];
+      i = i + 1;
+    }
+  dest[i] = '\0';
+  return (dest);
+}
+
+char	*my_strdup(char *str)
+{
+  char	*s;
+
+  if ((s = malloc(my_strlen(str) + 1)) == 0)
+    return (0);
+  my_strcpy(s, str);
+  return (s);
+}
 
 int		my_strlen(char *str)
 {
@@ -112,22 +136,66 @@ int		print_tab(char **tab)
   return (0);
 }
 
-int		add_line_tab(char **tab, char *line)
+int		print_list(t_cmd *pile)
+{
+  t_cmd		*tmp;
+
+  tmp = pile;
+  while (tmp)
+    {
+      printf(" TOKEN : %c\n", tmp->token + 48);
+      puts("TAB : ");
+      print_tab(tmp->cmd);
+      tmp = tmp->next;
+    }
+  return (0);
+}
+
+int		get_sep(t_parser *parser, char *str)
 {
   int		i;
-  char		**new;
 
-  if ((new = malloc(tablen(tab) + 2)) == NULL)
-    return (-1);
-  while (tab[i])
+  i = 0;
+  while (parser->sep[i])
     {
-      new[i] = my_strdup(tab[i]);
+      if (my_strcmp(parser->sep[i], str) == 0)
+	return (i);
       i++;
     }
-  new[i] = my_strdup(line);
-  free(line);
-  free_for_all(tab);
-  return (new);
+  if (my_strcmp("|", str) == 0)
+    return (PI);
+  return (-1);
+}
+
+int		get_nb_sep(t_pile *pile)
+{
+  int		size;
+  t_pile	*tmp;
+
+  tmp = pile;
+  size = 0;
+  while (tmp->next)
+    {
+      if (tmp->token == SEP)
+	size += 1;
+      tmp = tmp->next;
+    }
+  return (size);
+}
+
+int		malloc_size_count(t_pile *pile)
+{
+  int		size;
+  t_pile	*tmp;
+
+  tmp = pile;
+  size = 0;
+  while (tmp != NULL)
+    {
+      size++;
+      tmp = tmp->next;
+    }
+  return (size + 1);
 }
 
 int		end_parsing(t_parser *parser)
@@ -135,23 +203,35 @@ int		end_parsing(t_parser *parser)
   t_cmd		*cmd;
   t_cmd		tmp;
   t_pile	*pile;
-  char		flag;
+  int		i;
 
-  pile = parser->pile;
+  i = 0;
+  pile = parser->pile->next;
   cmd = init_list_cmd();
-  (void) cmd;
+  printf("MALLOC SIZE : %d\n", malloc_size_count(pile));
+  if ((tmp.cmd = malloc(sizeof(char *) * get_nb_sep(pile) + 2 * sizeof(void *))) == NULL)
+    return (0);
   while (pile != NULL)
     {
-      tmp.token = -1;
+      tmp.token = 0;
       if (pile->token == SEP)
 	{
-	  tmp.token = SEP;
+	  tmp.token = get_sep(parser, pile->content);
 	  add_node_cmd(cmd, tmp.cmd, tmp.token);
+	  i = 0;
+	  free(tmp.cmd);
+	  if ((tmp.cmd = malloc(sizeof(char *) * get_nb_sep(pile) + 1)) == NULL)
+	    return (0);
 	}
-
-      add_node_cmd(cmd, tmp.cmd, tmp.token);
+      else
+	{
+	  tmp.cmd[i] = my_strdup(pile->content);
+	  i++;
+	}
+      puts(tmp.cmd[i]);
       pile = pile->next;
     }
+  print_list(cmd);
   return (0);
 }
 
@@ -159,15 +239,14 @@ int		get_parse(char *str, t_parser *parser)
 {
   char		*tmp;
   char		**tab;
-  int 		i;
   t_cmd		**cmd;
 
-  i = 0;
   tmp = pre_parse(str, parser);
-  tab = str_to_wordtab(tmp, " \t\n");
+  tab = str_to_wordtab(tmp, "  \t\n");
   start_parsing(tab, parser);
-  puts(" CMD TREATMENT ----> ");
+  printf(" CMD TREATMENT ----> ");
   end_parsing(parser);
+  (void) tab;
   return (0);
 }
 
@@ -182,19 +261,6 @@ char		*get_path(char **env)
 	return (env[i]);
     }
   return (NULL);
-}
-
-int		print_list(t_pile *pile)
-{
-  t_pile	*tmp;
-
-  tmp = pile;
-  while (tmp)
-    {
-      printf("%c - %s\n", tmp->token + 48, tmp->content);
-      tmp = tmp->next;
-    }
-  return (0);
 }
 
 void          	clear_list(t_pile *list)

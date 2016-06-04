@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed Jun  1 22:08:43 2016 Kerdelhue Ethan
-** Last update Fri Jun  3 23:57:23 2016 Ethan Kerdelhue
+** Last update Sat Jun  4 04:53:02 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
@@ -41,30 +41,31 @@ t_pile			*init_list()
   return (tmp);
 }
 
-int			add_node_cmd(t_cmd_list *cmd,
+int			add_node_cmd(t_cmd *cmd,
 					  char **tab,
 					  char token)
 {
-  t_cmd_list			*tmp;
-  t_cmd_list			*new;
+  t_cmd			*tmp;
+  t_cmd			*new;
 
-  if ((new = malloc(sizeof(t_cmd_list))) == NULL)
+  print_tab(cmd->cmd);
+  if ((new = malloc(sizeof(t_cmd))) == NULL)
     return (-1);
   tmp = cmd;
   while (tmp->next)
     tmp = tmp->next;
   new->token = token;
-  new->cmd = cmd;
+  new->cmd = tab;
   new->prev = tmp;
   tmp->next = new;
   return (0);
 }
 
-t_cmd_list			*init_list_cmd()
+t_cmd			*init_list_cmd()
 {
-  t_cmd_list			*tmp;
+  t_cmd			*tmp;
 
-  if ((tmp = malloc(sizeof(t_cmd_list))) == NULL)
+  if ((tmp = malloc(sizeof(t_cmd))) == NULL)
     return (0);
   tmp->token = SKI;
   tmp->cmd = NULL;
