@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Tue May 31 16:27:07 2016 Ethan Kerdelhue
+** Last update Thu Jun  2 07:42:17 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
@@ -19,13 +19,6 @@ int		count_size_sep(char *str, char **sep)
   i = -1;
   j = 0;
   size = my_strlen(str);
-  int x;
-  x = 0;
-  while (str[x])
-    {
-     printf("%d\n", str[x++]); 
-    }
-  printf("=%s= %d_ %d\n", str, size, strlen(str));
   while (str[++i])
     {
       j = 0;
@@ -56,7 +49,7 @@ char		*epur_opt(char *str, char **lim, int i, int k)
 	      if (str[i + 1] != '|' && str[i - 1] != '|')
 		{
 		  new[k] = '\0';
-		  new = my_strcat(new, my_strcat(" ", my_strcat(lim[j], " ")));
+		  new = my_strcat_wm(new, my_strcat(" ", my_strcat(lim[j], " ")));
 		  k += my_strlen(lim[j]) + 2;
 		  i += my_strlen(lim[j]) - 1;
 		  flag = 0;
@@ -74,9 +67,8 @@ char		*epur_sep(char *str, char **delim, int i, int k)
   char		*new;
   char		flag;
 
-if ((new = malloc(count_size_sep(str, delim) + 1)) == NULL)
+  if ((new = malloc(count_size_sep(str, delim) + 1)) == NULL)
     return (NULL);
-    printf("%d -%s-\n", count_size_sep(str, delim) + 1, str);
   while (str[++i])
     {
       flag = 1;
@@ -94,7 +86,6 @@ if ((new = malloc(count_size_sep(str, delim) + 1)) == NULL)
         new[k++] = str[i];
     }
   new[k] = 0;
-printf("NEW -> %s \n", new);
   return (new);
 }
 

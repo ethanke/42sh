@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed May 25 07:06:35 2016 Kerdelhue Ethan
-** Last update Tue May 31 16:35:19 2016 Ethan Kerdelhue
+** Last update Sat Jun  4 02:53:59 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
@@ -33,6 +33,12 @@ char	*my_strcat_wm(char *s, char *s2)
   return (s);
 }
 
+int		my_strcmp(char *s1, char *s2)
+{
+  return ((my_strlen(s1) != my_strlen(s2)) ? (-1)
+	  : (my_strncmp(s1, s2, my_strlen(s1))));
+}
+
 int			my_strncmp(char *s1, char *s2, int n)
 {
   while (n && *s1 && *s2 && *s1 == *s2)
@@ -46,82 +52,9 @@ int			my_strncmp(char *s1, char *s2, int n)
   return (*s1 - *s2);
 }
 
-int			add_node(t_pile *pile, char token, char *content)
-{
-  t_pile		*tmp;
-  t_pile		*new;
-
-  if ((new = malloc(sizeof(t_pile))) == NULL)
-    return (-1);
-  tmp = pile;
-  while (tmp->next)
-    tmp = tmp->next;
-  new->token = token;
-  new->content = content;
-  new->next = NULL;
-  new->prev = tmp;
-  tmp->next = new;
-  return (0);
-}
-
-t_pile			*init_list()
-{
-  t_pile		*tmp;
-
-  if ((tmp = malloc(sizeof(t_pile))) == NULL)
-    return (0);
-  tmp->token = SKI;
-  tmp->content = "NULL";
-  tmp->next = NULL;
-  tmp->prev = NULL;
-  return (tmp);
-}
-
 void		my_putstr(char *str)
 {
   write(1, str, my_strlen(str));
-}
-
-int		iscmd(char *str, t_parser *parser)
-{
-  int		i;
-  char		*tmp;
-  i = 0;
-  if (access(str, F_OK) == 0)
-    return (1);
-  else
-    {
-      str = my_strcat("/", str);
-      while (parser->path[i])
-	{
-	  tmp = my_strcat(parser->path[i], str);
-	  if (access(tmp, F_OK) == 0)
-	    return (1);
-	  i++;
-	}
-    }
-  return (0);
-}
-
-int		cmd_parsing(char **tab, t_parser *parser, int i, char *flag)
-{
-  if (*flag == 1 && iscmd(tab[i], parser) == 1)
-    {
-      if (add_node(parser->pile, OPT, tab[i]) == -1)
-	return (-1);
-    }
-  else if (iscmd(tab[i], parser) == 1)
-    {
-      if (add_node(parser->pile, CMD, tab[i]) == -1)
-	return (-1);
-      *flag = 1;
-    }
-  else if (*flag == 1 && iscmd(tab[i], parser) == 0)
-    {
-      if (add_node(parser->pile, OPT, tab[i]) == -1)
-	return (-1);
-    }
-  return (0);
 }
 
 int		start_parsing(char **tab, t_parser *parser)
@@ -133,6 +66,8 @@ int		start_parsing(char **tab, t_parser *parser)
   flag = 0;
   while (tab[i])
     {
+      if ((special_case(tab, parser, i, &flag)) == -1)
+	return (-1);
       if ((opt_parsing(tab ,parser, i, &flag)) == -1)
 	return (-1);
       if ((sep_parsing(tab, parser, i, &flag)) == -1)
@@ -150,9 +85,74 @@ char		*pre_parse(char *str, t_parser *parser)
 
   new = epur_string(str);
   new = epur_sep(new, parser->sep, -1, 0);
-  printf("%s\n", str);
-  /* new = epur_opt(new, parser->opt, -1, 0); */
+  new = epur_opt(new, parser->opt, -1, 0);
   return (new);
+}
+
+int		tablen(char **tab)
+{
+  int		i;
+
+  i = 0;
+  while (tab[i])
+    i++;
+  return (i);
+}
+
+int		print_tab(char **tab)
+{
+  int		i;
+
+  i = 0;
+  while (tab[i])
+    {
+      puts(tab[i]);
+      i++;
+    }
+  return (0);
+}
+
+int		add_line_tab(char **tab, char *line)
+{
+  int		i;
+  char		**new;
+
+  if ((new = malloc(tablen(tab) + 2)) == NULL)
+    return (-1);
+  while (tab[i])
+    {
+      new[i] = my_strdup(tab[i]);
+      i++;
+    }
+  new[i] = my_strdup(line);
+  free(line);
+  free_for_all(tab);
+  return (new);
+}
+
+int		end_parsing(t_parser *parser)
+{
+  t_cmd		*cmd;
+  t_cmd		tmp;
+  t_pile	*pile;
+  char		flag;
+
+  pile = parser->pile;
+  cmd = init_list_cmd();
+  (void) cmd;
+  while (pile != NULL)
+    {
+      tmp.token = -1;
+      if (pile->token == SEP)
+	{
+	  tmp.token = SEP;
+	  add_node_cmd(cmd, tmp.cmd, tmp.token);
+	}
+
+      add_node_cmd(cmd, tmp.cmd, tmp.token);
+      pile = pile->next;
+    }
+  return (0);
 }
 
 int		get_parse(char *str, t_parser *parser)
@@ -160,17 +160,14 @@ int		get_parse(char *str, t_parser *parser)
   char		*tmp;
   char		**tab;
   int 		i;
+  t_cmd		**cmd;
 
   i = 0;
   tmp = pre_parse(str, parser);
-  puts(tmp);
   tab = str_to_wordtab(tmp, " \t\n");
-
-  printf("priting word tab of cmd separated by ' '\n");
-  while (tab[i])
-    printf("%s\n", tab[i++]);
-  printf("done\n");
   start_parsing(tab, parser);
+  puts(" CMD TREATMENT ----> ");
+  end_parsing(parser);
   return (0);
 }
 
@@ -243,7 +240,6 @@ int		main(int ac, char **av, char **env)
       my_putstr("$>");
       str = get_next_line(0);
       get_parse(str, parser);
-      print_list(parser->pile);
       clear_list(parser->pile);
       my_putstr("\n");
       free(str);

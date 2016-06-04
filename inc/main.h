@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Thu May 26 04:50:46 2016 Gaëtan Léandre
+** Last update Tue May 31 16:42:38 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_MINISHELL_
@@ -36,7 +36,7 @@ void			my_putchar(char c);
 void			my_putstr(char *str);
 int			my_strcmp(char *a, char *b);
 char			*my_strcat(char *a, char *b);
-char			*strdup(char *str);
+/*char			*strdup(char *str);*/
 char			*my_strcat_no_free(char *a, char *b);
 void			my_env(t_dlist *dlist);
 void			my_setenv(t_dlist *dlist, char *name, char *params);

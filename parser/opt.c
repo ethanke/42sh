@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May 30 17:13:16 2016 Ethan Kerdelhue
-** Last update Tue May 31 06:43:21 2016 Ethan Kerdelhue
+** Last update Thu Jun  2 06:29:35 2016 Ethan Kerdelhue
 */
 
 #include	"parser.h"
@@ -17,7 +17,8 @@ int		isopt(char *str, t_parser *parser)
   i = 0;
   while (parser->opt[i])
     {
-      if (my_strncmp(parser->opt[i], str, my_strlen(parser->opt[i])) == 0 && my_strncmp(str, "||", 2) != 0)
+      if (my_strncmp(parser->opt[i], str, my_strlen(parser->opt[i])) == 0
+	  && my_strncmp(str, "||", 2) != 0)
 	return (1);
       i++;
     }
@@ -28,7 +29,7 @@ int		opt_parsing(char **tab, t_parser *parser, int i, char *flag)
 {
   if (isopt(tab[i], parser) == 1)
     {
-      if (add_node(parser->pile, OPT, tab[i]) == -1)
+      if (add_node(parser->pile, OPE, tab[i]) == -1)
 	return (-1);
       *flag = 0;
     }

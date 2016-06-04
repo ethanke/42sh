@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Tue May 31 06:50:27 2016 Kerdelhue Ethan
+## Last update Wed Jun  1 22:17:22 2016 Ethan Kerdelhue
 ##
 
 NAME	=	mysh
@@ -16,6 +16,8 @@ SRC	= 	main.c				\
 		sep.c				\
 		epur.c				\
 		opt.c				\
+		link_list.c			\
+		cmd.c				\
 		my_strcat.c
 
 OBJ	=	$(SRC:.c=.o)
