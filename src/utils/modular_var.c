@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Thu May 26 00:08:24 2016 Victor Sousa
-** Last update Sat Jun  4 21:06:27 2016 Victor Sousa
+** Last update Sun Jun  5 01:14:01 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
@@ -17,22 +17,6 @@ int             modular_prog_status(char boolean, int value)
   if (boolean)
     status = value;
   return (status);
-}
-
-char            *my_strdup(char *str)
-{
-  char          *result;
-  int           i;
-
-  if ((result = malloc(1 + my_strlen(str))) == NULL)
-    return (NULL);
-  i = -1;
-  while (str[++i])
-    {
-      result[i] = str[i];
-    }
-  result[i] = '\0';
-  return (result);
 }
 
 char		*modular_pwd(char boolean, char *new_pwd)

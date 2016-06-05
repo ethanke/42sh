@@ -5,12 +5,12 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:48:02 2016 Gaëtan Léandre
-** Last update Thu May 26 05:48:55 2016 Gaëtan Léandre
+** Last update Sun Jun  5 01:33:19 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
 
-void			my_env(t_dlist *dlist)
+int			my_env(t_dlist *dlist)
 {
   t_list		*tmp;
 
@@ -23,9 +23,10 @@ void			my_env(t_dlist *dlist)
       my_putchar('\n');
       tmp = tmp->next;
     }
+  return (1);
 }
 
-void			my_setenv(t_dlist *dlist, char *name, char *params)
+int			my_setenv(t_dlist *dlist, char *name, char *params)
 {
   t_list		*list;
 
@@ -35,22 +36,23 @@ void			my_setenv(t_dlist *dlist, char *name, char *params)
       if (my_strcmp(list->name, name) == 1)
 	{
 	  free(list->params);
-	  list->params = my_strcpy(params);
+	  list->params = my_strdup(params);
 	  free_env(dlist);
 	  dlist_to_char(dlist);
-	  return;
+	  return (1);
 	}
       list = list->next;
     }
-  if ((list = create_list(my_strcpy(name), my_strcpy(params))) == NULL)
+  if ((list = create_list(my_strdup(name), my_strdup(params))) == NULL)
     exit(EXIT_FAILURE);
   insert_list_end(list, dlist);
   free_env(dlist);
   free_tables(dlist->path);
   dlist_to_char(dlist);
+  return (1);
 }
 
-void			my_unsetenv(t_dlist *dlist, char *name)
+int			my_unsetenv(t_dlist *dlist, char *name)
 {
   t_list		*list;
 
@@ -65,10 +67,11 @@ void			my_unsetenv(t_dlist *dlist, char *name)
 	  free_env(dlist);
 	  free_tables(dlist->path);
 	  dlist_to_char(dlist);
-	  return;
+	  return (1);
 	}
       list = list->next;
     }
+  return (0);
 }
 
 int			check_cmd(char *str)

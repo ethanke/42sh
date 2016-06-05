@@ -5,10 +5,10 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May 30 17:17:39 2016 Ethan Kerdelhue
-** Last update Tue May 31 06:36:57 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 01:20:44 2016 Gaëtan Léandre
 */
 
-#include	"parser.h"
+#include	"main.h"
 
 int		issep(char *str, t_parser *parser)
 {

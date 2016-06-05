@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Sat Jun  4 21:12:32 2016 Victor Sousa
+** Last update Sun Jun  5 03:03:04 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -23,7 +23,7 @@ int			launch_setenv(t_dlist *dlist, char **cmd)
   return (0);
 }
 
-int			test_build(t_dlist *dlist, char **cmd)
+int			test_build(t_dlist *dlist, char **cmd, int *cont)
 {
   int			i;
 
@@ -31,10 +31,7 @@ int			test_build(t_dlist *dlist, char **cmd)
   if (my_strcmp(cmd[0], "exit") == 1 || my_strcmp(cmd[0], "quit") == 1)
     return (my_exit(dlist, cmd));
   else if (my_strcmp(cmd[0], "env") == 1 && cmd[1] == NULL)
-    {
-      my_env(dlist);
-      return (0);
-    }
+    return (my_env(dlist));
   else if (my_strcmp(cmd[0], "setenv") == 1)
     return (launch_setenv(dlist, cmd));
   else if (my_strcmp(cmd[0], "unsetenv") == 1)
@@ -45,15 +42,17 @@ int			test_build(t_dlist *dlist, char **cmd)
 	{
 	  while (cmd[i])
 	    my_unsetenv(dlist, cmd[i++]);
+	  return (1);
 	}
       return (0);
     }
   else if (my_strcmp(cmd[0], "cd") == 1)
     return (my_cd(dlist, cmd[1]));
-  return (1);
+  *cont = 1;
+  return (0);
 }
 
-void			launch(t_dlist *dlist, char **cmd)
+int			launch(t_dlist *dlist, char **cmd)
 {
   int			pid;
   int			pid_stat;
@@ -70,31 +69,31 @@ void			launch(t_dlist *dlist, char **cmd)
     {
       waitpid(pid, &pid_stat, 0);
       if (WIFEXITED(pid_stat))
-	pid_stat = WEXITSTATUS(pid_stat);
+	return (WEXITSTATUS(pid_stat));
       else if (WIFSIGNALED(pid_stat) && (pid_stat = WTERMSIG(pid_stat)) == 11)
 	write(2, "Segmentation fault\n", 20);
     }
+  return (0);
 }
 
-void			make_command(char *cmd, t_dlist *dlist)
+int			make_command(char **cmd, t_dlist *dlist)
 {
-  char			**test;
+  int			tmp;
+  int			cont;
 
-  test = str_to_wordtable(cmd, " \t");
-  if (test[0] == NULL)
-    return;
-  find_name(dlist, test);
-  if (test_build(dlist, test) == 1)
-    launch(dlist, test);
-  free_tables(test);
+  cont = 0;
+  find_name(dlist, cmd);
+  tmp = test_build(dlist, cmd, &cont);
+  if (cont == 1)
+    tmp = launch(dlist, cmd);
+  tmp = (tmp != 0) ? 1 : 0;
+  return (tmp);
 }
 
 int			main(int ac, char **av, char **env)
 {
-  char			**test;
   t_dlist		*dlist;
   char			*cmd;
-  int			i;
   t_edit_line		line;
 
   (void)ac;
@@ -121,12 +120,8 @@ int			main(int ac, char **av, char **env)
   /*changer l'env que j'envoie*/
   while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
-      i = -1;
-      test = str_to_wordtable(cmd, ";");
-      while (test && test[++i])
-	make_pipe(test[i], dlist);
-      free_tables(test);
       disp_pwd(modular_pwd(0, NULL));
+      free(cmd);
     }
   my_putchar('\n');
   return (0);

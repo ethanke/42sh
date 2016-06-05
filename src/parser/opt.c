@@ -5,10 +5,10 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May 30 17:13:16 2016 Ethan Kerdelhue
-** Last update Thu Jun  2 06:29:35 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 01:20:21 2016 Gaëtan Léandre
 */
 
-#include	"parser.h"
+#include	"main.h"
 
 int		isopt(char *str, t_parser *parser)
 {

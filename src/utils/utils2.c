@@ -5,12 +5,12 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 19:19:55 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:04:14 2016 Gaëtan Léandre
+** Last update Sun Jun  5 01:13:40 2016 Gaëtan Léandre
 */
 
 #include "main.h"
 
-char	*my_strcpy(char *str)
+char	*my_strdup(char *str)
 {
   char	*cpy;
   int	i;

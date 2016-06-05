@@ -1,18 +1,14 @@
-#include		"parser.h"
+/*
+** send_redir.c for parser in /Users/leandr_g/Documents/Shared folder/42SH/src/parser/
+**
+** Made by Gaëtan Léandre
+** Login   <leandr_g@epitech.eu>
+**
+** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
+** Last update Sun Jun  5 02:55:04 2016 Gaëtan Léandre
+*/
 
-static int		my_strcmp(char *a, char *b)
-{
-  int			i;
-
-  i = 0;
-  while (a[i] || b[i])
-    {
-      if (a[i] != b[i])
-	return (0);
-      i++;
-    }
-  return (1);
-}
+#include		"main.h"
 
 int			what_redir(char **redir)
 {
@@ -87,47 +83,65 @@ char			*take_end(char **cmd)
   while (cmd[i])
     {
       if (my_strcmp(cmd[i], ">") || my_strcmp(cmd[i], ">>")
-	  || my_strcmp(cmd[i], "<") || my_strcmp(redir[i], "<<"))
+	  || my_strcmp(cmd[i], "<") || my_strcmp(cmd[i], "<<"))
 	return (cmd[i + 1]);
     }
-  return (cmd);
+  return (NULL);
 }
 
-int			exec_redir(t_cmd *cmd)
+int			exec_redir(char **cmd, t_dlist *dlist)
 {
   int			pos;
   int			result;
   char			**start;
   char			*end;
 
-  pos = what_redir(cod->table);
+  pos = what_redir(cmd);
   result = 0;
   if (pos < 0)
-    //erreur multiples redirections
+    {
+      my_printf(2, "Ambiguous output redirect.\n");
+      return (0);
+    }
   else if (pos == 0)
-    //result = execution normale
+    {
+      return (make_command(cmd, dlist));
+    }
   else
     {
-      start = take_start(cmd->table);
+      start = take_start(cmd);
       end = take_end(cmd);
-      (pos == 1 ? (result = right_redir(start, end)) :
-       (pos == 2 ? (result = dright_redif(start, end)) :
-	(pos == 3 ? (result = left_redif(start, end)) :
-	 (result = dleft_redif(start, end)))));
+      (pos == 1 ? (result = right_redir(start, end, dlist)) :
+       (pos == 2 ? (result = dright_redir(start, end, dlist)) :
+	(pos == 3 ? (result = left_redir(start, end, dlist)) :
+	 (result = dleft_redir(start, end, dlist)))));
       if (start != NULL)
 	free(start);
     }
    return (result);
 }
 
-t_cmd			*send_cmd(t_cmd *cmd)
+void			send_cmd(t_cmd *cmd, t_dlist *dlist)
 {
   t_cmd			*tmp;
+  int			result;
 
+  result = 1;
   tmp = cmd;
   while (tmp != NULL)
     {
-      exec_redir(tmp);
+	  if (tmp->token == PI)
+	    {
+	      result = make_pipe(tmp, dlist);
+	      while (tmp && tmp->token == PI)
+		tmp = tmp->next;
+	    }
+	  else if (tmp->prev == NULL || (tmp->prev->token == ET && result == 1))
+	    result = exec_redir(tmp->cmd, dlist);
+	  else if (tmp->prev->token == OU && result == 0)
+	    result = exec_redir(tmp->cmd, dlist);
+	  else
+	    result = exec_redir(tmp->cmd, dlist);
       tmp = tmp->next;
     }
 }

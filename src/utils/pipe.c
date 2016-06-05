@@ -5,14 +5,15 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue Apr 12 16:51:52 2016 Gaëtan Léandre
-** Last update Tue Apr 12 18:35:52 2016 Gaëtan Léandre
+** Last update Sun Jun  5 01:50:09 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
 
-int		last_pipe(char *cmd, int *pip, t_dlist *dlist)
+int		last_pipe(char **cmd, int *pip, t_dlist *dlist)
 {
   int		pid;
+  int		tmp;
 
   pid = fork();
   if (pid == 0)
@@ -20,8 +21,8 @@ int		last_pipe(char *cmd, int *pip, t_dlist *dlist)
       dup2(pip[0], 0);
       close(pip[0]);
       close(pip[1]);
-      make_command(cmd, dlist);
-      exit(0);
+      tmp = exec_redir(cmd, dlist);
+      exit(tmp);
     }
   else if (pid == -1)
     return (-1);
@@ -30,9 +31,10 @@ int		last_pipe(char *cmd, int *pip, t_dlist *dlist)
   return (0);
 }
 
-int		mid_pipe(char *cmd, int *pip, t_dlist *dlist, int *prev)
+int		mid_pipe(char **cmd, int *pip, t_dlist *dlist, int *prev)
 {
   int		pid;
+  int		tmp;
 
   if (pipe(pip) != 0)
     return (-1);
@@ -43,8 +45,8 @@ int		mid_pipe(char *cmd, int *pip, t_dlist *dlist, int *prev)
       dup2(pip[1], 1);
       close(*prev);
       close(pip[1]);
-      make_command(cmd, dlist);
-      exit(0);
+      tmp = exec_redir(cmd, dlist);
+      exit(tmp);
     }
   else if (pid == -1)
     return (-1);
@@ -54,9 +56,10 @@ int		mid_pipe(char *cmd, int *pip, t_dlist *dlist, int *prev)
   return (0);
 }
 
-int		first_pipe(char *cmd, int *pip, t_dlist *dlist, int *prev)
+int		first_pipe(char **cmd, int *pip, t_dlist *dlist, int *prev)
 {
   int		pid;
+  int		tmp;
 
   if (pipe(pip) != 0)
     return (-1);
@@ -66,8 +69,8 @@ int		first_pipe(char *cmd, int *pip, t_dlist *dlist, int *prev)
       dup2(pip[1], 1);
       close(pip[1]);
       close(pip[0]);
-      make_command(cmd, dlist);
-      exit(0);
+      tmp = exec_redir(cmd, dlist);
+      exit(tmp);
     }
   else if (pid == -1)
     return (-1);
@@ -76,7 +79,7 @@ int		first_pipe(char *cmd, int *pip, t_dlist *dlist, int *prev)
   return (0);
 }
 
-void			exec_pipe(t_dlist *dlist, char **pipe, int size)
+int			exec_pipe(t_dlist *dlist, t_cmd *cmd, int size)
 {
   int			i;
   int			*pip;
@@ -88,32 +91,37 @@ void			exec_pipe(t_dlist *dlist, char **pipe, int size)
     write(2, "Error malloc sound\n", 20);
   else
     {
-      first_pipe(pipe[0], pip, dlist, &prev);
+      first_pipe(cmd->cmd, pip, dlist, &prev);
       i = 1;
-      while (i < size - 1)
-	mid_pipe(pipe[i++], pip, dlist, &prev);
-      last_pipe(pipe[i], pip, dlist);
+      while (cmd && cmd->token == PI)
+	{
+	  mid_pipe(cmd->cmd, pip, dlist, &prev);
+	  cmd = cmd->next;
+	}
+      last_pipe(cmd->cmd, pip, dlist);
       i = 0;
       while (i < size)
 	{
-	  wait(NULL);
+	  wait(&prev);
 	  i++;
 	}
+      return (prev == 0 ? 0 : 1);
     }
+  return (0);
 }
 
-void			make_pipe(char *cmd, t_dlist *dlist)
+int			make_pipe(t_cmd *cmd, t_dlist *dlist)
 {
-  char			**pipe;
+  t_cmd			*tmp;
   int			size;
 
-  pipe = str_to_wordtable(cmd, "|");
-  size = 0;
-  while (pipe[size])
+  size = 1;
+  tmp = cmd;
+  while (tmp && tmp->token == PI)
+    {
+      tmp = tmp->next;
+      size++;
+    }
     size++;
-  if (size == 1)
-    make_command(pipe[0], dlist);
-  else
-    exec_pipe(dlist, pipe, size);
-  free_tables(pipe);
+  return (exec_pipe(dlist, cmd, size));
 }

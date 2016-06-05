@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Sat Jun  4 12:46:25 2016 Kerdelhue Ethan
+** Last update Sun Jun  5 02:55:48 2016 Gaëtan Léandre
 */
 
 #ifndef 		_PARSER_
@@ -63,6 +63,10 @@ int		my_strncmp(char *s1, char *s2, int n);
 int		my_strcmp(char *s1, char *s2);
 char		*my_strcat(char *s1, char *s2);
 char		*get_next_line(int fd);
+int		free_for_all(char **table);
+int		get_sep(t_parser *parser, char *str);
+char		*pre_parse(char *str, t_parser *parser);
+int		start_parsing(char **table, t_parser *parser);
 
 		/* OPT */
 int		isopt(char *str, t_parser *parser);
@@ -89,5 +93,7 @@ t_cmd		*init_list_cmd();
 int		iscmd(char *str, t_parser *parser);
 int		cmd_parsing(char **table, t_parser *parser, int i, char *flag);
 int		special_case(char **table, t_parser *parser, int i, char *flag);
+
+t_cmd		*get_parse(char *str, t_parser *parser);
 
 #endif			/*_PARSER_*/

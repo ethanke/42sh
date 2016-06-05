@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Sat Jun  4 08:04:41 2016 Victor Sousa
+## Last update Sun Jun  5 02:23:18 2016 Gaëtan Léandre
 ##
 
 NAME	=	42sh
@@ -23,6 +23,7 @@ LISTDIR         =       $(SRCDIR)/list
 UTILSDIR        =       $(SRCDIR)/utils
 PRTFDIR         =       $(SRCDIR)/my_printf
 SPRTFDIR        =       $(SRCDIR)/my_sprintf
+PARSDIR        =       	$(SRCDIR)/parser
 
 INCDIR          =       inc
 LIBDIR          =       lib
@@ -57,7 +58,8 @@ SRC		+=	$(UTILSDIR)/utils.c			\
 			$(UTILSDIR)/modular_var.c		\
 			$(UTILSDIR)/pipe.c			\
 			$(UTILSDIR)/free.c			\
-			$(UTILSDIR)/pars_env.c
+			$(UTILSDIR)/pars_env.c			\
+			$(UTILSDIR)/redirect.c
 
 ## PRINTF ##
 SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
@@ -86,8 +88,19 @@ SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c       \
                         $(SPRTFDIR)/my_put_fnbr.c               \
                         $(SPRTFDIR)/my_strcat.c
 
+SRC		+=	$(PARSDIR)/cmd.c			\
+			$(PARSDIR)/epur.c			\
+			$(PARSDIR)/free_pars.c			\
+			$(PARSDIR)/link_list.c			\
+			$(PARSDIR)/opt.c			\
+			$(PARSDIR)/pars_utils.c			\
+			$(PARSDIR)/pars.c			\
+			$(PARSDIR)/send_redir.c			\
+			$(PARSDIR)/sep.c			\
+			$(PARSDIR)/start_pars.c
+
 ## TERMCAP
-SRC		+=	src/cmd_input/getPromptInput.c				\
+SRC		+=	src/cmd_input/getPromptInput.c			\
 			src/cmd_input/termcap/my_put_termcap.c		\
 			src/cmd_input/termcap/term_mode.c		\
 			src/cmd_input/termcap/term_init.c		\
