@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:16:02 2016 Gaëtan Léandre
-** Last update Sun Jun  5 02:57:58 2016 Gaëtan Léandre
+** Last update Sun Jun  5 03:30:01 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -21,7 +21,7 @@ int			start_parsing(char **table, t_parser *parser)
     {
       if ((special_case(table, parser, i, &flag)) == -1)
 	return (-1);
-      if ((opt_parsing(table ,parser, i, &flag)) == -1)
+      if ((opt_parsing(table, parser, i, &flag)) == -1)
 	return (-1);
       if ((sep_parsing(table, parser, i, &flag)) == -1)
 	return (-1);

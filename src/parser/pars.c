@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 03:25:27 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 03:30:26 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -84,6 +84,7 @@ t_cmd			*parsing(char *str, char **path)
 {
   t_parser		parser;
 
+  parser.pile = init_list();
   if ((parser.opt = load_opt()) == NULL)
     return (NULL);
   if ((parser.sep = load_sep()) == NULL)
