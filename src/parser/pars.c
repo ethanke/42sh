@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 02:10:48 2016 Gaëtan Léandre
+** Last update Sun Jun  5 03:18:53 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -36,19 +36,20 @@ t_cmd			*end_parsing(t_parser *parser)
   pile = parser->pile->next;
   cmd = init_list_cmd();
   if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
-    return (0);
-  while (pile != NULL)
+    return (NULL);
+  while (pile)
     {
       tmp.token = 0;
       if (pile->token == SEP)
 	{
 	  tmp.token = get_sep(parser, pile->content);
 	  tmp.cmd[i] = 0;
-	  add_node_cmd(cmd, tmp.cmd, tmp.token);
+	  if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
+	    return (NULL);
 	  i = 0;
 	  free(tmp.cmd);
 	  if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 1)) == NULL)
-	    return (0);
+	    return (NULL);
 	}
       else
 	{
@@ -57,7 +58,8 @@ t_cmd			*end_parsing(t_parser *parser)
 	}
       pile = pile->next;
     }
-  add_node_cmd(cmd, tmp.cmd, tmp.token);
+  if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
+    return (NULL);
   return (cmd);
 }
 
@@ -78,15 +80,18 @@ t_cmd			*get_parse(char *str, t_parser *parser)
   return (cmd);
 }
 
-char			*get_path(char **env)
+t_cmd			*parsing(char *str, char **path)
 {
-  int			i;
+  t_parser		*parser;
 
-  i = -1;
-  while (env[++i])
-    {
-      if (my_strncmp(env[i], "PATH=", 5) == 0)
-	return (env[i]);
-    }
-  return (NULL);
+  if ((parser = malloc(sizeof(t_parser))) == NULL)
+    return (NULL);
+  if ((parser->opt = load_opt()) == NULL)
+    return (NULL);
+  if ((parser->sep = load_sep()) == NULL)
+    return (NULL);
+  parser->path = path;
+  if ((parser->cmd = get_parse(str, parser)) == NULL)
+    return (NULL);
+  return (parser->cmd);
 }

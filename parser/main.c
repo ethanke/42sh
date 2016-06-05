@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed May 25 07:06:35 2016 Kerdelhue Ethan
-** Last update Sun Jun  5 01:04:15 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 01:19:22 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
@@ -217,7 +217,7 @@ t_cmd			*end_parsing(t_parser *parser)
 {
   t_cmd			*cmd;
   t_cmd			tmp;
-  t_pile	*pile;
+  t_pile		*pile;
   int			i;
   char			flag;
 
@@ -249,23 +249,6 @@ t_cmd			*end_parsing(t_parser *parser)
       pile = pile->next;
     }
   add_node_cmd(cmd, tmp.cmd, tmp.token);
-  return (cmd);
-}
-
-t_cmd			*get_parse(char *str, t_parser *parser)
-{
-  char			*tmp;
-  char			**tab;
-  t_cmd			*cmd;
-
-  if ((tmp = pre_parse(str, parser)) == NULL)
-    return (NULL);
-  if ((tab = str_to_wordtable(tmp, "  \t\n")) == NULL)
-    return (NULL);
-  if ((start_parsing(tab, parser)) == NULL)
-    return (NULL);
-  if ((cmd = end_parsing(parser)) == NULL)
-    return (NULL);
   return (cmd);
 }
 
@@ -305,4 +288,21 @@ int			free_for_all(char **tab)
     free(tab[i]);
   free(tab);
   return (0);
+}
+
+t_cmd			*get_parse(char *str, t_parser *parser)
+{
+  char			*tmp;
+  char			**tab;
+  t_cmd			*cmd;
+
+  if ((tmp = pre_parse(str, parser)) == NULL)
+    return (NULL);
+  if ((tab = str_to_wordtable(tmp, "  \t\n")) == NULL)
+    return (NULL);
+  if ((start_parsing(tab, parser)) == NULL)
+    return (NULL);
+  if ((cmd = end_parsing(parser)) == NULL)
+    return (NULL);
+  return (cmd);
 }

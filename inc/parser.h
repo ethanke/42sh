@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 02:55:48 2016 Gaëtan Léandre
+** Last update Sun Jun  5 03:20:04 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_PARSER_
@@ -67,6 +67,7 @@ int		free_for_all(char **table);
 int		get_sep(t_parser *parser, char *str);
 char		*pre_parse(char *str, t_parser *parser);
 int		start_parsing(char **table, t_parser *parser);
+t_cmd		*parsing(char *str, char **path);
 
 		/* OPT */
 int		isopt(char *str, t_parser *parser);
