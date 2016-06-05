@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 04:38:07 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 04:54:41 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -44,7 +44,7 @@ t_cmd			*end_parsing(t_parser *parser)
       if (pile->token == SEP)
 	{
 	  tmp.token = get_sep(parser, pile->content);
-	  tmp.cmd[i] = 0;
+	  tmp.cmd[i] = NULL;
 	  if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
 	    return (NULL);
 	  i = 0;
@@ -60,6 +60,7 @@ t_cmd			*end_parsing(t_parser *parser)
 	}
       pile = pile->next;
     }
+  tmp.cmd[i] = NULL;
   if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
     return (NULL);
   return (cmd);
