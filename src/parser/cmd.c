@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Jun  1 22:13:03 2016 Ethan Kerdelhue
-** Last update Thu Jun  2 07:38:45 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 03:33:42 2016 Ethan Kerdelhue
 */
 
 #include	"parser.h"
@@ -68,7 +68,6 @@ int		check_last(t_pile *pile)
   tmp = pile;
   while (tmp->next)
     tmp = tmp->next;
-  puts(tmp->content);
   if (tmp)
     return (((my_strcmp(tmp->content, "<") == 0) ? (1) :
 	     (my_strcmp(tmp->content, ">") == 0) ? (1) :
