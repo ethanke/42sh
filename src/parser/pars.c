@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 05:28:36 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 05:32:07 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -91,7 +91,6 @@ t_cmd			*end_parsing(t_parser *parser)
   tmp.cmd[i] = NULL;
   if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
     return (NULL);
-  list_len(cmd);
   return (cmd);
 }
 
