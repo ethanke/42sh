@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 03:40:23 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 04:37:05 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_PARSER_
@@ -52,7 +52,6 @@ typedef struct		s_parser
   t_cmd			*cmd;
 }			t_parser;
 
-int		print_tab(char **table);
 int		free_for_all(char **table);
 int		check_last(t_pile *pile);
 char	        *my_strcat_wm(char *s, char *s2);
@@ -93,7 +92,7 @@ t_cmd		*init_list_cmd();
 		/* CMD */
 int		iscmd(char *str, t_parser *parser);
 int		cmd_parsing(char **table, t_parser *parser, int i, char *flag);
-int		special_case(char **table, t_parser *parser, int i, char *flag);
-int		get_parse(char *str, t_parser *parser);
+int
+get_parse(char *str, t_parser *parser);
 
 #endif			/*_PARSER_*/

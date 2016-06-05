@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Jun  1 22:13:03 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 03:33:42 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 04:36:59 2016 Ethan Kerdelhue
 */
 
 #include	"parser.h"
@@ -46,17 +46,6 @@ int		cmd_parsing(char **table, t_parser *parser, int i, char *flag)
       if (add_node(parser->pile, CMD, table[i]) == -1)
 	return (-1);
       *flag = 1;
-    }
-  return (0);
-}
-
-int		special_case(char **table, t_parser *parser, int i, char *flag)
-{
-  (void) flag;
-  if (check_last(parser->pile) == 1 && *flag == 0)
-    {
-      if (add_node(parser->pile, FIL, table[i]) == -1)
-	return (-1);
     }
   return (0);
 }

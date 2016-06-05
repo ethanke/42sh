@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 04:08:37 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 04:38:07 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -34,7 +34,8 @@ t_cmd			*end_parsing(t_parser *parser)
 
   i = 0;
   pile = parser->pile->next;
-  cmd = init_list_cmd();
+  if ((cmd = init_list_cmd()) == NULL)
+    return (NULL);
   if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
     return (NULL);
   while (pile)
@@ -53,7 +54,8 @@ t_cmd			*end_parsing(t_parser *parser)
 	}
       else
 	{
-	  tmp.cmd[i] = my_strdup(pile->content);
+	  if ((tmp.cmd[i] = my_strdup(pile->content)) == NULL)
+	    return (NULL);
 	  i++;
 	}
       pile = pile->next;
@@ -61,6 +63,16 @@ t_cmd			*end_parsing(t_parser *parser)
   if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
     return (NULL);
   return (cmd);
+}
+
+int			tabr(char **ta)
+{
+  int			i;
+
+  i = -1;
+  while (ta[++i])
+    puts(ta[i]);
+  return (0);
 }
 
 int			get_parse(char *str, t_parser *parser)

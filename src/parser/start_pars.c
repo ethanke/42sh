@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:16:02 2016 Gaëtan Léandre
-** Last update Sun Jun  5 03:30:01 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 04:37:19 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -19,8 +19,6 @@ int			start_parsing(char **table, t_parser *parser)
   flag = 0;
   while (tab[i])
     {
-      if ((special_case(table, parser, i, &flag)) == -1)
-	return (-1);
       if ((opt_parsing(table, parser, i, &flag)) == -1)
 	return (-1);
       if ((sep_parsing(table, parser, i, &flag)) == -1)
@@ -36,9 +34,12 @@ char			*pre_parse(char *str, t_parser *parser)
 {
   char			*new;
 
-  new = epur_string(str);
-  new = epur_sep(new, parser->sep, -1, 0);
-  new = epur_opt(new, parser->opt, -1, 0);
+  if ((new = epur_string(str)) == NULL)
+    return (NULL);
+  if ((new = epur_sep(new, parser->sep, -1, 0)) == NULL)
+    return (NULL);
+  if ((new = epur_opt(new, parser->opt, -1, 0)) == NULL)
+    return (NULL);
   return (new);
 }
 
