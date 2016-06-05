@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Sun Jun  5 05:30:48 2016 Gaëtan Léandre
+** Last update Sun Jun  5 07:36:01 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -17,8 +17,8 @@ int			what_redir(char **redir)
   int			i;
 
   one = 0;
-  i = -1;
-  while (redir[++i])
+  i = 0;
+  while (redir[i])
     {
       tmp = 0;
       if (my_strcmp(redir[i], ">") == 1)
@@ -33,6 +33,7 @@ int			what_redir(char **redir)
 	one = tmp;
       else if (tmp != 0)
 	return (-1);
+      i++;
     }
   return (one);
 }
@@ -140,8 +141,8 @@ void			send_cmd(t_cmd *cmd, t_dlist *dlist)
 	    result = exec_redir(tmp->cmd, dlist);
 	  else if (tmp->prev->token == OU && result == 0)
 	    result = exec_redir(tmp->cmd, dlist);
-	  else
+	  else if (tmp->prev->token == PV)
 	    result = exec_redir(tmp->cmd, dlist);
-      tmp = tmp->next;
+	  tmp = tmp->next;
     }
 }
