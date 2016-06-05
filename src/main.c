@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Sun Jun  5 03:03:04 2016 Gaëtan Léandre
+** Last update Sun Jun  5 03:26:12 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -120,6 +120,7 @@ int			main(int ac, char **av, char **env)
   /*changer l'env que j'envoie*/
   while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
+      send_cmd(parsing(cmd, dlist->path), dlist);
       disp_pwd(modular_pwd(0, NULL));
       free(cmd);
     }

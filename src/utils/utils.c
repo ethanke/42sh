@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:46:33 2016 Gaëtan Léandre
-** Last update Thu May 26 04:50:29 2016 Gaëtan Léandre
+** Last update Sun Jun  5 03:28:29 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -77,7 +77,6 @@ char			*my_strcat(char *a, char *b)
       j++;
     }
   str[i] = '\0';
-  free(b);
   return (str);
 }
 
