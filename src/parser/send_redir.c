@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Mon Jun  6 00:50:44 2016 Gaëtan Léandre
+** Last update Mon Jun  6 01:13:22 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -137,9 +137,9 @@ void			send_cmd(t_cmd *cmd, t_dlist *dlist)
 	      while (tmp && tmp->token == PI)
 		tmp = tmp->next;
 	    }
-	  else if (tmp->prev->cmd == NULL || (tmp->prev->token == ET && result == 1))
+	  else if (tmp->prev->cmd == NULL || (tmp->prev->token == ET && result == 0))
 	    result = exec_redir(tmp->cmd, dlist);
-	  else if (tmp->prev->token == OU && result == 0)
+	  else if (tmp->prev->token == OU && result == 1)
 	    result = exec_redir(tmp->cmd, dlist);
 	  else if (tmp->prev->token == PV)
 	    result = exec_redir(tmp->cmd, dlist);
