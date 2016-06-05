@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 03:30:26 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 03:44:46 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -63,35 +63,35 @@ t_cmd			*end_parsing(t_parser *parser)
   return (cmd);
 }
 
-t_cmd			*get_parse(char *str, t_parser *parser)
+int			get_parse(char *str, t_parser *parser)
 {
   char			*tmp;
   char			**table;
-  t_cmd			*cmd;
 
   if ((tmp = pre_parse(str, parser)) == NULL)
-    return (NULL);
+    return (-1);
   if ((table = str_to_wordtable(tmp, "  \t\n")) == NULL)
-    return (NULL);
+    return (-1);
   if ((start_parsing(table, parser)) == -1)
-    return (NULL);
-  if ((cmd = end_parsing(parser)) == NULL)
-    return (NULL);
-  return (cmd);
+    return (-1);
+  if ((parser->cmd = end_parsing(parser)) == NULL)
+    return (-1);
+  return (-1);
 }
 
 t_cmd			*parsing(char *str, char **path)
 {
   t_parser		parser;
 
-  parser.pile = init_list();
+  if ((parser.pile = init_list()) == NULL)
+    return (NULL);
   if ((parser.opt = load_opt()) == NULL)
     return (NULL);
   if ((parser.sep = load_sep()) == NULL)
     return (NULL);
   if ((parser.path = path) == NULL)
     return (NULL);
-  if ((parser.cmd = get_parse(str, &parser)) == NULL)
+  if (get_parse(str, &parser) == -1)
     return (NULL);
   return (parser.cmd);
 }

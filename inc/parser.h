@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 03:21:24 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 03:40:23 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_PARSER_
@@ -94,7 +94,6 @@ t_cmd		*init_list_cmd();
 int		iscmd(char *str, t_parser *parser);
 int		cmd_parsing(char **table, t_parser *parser, int i, char *flag);
 int		special_case(char **table, t_parser *parser, int i, char *flag);
-
-t_cmd		*get_parse(char *str, t_parser *parser);
+int		get_parse(char *str, t_parser *parser);
 
 #endif			/*_PARSER_*/
