@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 04:54:41 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 05:28:36 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -25,6 +25,34 @@ int			malloc_size_count(t_pile *pile)
   return (size + 1);
 }
 
+int			list_len(t_cmd *cmd)
+{
+  int			i;
+  t_cmd			*tmp;
+
+  tmp = cmd;
+  i = 0;
+  while (tmp)
+    {
+      i++;
+      tmp = tmp->next;
+    }
+  printf("LIST LEN : %d", i);
+  return (0);
+}
+
+void			list_print(t_pile *pile)
+{
+  t_pile 		*tmp;
+
+  tmp = pile;
+  while (tmp)
+    {
+      printf("C: %s T: %d\n", pile->content, pile->token);
+      tmp = tmp->next;
+    }
+}
+
 t_cmd			*end_parsing(t_parser *parser)
 {
   t_cmd			*cmd;
@@ -38,7 +66,7 @@ t_cmd			*end_parsing(t_parser *parser)
     return (NULL);
   if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
     return (NULL);
-  while (pile)
+  while (pile != NULL)
     {
       tmp.token = 0;
       if (pile->token == SEP)
@@ -63,6 +91,7 @@ t_cmd			*end_parsing(t_parser *parser)
   tmp.cmd[i] = NULL;
   if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
     return (NULL);
+  list_len(cmd);
   return (cmd);
 }
 

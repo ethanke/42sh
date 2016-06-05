@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:16:02 2016 Gaëtan Léandre
-** Last update Sun Jun  5 04:37:19 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 05:27:43 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -13,18 +13,25 @@
 int			start_parsing(char **table, t_parser *parser)
 {
   int			i;
-  char			flag;
 
   i = 0;
-  flag = 0;
-  while (tab[i])
+  while (table[i])
     {
-      if ((opt_parsing(table, parser, i, &flag)) == -1)
-	return (-1);
-      if ((sep_parsing(table, parser, i, &flag)) == -1)
-	return (-1);
-      if ((cmd_parsing(table, parser, i, &flag)) == -1)
-	return (-1);
+      if (isopt(table[i], parser) == 1)
+	{
+	  if (add_node(parser->pile, OPE, table[i]) == -1)
+	    return (-1);
+	}
+      else if (issep(table[i], parser) == 1)
+	{
+	  if (add_node(parser->pile, SEP, table[i]) == -1)
+	    return (-1);
+	}
+      else
+	{
+	  if (add_node(parser->pile, SKI, table[i]) == -1)
+	    return (-1);
+	}
       i++;
     }
   return (0);
