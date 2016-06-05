@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 06:51:00 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 00:45:06 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -75,8 +75,7 @@ void			list_print(t_pile *pile)
   tmp = pile;
   while (tmp)
     {
-      printf("C: %s || \n", tmp->content);
-      puts(tmp->content);
+      printf("C: %s \n", tmp->content);
       tmp = tmp->next;
     }
 }
@@ -84,41 +83,52 @@ void			list_print(t_pile *pile)
 t_cmd			*end_parsing(t_parser *parser)
 {
   t_cmd			*cmd;
-  t_cmd			tmp;
+  t_cmd			*tmp;
   t_pile		*pile;
   int			i;
+  int			j;
+  char			flag;
 
   i = 0;
+  j = 0;
+  flag = 0;
   pile = parser->pile->next;
   if ((cmd = init_list_cmd()) == NULL)
     return (NULL);
-  if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
+  if ((tmp = malloc(sizeof(t_cmd) * (malloc_size_count(pile) + 2))) == NULL)
+    return (NULL);
+  if ((tmp[j].cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
     return (NULL);
   while (pile != NULL)
     {
-      tmp.token = 0;
+      tmp[j].token = 0;
       if (pile->token == SEP)
 	{
-	  tmp.token = get_sep(parser, pile->content);
-	  tmp.cmd[i] = NULL;
-	  if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
+	  tmp[j].token = get_sep(parser, pile->content);
+	  tmp[j].cmd[i] = NULL;
+	  if (add_node_cmd(cmd, tmp[j].cmd, tmp[j].token) == -1)
 	    return (NULL);
+	  j++;
 	  i = 0;
-	  free(tmp.cmd);
-	  if ((tmp.cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 1)) == NULL)
+	  if ((tmp[j].cmd = malloc(sizeof(char *) * (malloc_size_count(pile) + 1))) == NULL)
 	    return (NULL);
+	  flag = 1;
 	}
       else
 	{
-	  if ((tmp.cmd[i] = my_strdup(pile->content)) == NULL)
+	  if ((tmp[j].cmd[i] = my_strdup(pile->content)) == NULL)
 	    return (NULL);
+	  flag = 0;
 	  i++;
 	}
       pile = pile->next;
     }
-  tmp.cmd[i] = NULL;
-  if (add_node_cmd(cmd, tmp.cmd, tmp.token) == -1)
-    return (NULL);
+  tmp[j].cmd[i] = NULL;
+  if (flag == 0)
+    {
+      if (add_node_cmd(cmd, tmp[j].cmd, tmp[j].token) == -1)
+	return (NULL);
+    }
   return (cmd);
 }
 
@@ -146,6 +156,20 @@ int			get_parse(char *str, t_parser *parser)
   if ((parser->cmd = end_parsing(parser)) == NULL)
     return (-1);
   return (0);
+}
+
+void			print_list(t_cmd *cmd)
+{
+  t_cmd *tmp;
+
+  tmp = cmd->next;
+  while (tmp)
+    {
+      puts(".: TAB CMD :.");
+      tabr(tmp->cmd);
+      puts(".: END :.\n");
+      tmp = tmp->next;
+    }
 }
 
 t_cmd			*parsing(char *str, char **path)
