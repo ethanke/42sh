@@ -131,7 +131,7 @@ OBJ             =       $(SRC:.c=.o)
 all:                    title $(NAME)
 
 title           :
-			@$(ECHO) $(GREEN)Raytracer$(TEAL)2$(DEFAULT)
+			@$(ECHO) $(GREEN)42$(TEAL)sh$(DEFAULT)
 
 $(NAME)         :	$(OBJ)
 			@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) &&   \

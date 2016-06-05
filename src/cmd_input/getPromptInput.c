@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Sat Jun  4 21:34:47 2016 Victor Sousa
+** Last update Sun Jun  5 15:49:24 2016 Victor Sousa
 */
 
 #include	"prompt.h"
@@ -60,8 +60,16 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	}
       else
 	{
-	  printf("\n");
-	  break;
+	  if (modular_prog_status(0, 0) == 2)
+	    {
+	      modular_prog_status(1, 1);
+	      write(1, "\n", 1);
+	      freeString(line->output_string);
+	      line->output_string = formString("");
+	      return (StringToArray(line->output_string, STRING_FREE));
+	    }
+	  else
+	    continue;
 	}
 
       if (buff[0] == CTRLD && buff[1] == '\0')
