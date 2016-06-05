@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May 26 03:05:28 2016 Gaëtan Léandre
-** Last update Sun Jun  5 01:34:26 2016 Gaëtan Léandre
+** Last update Sun Jun  5 05:48:10 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -44,17 +44,20 @@ int			my_cd(t_dlist *dlist, char *command)
   char			*new;
 
   i = 0;
-  while (command[i] && command[i] == ' ')
+  while (command && command[i] && command[i] == ' ')
     i++;
-  if (command[i] == '~' && (home = find_with_name(dlist, "HOME")) != NULL)
+  if ((!command || command[i] == '~') && (home = find_with_name(dlist, "HOME")) != NULL)
     {
-      while (command[++i] && command[i] == '/');
-      new = my_strcat_no_free(home, &command[i]);
+      while (command && command[++i] && command[i] == '/');
+      if (command)
+	new = my_strcat_no_free(home, &command[i]);
+      else
+	new = my_strcat_no_free(home, "");
     }
-  else if (my_strcmp(command, "-") == 1
+  else if (command && my_strcmp(command, "-") == 1
 	   && (home = find_with_name(dlist, "OLDPWD")) != NULL)
     new = my_strcat_no_free_b("", home);
-  else
+  else if (command)
     new = my_strcat_no_free_b("", &command[i]);
   if (new == NULL)
     return (0);

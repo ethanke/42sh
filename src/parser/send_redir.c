@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Sun Jun  5 02:55:04 2016 Gaëtan Léandre
+** Last update Sun Jun  5 05:30:48 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -127,7 +127,7 @@ void			send_cmd(t_cmd *cmd, t_dlist *dlist)
   int			result;
 
   result = 1;
-  tmp = cmd;
+  tmp = cmd == NULL ? cmd : cmd->next;
   while (tmp != NULL)
     {
 	  if (tmp->token == PI)
