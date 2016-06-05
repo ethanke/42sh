@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 05:26:00 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 06:46:17 2016 Ethan Kerdelhue
 */
 
 #ifndef 		_PARSER_
@@ -52,11 +52,11 @@ typedef struct		s_parser
   t_cmd			*cmd;
 }			t_parser;
 
-void			list_print(t_pile *pile);
+char		*my_my_strcat(char *a, char *b);
+void		list_print(t_pile *pile);
 int		free_for_all(char **table);
 int		check_last(t_pile *pile);
 char	        *my_strcat_wm(char *s, char *s2);
-int		add_node(t_pile *pile, char token, char *content);
 int		my_strlen(char *str);
 char		**str_to_wordtable(char *s, char *delim);
 int		my_strncmp(char *s1, char *s2, int n);
@@ -85,7 +85,7 @@ char		*epur_sep(char *str, char **delim, int i, int k);
 char		*epur_string(char *str);
 
 		/* LINK LIST */
-int		add_node(t_pile *pile, char token, char *content);
+t_pile		*add_node(t_pile *pile, char token, char *content);
 t_pile		*init_list();
 int		add_node_cmd(t_cmd *cmd, char **table, char token);
 t_cmd		*init_list_cmd();

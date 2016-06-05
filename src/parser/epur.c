@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Thu Jun  2 07:42:17 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 06:47:01 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
@@ -49,7 +49,7 @@ char		*epur_opt(char *str, char **lim, int i, int k)
 	      if (str[i + 1] != '|' && str[i - 1] != '|')
 		{
 		  new[k] = '\0';
-		  new = my_strcat_wm(new, my_strcat(" ", my_strcat(lim[j], " ")));
+		  new = my_strcat_wm(new, my_my_strcat(" ", my_my_strcat(lim[j], " ")));
 		  k += my_strlen(lim[j]) + 2;
 		  i += my_strlen(lim[j]) - 1;
 		  flag = 0;
@@ -77,7 +77,7 @@ char		*epur_sep(char *str, char **delim, int i, int k)
 	  if (my_strncmp(str + i, delim[j], my_strlen(delim[j])) == 0)
 	    {
 	      new[k] = '\0';
-	      new = my_strcat_wm(new, my_strcat(" ", my_strcat(delim[j], " ")));
+	      new = my_strcat_wm(new, my_my_strcat(" ", my_my_strcat(delim[j], " ")));
 	      k += my_strlen(delim[j]) + 2;
 	      i += my_strlen(delim[j]) - 1;
 	      flag = 0;

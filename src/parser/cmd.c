@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Jun  1 22:13:03 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 04:36:59 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 05:50:50 2016 Ethan Kerdelhue
 */
 
 #include	"parser.h"
@@ -33,7 +33,7 @@ int		iscmd(char *str, t_parser *parser)
     }
   return (0);
 }
-
+/*
 int		cmd_parsing(char **table, t_parser *parser, int i, char *flag)
 {
   if (*flag == 1)
@@ -49,7 +49,7 @@ int		cmd_parsing(char **table, t_parser *parser, int i, char *flag)
     }
   return (0);
 }
-
+*/
 int		check_last(t_pile *pile)
 {
   t_pile	*tmp;

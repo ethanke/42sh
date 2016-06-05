@@ -5,15 +5,42 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Sun Jun  5 05:32:07 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 06:51:00 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
 
+char			*my_my_strcat(char *a, char *b)
+{
+  int			size;
+  char			*str;
+  int			i;
+  int			j;
+
+  size = my_strlen(a) + my_strlen(b) + 2;
+  if ((str = malloc(size)) == NULL)
+    return (NULL);
+  i = 0;
+  while (a[i])
+    {
+      str[i] = a[i];
+      i++;
+    }
+  j = 0;
+  while (b[j])
+    {
+      str[i] = b[j];
+      i++;
+      j++;
+    }
+  str[i] = '\0';
+  return (str);
+}
+
 int			malloc_size_count(t_pile *pile)
 {
   int			size;
-  t_pile	*tmp;
+  t_pile		*tmp;
 
   tmp = pile;
   size = 0;
@@ -48,7 +75,8 @@ void			list_print(t_pile *pile)
   tmp = pile;
   while (tmp)
     {
-      printf("C: %s T: %d\n", pile->content, pile->token);
+      printf("C: %s || \n", tmp->content);
+      puts(tmp->content);
       tmp = tmp->next;
     }
 }

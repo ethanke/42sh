@@ -5,18 +5,18 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Wed Jun  1 22:08:43 2016 Kerdelhue Ethan
-** Last update Sun Jun  5 00:22:31 2016 Ethan Kerdelhue
+** Last update Sun Jun  5 06:00:14 2016 Ethan Kerdelhue
 */
 
 #include		"parser.h"
 
-int			add_node(t_pile *pile, char token, char *content)
+t_pile			*add_node(t_pile *pile, char token, char *content)
 {
   t_pile		*tmp;
   t_pile		*new;
 
   if ((new = malloc(sizeof(t_pile))) == NULL)
-    return (-1);
+    return (NULL);
   tmp = pile;
   while (tmp->next)
     tmp = tmp->next;
@@ -25,7 +25,7 @@ int			add_node(t_pile *pile, char token, char *content)
   new->next = NULL;
   new->prev = tmp;
   tmp->next = new;
-  return (0);
+  return (pile);
 }
 
 t_pile			*init_list()

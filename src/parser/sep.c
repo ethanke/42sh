@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May 30 17:17:39 2016 Ethan Kerdelhue
-** Last update Sun Jun  5 01:20:44 2016 Gaëtan Léandre
+** Last update Sun Jun  5 05:51:02 2016 Ethan Kerdelhue
 */
 
 #include	"main.h"
@@ -23,7 +23,7 @@ int		issep(char *str, t_parser *parser)
     }
   return (0);
 }
-
+/*
 int		sep_parsing(char **table, t_parser *parser, int i, char *flag)
 {
   if (issep(table[i], parser) == 1)
@@ -34,7 +34,7 @@ int		sep_parsing(char **table, t_parser *parser, int i, char *flag)
     }
   return (0);
 }
-
+*/
 char			**load_sep()
 {
   char			**table;
