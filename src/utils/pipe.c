@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue Apr 12 16:51:52 2016 Gaëtan Léandre
-** Last update Mon Jun  6 16:03:58 2016 Gaëtan Léandre
+** Last update Mon Jun  6 22:11:28 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
@@ -105,7 +105,7 @@ int			exec_pipe(t_dlist *dlist, t_cmd *cmd, int size)
 	wait(&prev);
       return (prev);
     }
-  return (0);
+  return (1);
 }
 
 int			make_pipe(t_cmd *cmd, t_dlist *dlist)
