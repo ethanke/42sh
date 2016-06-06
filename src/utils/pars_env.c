@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:49:20 2016 Gaëtan Léandre
-** Last update Thu May 26 05:54:06 2016 Gaëtan Léandre
+** Last update Mon Jun  6 05:38:05 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -95,6 +95,7 @@ void			dlist_to_char(t_dlist *dlist)
   int			i;
 
   i = 0;
+  dlist->path = NULL;
   list = dlist->start;
   if ((dlist->env = malloc((dlist->size + 1) * sizeof(char *))) == NULL)
     exit(EXIT_FAILURE);
