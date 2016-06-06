@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 19:19:55 2016 Gaëtan Léandre
-** Last update Mon Jun  6 05:33:34 2016 Gaëtan Léandre
+** Last update Mon Jun  6 21:36:04 2016 Gaëtan Léandre
 */
 
 #include "main.h"
@@ -36,9 +36,12 @@ char	*my_strdup(char *str)
 
 void	disp_pwd(char *pwd)
 {
-  if (pwd != NULL)
-    my_putstr(pwd);
-  my_putchar('>');
+  if (isatty(0) == 1)
+    {
+      if (pwd != NULL)
+	my_putstr(pwd);
+      my_putchar('>');
+    }
 }
 
 void	find_name(t_dlist *dlist, char **cmd)

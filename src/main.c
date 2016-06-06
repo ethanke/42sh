@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 21:32:18 2016 Gaëtan Léandre
+** Last update Mon Jun  6 21:38:45 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -68,25 +68,20 @@ int			main(int ac, char **av, char **env)
   (void)av;
   modular_history(1, NULL);
   result = 0;
-  if (init_line(&line) == -1)
-    return (-1);
-  if ((dlist = create_dlist()) == NULL)
+  if (init_line(&line) == -1 || (dlist = create_dlist()) == NULL)
     return (-1);
   get_env(env, dlist);
   modular_pwd(1, dlist->pwd);
-  if (isatty(0) == 1)
-    disp_pwd(modular_pwd(0, NULL));
+  disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
   modular_line(1, &line);
   while ((cmd = get_prompt_input(&line, dlist->env)) != NULL)
     {
       cmd = reverse_inib(cmd);
       result = send_cmd(parsing(cmd, dlist->path), dlist);
-      if (isatty(0) == 1)
-	disp_pwd(modular_pwd(0, NULL));
+      disp_pwd(modular_pwd(0, NULL));
       free(cmd);
     }
   my_putchar('\n');
-  result = (isatty(0) != 1) ? result : 0;
-  return (result);
+  return ((isatty(0) != 1) ? result : 0);
 }
