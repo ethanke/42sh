@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:49:20 2016 Gaëtan Léandre
-** Last update Mon Jun  6 05:38:05 2016 Gaëtan Léandre
+** Last update Mon Jun  6 07:41:14 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -79,9 +79,7 @@ char			*compil_env(t_list *list, t_dlist *dlist, int i)
   while (++j < my_strlen(list->params))
     str[i++] = list->params[j];
   str[i] = '\0';
-  if (my_strcmp("PATH", list->name) == 1)
-    dlist->path = str_to_wordtable(list->params, ":");
-  else if (my_strcmp("PWD", list->name) == 1)
+  if (my_strcmp("PWD", list->name) == 1)
     {
       dlist->pwd = list->params;
       modular_pwd(1, list->params);
@@ -93,18 +91,27 @@ void			dlist_to_char(t_dlist *dlist)
 {
   t_list		*list;
   int			i;
+  int			j;
 
   i = 0;
+  j = 0;
   dlist->path = NULL;
   list = dlist->start;
   if ((dlist->env = malloc((dlist->size + 1) * sizeof(char *))) == NULL)
     exit(EXIT_FAILURE);
   while (list != NULL)
     {
+      if (my_strcmp("PATH", list->name) == 1)
+	{
+	  dlist->path = str_to_wordtable(list->params, ":");
+	  j = 1;
+	}
       dlist->env[i] = compil_env(list, dlist, 0);
       i++;
       list = list->next;
     }
+  if (dlist->path == NULL && j == 0)
+    dlist->path = str_to_wordtable("/bin", ":");
   dlist->env[i] = NULL;
 }
 

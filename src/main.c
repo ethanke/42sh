@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 06:55:09 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 08:05:26 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -63,7 +63,7 @@ int			launch(t_dlist *dlist, char **cmd)
     {
       if (execve(cmd[0], cmd, dlist->env) == -1)
 	{
-	  my_printf(2, "%s\n", strerror(errno));
+	  my_printf(2, "%s: Command not found.\n", cmd[0]);
 	  exit(1);
 	}
     }
@@ -88,7 +88,6 @@ int			make_command(char **cmd, t_dlist *dlist)
   tmp = test_build(dlist, cmd, &cont);
   if (cont == 1)
     tmp = launch(dlist, cmd);
-  tmp = (tmp != 0) ? 1 : 0;
   return (tmp);
 }
 
@@ -119,10 +118,12 @@ int			main(int ac, char **av, char **env)
   t_dlist		*dlist;
   char			*cmd;
   t_edit_line		line;
+  int			result;
 
   (void)ac;
   (void)av;
   modular_history(1, NULL);
+  result = 0;
   if ((line.fd_tty = open("/dev/tty", O_RDWR)) == -1)
     return (-1);
   my_put_termcap(line.fd_tty, NULL);
@@ -140,15 +141,18 @@ int			main(int ac, char **av, char **env)
     return (-1);
   get_env(env, dlist);
   modular_pwd(1, dlist->pwd);
-  disp_pwd(modular_pwd(0, NULL));
+  if (isatty(0) == 1)
+    disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
   while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
       reverse_inib(cmd);
-      send_cmd(parsing(cmd, dlist->path), dlist);
-      disp_pwd(modular_pwd(0, NULL));
+      result = send_cmd(parsing(cmd, dlist->path), dlist);
+      if (isatty(0) == 1)
+	disp_pwd(modular_pwd(0, NULL));
       free(cmd);
     }
   my_putchar('\n');
-  return (0);
+  result = (isatty(0) != 1) ? result : 0;
+  return (result);
 }

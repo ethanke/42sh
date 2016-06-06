@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Mon Jun  6 05:53:43 2016 Gaëtan Léandre
+** Last update Mon Jun  6 07:05:19 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -123,12 +123,12 @@ int			exec_redir(char **cmd, t_dlist *dlist)
    return (result);
 }
 
-void			send_cmd(t_cmd *cmd, t_dlist *dlist)
+int			send_cmd(t_cmd *cmd, t_dlist *dlist)
 {
   t_cmd			*tmp;
   int			result;
 
-  result = 1;
+  result = 0;
   tmp = cmd == NULL ? cmd : cmd->next;
   while (tmp != NULL)
     {
@@ -140,10 +140,11 @@ void			send_cmd(t_cmd *cmd, t_dlist *dlist)
 	    }
 	  else if (tmp->prev->cmd == NULL || (tmp->prev->token == ET && result == 0))
 	    result = exec_redir(tmp->cmd, dlist);
-	  else if (tmp->prev->token == OU && result == 1)
+	  else if (tmp->prev->token == OU && result != 0)
 	    result = exec_redir(tmp->cmd, dlist);
 	  else if (tmp->prev->token == PV)
 	    result = exec_redir(tmp->cmd, dlist);
 	  tmp = tmp->next;
     }
+  return (result);
 }

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 06:53:10 2016 Gaëtan Léandre
+** Last update Mon Jun  6 07:06:37 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -75,7 +75,7 @@ int			right_redir(char **start, char *end, t_dlist *dlist);
 int			dright_redir(char **start, char *end, t_dlist *dlist);
 int			left_redir(char **start, char *end, t_dlist *dlist);
 int			dleft_redir(char **start, char *end, t_dlist *dlist);
-void			send_cmd(t_cmd *cmd, t_dlist *dlist);
+int			send_cmd(t_cmd *cmd, t_dlist *dlist);
 int			history_buildin(void);
 void			disp_msg(int error);
 

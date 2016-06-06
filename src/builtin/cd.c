@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May 26 03:05:28 2016 Gaëtan Léandre
-** Last update Sun Jun  5 05:48:10 2016 Gaëtan Léandre
+** Last update Mon Jun  6 08:34:20 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -30,11 +30,11 @@ int			change_pwd(t_dlist *dlist)
   char			*home;
 
   if (getcwd(pwd, 1024) == NULL)
-    return (0);
+    return (1);
   if ((home = find_with_name(dlist, "PWD")) != NULL)
     my_setenv(dlist, "OLDPWD", home);
   my_setenv(dlist, "PWD", pwd);
-  return (1);
+  return (0);
 }
 
 int			my_cd(t_dlist *dlist, char *command)
@@ -60,11 +60,11 @@ int			my_cd(t_dlist *dlist, char *command)
   else if (command)
     new = my_strcat_no_free_b("", &command[i]);
   if (new == NULL)
-    return (0);
+    return (1);
   if (chdir(new) == -1)
     my_printf(2, "bash: cd: %s: No such file or directory\n", command);
   else
     return (change_pwd(dlist));
   free(new);
-  return (0);
+  return (1);
 }
