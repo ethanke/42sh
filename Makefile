@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 21:32:48 2016 Gaëtan Léandre
+## Last update Mon Jun  6 22:03:04 2016 Ethan Kerdelhue
 ##
 
 NAME	=	42sh
@@ -100,6 +100,7 @@ SRC		+=	$(PARSDIR)/cmd.c			\
 		   	$(PARSDIR)/utils.c			\
 			$(PARSDIR)/free_pars.c			\
 			$(PARSDIR)/link_list.c			\
+	 		$(PARSDIR)/list_utils.c			\
 			$(PARSDIR)/opt.c			\
 			$(PARSDIR)/error_case.c			\
 			$(PARSDIR)/pars_utils.c			\

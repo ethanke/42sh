@@ -5,53 +5,10 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Mon Jun  6 21:19:59 2016 Kerdelhue Ethan
-** Last update Mon Jun  6 21:57:08 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 22:05:41 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
-
-int			malloc_size_count(t_pile *pile)
-{
-  int			size;
-  t_pile		*tmp;
-
-  tmp = pile;
-  size = 0;
-  while (tmp != NULL)
-    {
-      size++;
-      tmp = tmp->next;
-    }
-  return (size + 1);
-}
-
-int			list_len(t_cmd *cmd)
-{
-  int			i;
-  t_cmd			*tmp;
-
-  tmp = cmd;
-  i = 0;
-  while (tmp)
-    {
-      i++;
-      tmp = tmp->next;
-    }
-  printf("LIST LEN : %d", i);
-  return (0);
-}
-
-void			list_print(t_pile *pile)
-{
-  t_pile 		*tmp;
-
-  tmp = pile;
-  while (tmp)
-    {
-      printf("C: %s \n", tmp->content);
-      tmp = tmp->next;
-    }
-}
 
 int			push_t_cmd(t_cmd *cmd, t_cmd *tmp, char flag, int j)
 {
@@ -105,16 +62,6 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
   return (cmd);
 }
 
-int			tabr(char **ta)
-{
-  int			i;
-
-  i = -1;
-  while (ta[++i])
-    puts(ta[i]);
-  return (0);
-}
-
 int			get_parse(char *str, t_parser *parser)
 {
   char			*tmp;
@@ -143,20 +90,6 @@ int			get_parse(char *str, t_parser *parser)
   if ((parser->cmd = end_parsing(parser, 0, 0, 0)) == NULL)
     return (-1);
   return (0);
-}
-
-void			print_list(t_cmd *cmd)
-{
-  t_cmd *tmp;
-
-  tmp = cmd->next;
-  while (tmp)
-    {
-      puts(".: TAB CMD :.");
-      tabr(tmp->cmd);
-      puts(".: END :.\n");
-      tmp = tmp->next;
-    }
 }
 
 t_cmd			*parsing(char *str, char **path)
