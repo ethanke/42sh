@@ -5,11 +5,11 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 04:41:29 2016 Victor Sousa
-** Last update Sun Jun  5 23:08:59 2016 Victor Sousa
+** Last update Mon Jun  6 18:52:30 2016 victor sousa
 */
 
-#ifndef			MY_STRING_H
-# define		MY_STRING_H
+#ifndef			MY_STRING_H_
+# define		MY_STRING_H_
 
 # include		<unistd.h>
 # include		<stdlib.h>
@@ -42,4 +42,4 @@ char			*StringToArray(String string, char needFree);
 String			copyStringFrom(String string, int pos);
 void			deleteAfterI(String string, int pos);
 
-#endif			/*MY_STRING_H*/
+#endif			/*MY_STRING_H_*/

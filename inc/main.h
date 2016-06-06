@@ -5,11 +5,11 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 18:03:51 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:53:12 2016 victor sousa
 */
 
-#ifndef 		_MINISHELL_
-# define 		_MINISHELL_
+#ifndef 		MINISHELL_H_
+# define 		MINISHELL_H_
 
 #include		<errno.h>
 # include		<string.h>
@@ -82,4 +82,4 @@ void			disp_msg(int error);
 char			**make_glob(char **cmd);
 char			*auto_compleat(char *cmd);
 
-#endif			/*_MINISHELL_*/
+#endif			/*MINISHELL_H_*/
