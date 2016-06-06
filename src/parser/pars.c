@@ -5,7 +5,11 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Jun  6 04:06:14 2016 Ethan Kerdelhue
+<<<<<<< HEAD
+** Last update Mon Jun  6 18:15:44 2016 Gaëtan Léandre
+=======
 ** Last update Mon Jun  6 17:15:16 2016 Ethan Kerdelhue
+>>>>>>> da422ad488e7725d4ad6b66d3624037d4e34dbe4
 */
 
 #include		"main.h"
@@ -121,7 +125,7 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
   tmp[j].cmd[i] = NULL;
   if (flag == 0)
     {
-      if (add_node_cmd(cmd, tmp[j].cmd, tmp[j].token) == -1)
+      if (add_node_cmd(cmd, make_glob(tmp[j].cmd), tmp[j].token) == -1)
 	return (NULL);
     }
   return (cmd);
