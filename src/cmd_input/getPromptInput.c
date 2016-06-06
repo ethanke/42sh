@@ -5,9 +5,10 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 03:34:25 2016 Victor Sousa
+** Last update Mon Jun  6 04:31:04 2016 Victor Sousa
 */
 
+#include	"main.h"
 #include	"prompt.h"
 
 int	init_edition_line(char **env, t_edit_line *line)
@@ -36,6 +37,8 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   struct pollfd pfd = {0,0,0};
   int		pr;
 
+  if (isatty(0) != 1)
+    return (get_next_line(0));
   init_edition_line(env, line);
   ret = 1;
 
@@ -146,14 +149,16 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       if (my_prompt_strcmp(buff, KEY_UP) == 1)
 	{
 	  freeString(line->output_string);
-	  line->output_string = formString("history up");
+	  if (modular_history(0, NULL) != NULL && modular_history(0, NULL)->prev != NULL)
+	    modular_history(1, modular_history(0, NULL)->prev);
+	  line->output_string = formString(modular_history(0, NULL)->cmd);
 	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
 	  continue;
   	}
       if (my_prompt_strcmp(buff, KEY_DOWN) == 1)
 	{
 	  freeString(line->output_string);
-	  line->output_string = formString("history down");
+	  line->output_string = formString(modular_history(0, modular_history(1, modular_history(0, NULL)->next))->cmd);
 	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
   	  continue;
   	}
