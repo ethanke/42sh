@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Thu May 26 00:08:24 2016 Victor Sousa
-** Last update Mon Jun  6 04:08:14 2016 Victor Sousa
+** Last update Mon Jun  6 17:02:44 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -53,4 +53,15 @@ String			modular_clip(char boolean, String new_buff, int pos)
       buff = copyStringFrom(new_buff, pos);
     }
   return (buff);
+}
+
+t_edit_line		*modular_line(char boolean, t_edit_line *new_line)
+{
+  static t_edit_line	*line = NULL;
+
+  if (boolean && new_line)
+    {
+      line = new_line;
+    }
+  return (line);
 }
