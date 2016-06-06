@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 08:05:26 2016 Gaëtan Léandre
+** Last update Mon Jun  6 15:02:34 2016 Victor Sousa
 */
 
 #include 		"main.h"
@@ -144,7 +144,7 @@ int			main(int ac, char **av, char **env)
   if (isatty(0) == 1)
     disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
-  while ((cmd = get_prompt_input(&line, env)) != NULL)
+  while ((cmd = get_prompt_input(&line, dlist->env)) != NULL)
     {
       reverse_inib(cmd);
       result = send_cmd(parsing(cmd, dlist->path), dlist);
