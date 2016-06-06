@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 19:41:28 2016 victor sousa
+** Last update Mon Jun  6 19:44:24 2016 victor sousa
 */
 
 #include 	"parser.h"
@@ -78,7 +78,6 @@ char		*epur_opt(char *str, char **lim, int i, int k)
    int		j;
   char		*new;
 
-  printf("before : |%s|\n", str);
   if ((new = malloc(count_size_sep(str, lim) + 1)) == NULL)
     return (NULL);
   while (str[++i])
@@ -101,7 +100,6 @@ char		*epur_opt(char *str, char **lim, int i, int k)
       new[k++] = str[i];
     }
   new[k] = 0;
-  printf("after  : |%s|\n", new);
   return (new);
 }
 
