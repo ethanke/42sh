@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 17:28:59 2016 Victor Sousa
+** Last update Mon Jun  6 17:49:07 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -206,7 +206,7 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	}
       /* TODO */
 
-      line->output_string->data = pushCharAt(line->output_string->data, buff[0], line->cur_pos_x++);
+      line->output_string->data = pushCharAt(line->output_string->data, buff[0], line->cur_pos_x++ - line->start_pos_x);
     }
   return (StringToArray(line->output_string, STRING_FREE));
 }
