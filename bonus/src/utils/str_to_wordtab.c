@@ -5,36 +5,10 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat Apr  9 01:06:04 2016 Gaëtan Léandre
-** Last update Mon Jun  6 23:31:40 2016 victor sousa
+** Last update Mon Jun  6 16:02:03 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
-
-int             my_strncmp(char *s1, char *s2, int n)
-{
-  int           i;
-  int           len;
-  int           len2;
-
-  i = 0;
-  if ((s1 == NULL) || (s2 == NULL))
-    return (s1 - s2);
-  len = strlen(s1);
-  len2 = strlen(s2);
-  if (len > len2)
-    len = len2;
-  if ((len > n) && (n != -1))
-    len = n;
-  while (i < len)
-    {
-      if (s1[i] != s2[i])
-        return (s1[i] - s2[i]);
-      i = i + 1;
-    }
-  if (len == n)
-    return (0);
-  return (s1[i] - s2[i]);
-}
 
 int			is_separate(char c, char *str)
 {

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 23:30:55 2016 victor sousa
+** Last update Mon Jun  6 23:20:49 2016 victor sousa
 */
 
 #ifndef 		MINISHELL_H_
@@ -17,15 +17,14 @@
 # include 		<stdio.h>
 # include		<glob.h>
 # include 		<sys/wait.h>
-# include		<sys/stat.h>
 # include		<signal.h>
 # include 		<dirent.h>
 # include 		<unistd.h>
-# include		<fcntl.h>
 # include		"my_printf.h"
 # include		"my_sprintf.h"
 # include 		"list.h"
 # include 		"get_next_line.h"
+# include		"prompt.h"
 # include		"parser.h"
 
 typedef struct		s_error
@@ -71,6 +70,7 @@ int			exec_pipe(t_dlist *dlist, t_cmd *cmd, int size);
 int			make_command(char **cmd, t_dlist *dlist);
 int			make_pipe(t_cmd *cmd, t_dlist *dlist);
 void			sighandler(int sig);
+String			modular_clip(char boolean, String new_buff, int pos);
 int		        modular_prog_status(char boolean, int value);
 char		        *modular_pwd(char boolean, char *new_pwd);
 char			*find_with_name(t_dlist *dlist, char *name);
@@ -86,7 +86,9 @@ int			send_cmd(t_cmd *cmd, t_dlist *dlist);
 int			history_buildin(void);
 void			disp_msg(int error);
 char			**make_glob(char **cmd);
+char			*auto_compleat(char *cmd);
 int			my_tablestrlen(char **table);
+int			auto_complete(String string, int *pos_curs);
 int			launch_setenv(t_dlist *dlist, char **cmd);
 int			my_loop_unset(t_dlist *dlist, char **cmd);
 int			test_build(t_dlist *dlist, char **cmd, int *cont);

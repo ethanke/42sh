@@ -5,10 +5,11 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:18:19 2016 Gaëtan Léandre
-** Last update Mon Jun  6 23:29:48 2016 victor sousa
+** Last update Mon Jun  6 17:35:30 2016 tanguy lelievre
 */
 
 #include	"main.h"
+#include	"prompt.h"
 
 int		right_redir(char **start, char *end, t_dlist *dlist)
 {
@@ -82,14 +83,16 @@ int		dleft_redir(char **start, char *end, t_dlist *dlist)
   char		*str;
   int		diff;
   int		reset;
+  t_edit_line	*line;
 
+  line = modular_line(0, NULL);
   diff = 0;
-  if (pipe(fd) == -1 || (reset = dup(0)) == -1)
+  if (pipe(fd) == -1 || (reset = dup(line->fd_tty)) == -1)
     return (0);
   modular_pwd(1, "");
   while (diff == 0)
     {
-      str = get_next_line(0);
+      str = get_prompt_input(line, dlist->env);
       if (str && (diff = my_strcmp(str, end)) == 0)
 	my_printf(fd[1], "%s\n", str);
     }

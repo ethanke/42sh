@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 23:23:50 2016 victor sousa
+## Last update Mon Jun  6 23:08:44 2016 Gaëtan Léandre
 ##
 
 NAME	=	42sh
@@ -110,6 +110,39 @@ SRC		+=	$(PARSDIR)/cmd.c			\
 			$(PARSDIR)/send_redir2.c		\
 			$(PARSDIR)/sep.c			\
 			$(PARSDIR)/start_pars.c
+
+## TERMCAP
+SRC		+=	src/cmd_input/getPromptInput.c			\
+			src/cmd_input/conditional_key.c			\
+			src/cmd_input/conditional_arrow.c		\
+			src/cmd_input/history.c				\
+			src/cmd_input/termcap/my_put_termcap.c		\
+			src/cmd_input/termcap/term_mode.c		\
+			src/cmd_input/termcap/term_init.c		\
+			src/cmd_input/termcap/term_cursor.c		\
+			src/cmd_input/termcap/term_refresh.c		\
+			src/cmd_input/termcap/term_cursor_position.c	\
+			src/cmd_input/termcap/func_key.c		\
+		      	src/cmd_input/termcap/term_get_size.c
+
+## MISC
+SRC		+=	src/cmd_input/misc/xfree.c			\
+			src/cmd_input/misc/str.c			\
+			src/cmd_input/misc/my_clear_screen.c		\
+			src/cmd_input/misc/get_env_var.c
+
+## STRING
+SRC		+=	src/cmd_input/string/concatString.c		\
+			src/cmd_input/string/formString.c		\
+			src/cmd_input/string/freeString.c		\
+			src/cmd_input/string/printString.c		\
+			src/cmd_input/string/pushChar.c			\
+			src/cmd_input/string/deleteCharAt.c		\
+			src/cmd_input/string/StringLenght.c		\
+			src/cmd_input/string/StringToArray.c		\
+			src/cmd_input/string/copyStringFrom.c		\
+			src/cmd_input/string/deleteAfterI.c
+
 
 OBJ             =       $(SRC:.c=.o)
 

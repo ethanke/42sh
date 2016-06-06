@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Jun  6 21:26:45 2016 Gaëtan Léandre
-** Last update Mon Jun  6 23:30:13 2016 victor sousa
+** Last update Mon Jun  6 21:27:21 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -41,6 +41,8 @@ int			test_build(t_dlist *dlist, char **cmd, int *cont)
     return (my_env(dlist));
   else if (my_strcmp(cmd[0], "setenv") == 1)
     return (launch_setenv(dlist, cmd));
+  if (my_prompt_strcmp(cmd[0], "history") == 1)
+    return (history_buildin());
   else if (my_strcmp(cmd[0], "unsetenv") == 1)
     {
       if (cmd[1] == NULL)

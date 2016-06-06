@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 23:34:05 2016 victor sousa
+** Last update Mon Jun  6 22:57:30 2016 victor sousa
 */
 
 #include 		"main.h"
@@ -39,22 +39,43 @@ char			*reverse_inib(char *str)
   return (new);
 }
 
+int			init_line(t_edit_line *line)
+{
+  if ((line->fd_tty = open("/dev/tty", O_RDWR)) == -1)
+    return (-1);
+  my_put_termcap(line->fd_tty, NULL);
+  if (reset_save_mode(0, line->fd_tty) == EXIT_FAILURE)
+    {
+      dprintf(2, "Error SAVE termcap\n");
+      return (-1);
+    }
+  if (mode_raw(line->fd_tty) == EXIT_FAILURE)
+    {
+      dprintf(2, "Error mod_raw termcap\n");
+      return (-1);
+    }
+  return (0);
+}
+
 int			main(int ac, char **av, char **env)
 {
   t_dlist		*dlist;
   char			*cmd;
+  t_edit_line		line;
   int			result;
 
   (void)ac;
   (void)av;
+  modular_history(1, NULL);
   result = 0;
-  if ((dlist = create_dlist()) == NULL)
+  if (init_line(&line) == -1 || (dlist = create_dlist()) == NULL)
     return (-1);
   get_env(env, dlist);
   modular_pwd(1, dlist->pwd);
   disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
-  while ((cmd = get_next_line(0)) != NULL)
+  modular_line(1, &line);
+  while ((cmd = get_prompt_input(&line, dlist->env)) != NULL)
     {
       cmd = reverse_inib(cmd);
       result = send_cmd(parsing(cmd, dlist->path), dlist);
