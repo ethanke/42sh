@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 07:06:37 2016 Gaëtan Léandre
+** Last update Mon Jun  6 17:43:54 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -15,6 +15,7 @@
 # include		<string.h>
 # include 		<sys/types.h>
 # include 		<stdio.h>
+# include		<glob.h>
 # include 		<sys/wait.h>
 # include		<signal.h>
 # include 		<dirent.h>
