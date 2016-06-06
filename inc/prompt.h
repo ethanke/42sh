@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 04:10:54 2016 Victor Sousa
+** Last update Mon Jun  6 14:55:34 2016 Victor Sousa
 */
 
 #ifndef 		PROMPT_H_
@@ -84,7 +84,7 @@ char			*get_prompt_input(t_edit_line *line, char **env);
 /*TERMCAP*/
 int			my_put_termcap(int flag, char *capacity);
 char			*my_tgetstr(char *cap);
-void			init_capacity_termcap(t_termcap *termcap);
+int			init_capacity_termcap(t_termcap *termcap);
 int			mode_raw(int fd);
 int			reset_mode(struct termios t, int fd);
 int			reset_save_mode(int type, int fd);
