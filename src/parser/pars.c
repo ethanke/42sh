@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Jun  6 04:06:14 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 06:56:38 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 16:03:05 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -196,5 +196,6 @@ t_cmd			*parsing(char *str, char **path)
     return (NULL);
   if (error_case(parser.cmd) == -1)
     return (NULL);
+  print_list(parser.cmd);
   return (parser.cmd);
 }
