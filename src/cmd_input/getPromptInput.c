@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 18:53:50 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 19:27:10 2016 tanguy lelievre
 */
 
 #include	"main.h"
@@ -168,7 +168,7 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   	}
       if (buff[0] == TAB && buff[1] == '\0')
 	{
-
+	  auto_complete(line->output_string, &line->cur_pos_x);
 	  continue;
 	}
       /* TODO */

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:18:19 2016 Gaëtan Léandre
-** Last update Mon Jun  6 17:26:44 2016 Victor Sousa
+** Last update Mon Jun  6 17:35:30 2016 tanguy lelievre
 */
 
 #include	"main.h"
@@ -83,12 +83,10 @@ int		dleft_redir(char **start, char *end, t_dlist *dlist)
   char		*str;
   int		diff;
   int		reset;
-  int		to_ret;
   t_edit_line	*line;
 
   line = modular_line(0, NULL);
   diff = 0;
-  to_ret = 1;
   if (pipe(fd) == -1 || (reset = dup(line->fd_tty)) == -1)
     return (0);
   modular_pwd(1, "");
@@ -100,9 +98,9 @@ int		dleft_redir(char **start, char *end, t_dlist *dlist)
     }
   close(fd[1]);
   if (dup2(fd[0], 0) == -1 || make_command(start, dlist) == 0)
-    to_ret = 0;
+    diff = 0;
   close(fd[0]);
   dup2(reset, 0);
   modular_pwd(1, dlist->pwd);
-  return (to_ret);
+  return (diff);
 }
