@@ -5,14 +5,10 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Sun Jun  5 15:49:24 2016 Victor Sousa
+** Last update Mon Jun  6 00:52:26 2016 Victor Sousa
 */
 
 #include	"prompt.h"
-#include <time.h>
-#include <unistd.h>
-
-#include <poll.h>
 
 int	init_edition_line(char **env, t_edit_line *line)
 {
@@ -29,6 +25,7 @@ int	init_edition_line(char **env, t_edit_line *line)
   line->cur_pos_x = line->start_pos_x;
   line->cur_pos_y = line->start_pos_y;
   line->output_string = formString("");
+  modular_clip(1, formString(""), 0);
   return (1);
 }
 
@@ -74,7 +71,6 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 
       if (buff[0] == CTRLD && buff[1] == '\0')
 	{
-	  printf("\nctrl+ D catched, leaving...\n");
 	  freeString(line->output_string);
 	  return (NULL);
 	}
@@ -96,16 +92,19 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	}
       if (my_prompt_strcmp(buff, KEY_RIGHT) == 1)
 	{
-	  if (line->cur_pos_x < get_termsize_x() && line->cur_pos_x < StringLenght(line->output_string) + line->start_pos_x)
+	  if (line->cur_pos_x < get_termsize_x() &&
+	      line->cur_pos_x < StringLenght(line->output_string) + line->start_pos_x)
 	    line->cur_pos_x++;
 	  continue;
 	}
-      if (my_prompt_strcmp(buff, KEY_START) == 1)
+      if (my_prompt_strcmp(buff, KEY_START) == 1 ||
+	  (buff[0] == CTRLA && buff[1] == '\0'))
   	{
   	  line->cur_pos_x = line->start_pos_x;
   	  continue;
   	}
-      if (my_prompt_strcmp(buff, KEY_END) == 1)
+      if (my_prompt_strcmp(buff, KEY_END) == 1 ||
+	  (buff[0] == CTRLE && buff[1] == '\0'))
     	{
     	  line->cur_pos_x = StringLenght(line->output_string) + line->start_pos_x;
     	  continue;
@@ -116,23 +115,35 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	    deleteCharAt(line->output_string, line->cur_pos_x-- - line->start_pos_x);
   	  continue;
   	}
-
-      /* TODO */
+      if (buff[0] == 0x1B && buff[1] == 0x5B && buff[2] == 0x33 &&
+	  buff[3] == 0x7E && buff[4] == '\0')
+  	{
+	  printf("   %d\n", line->cur_pos_x - line->start_pos_x + 1);
+	  deleteCharAt(line->output_string, line->cur_pos_x - line->start_pos_x + 1);
+    	  continue;
+    	}
       if (buff[0] == CTRLK && buff[1] == '\0')
-	{
-	  printf("CTRL-K\n");
+        {
+	  modular_clip(1, line->output_string, line->cur_pos_x - line->start_pos_x);
+	  deleteAfterI(line->output_string, line->cur_pos_x - line->start_pos_x);
 	  continue;
-	}
+        }
       if (buff[0] == CTRLY && buff[1] == '\0')
 	{
-	  printf("CTRL-Y\n");
+	  line->output_string = concatStringAt(line->output_string, modular_clip(0, NULL, 0), line->cur_pos_x - line->start_pos_x);
+	  line->cur_pos_x += StringLenght(modular_clip(0, NULL, 0));
 	  continue;
 	}
-        if (buff[0] == CTRLU && buff[1] == '\0')
-  	{
-  	  printf("CTRL-U\n");
-  	  continue;
-  	}
+      if (buff[0] == CTRLU && buff[1] == '\0')
+	{
+	  modular_clip(1, line->output_string, 0);
+	  line->cur_pos_x -= StringLenght(line->output_string);
+	  freeString(line->output_string);
+	  line->output_string = formString("");
+	  continue;
+	}
+
+      /* TODO */
         if (my_prompt_strcmp(buff, KEY_UP) == 1)
   	{
   	  freeString(line->output_string);

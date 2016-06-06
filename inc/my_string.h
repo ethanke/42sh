@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 04:41:29 2016 Victor Sousa
-** Last update Sat Jun  4 06:21:07 2016 Victor Sousa
+** Last update Sun Jun  5 23:08:59 2016 Victor Sousa
 */
 
 #ifndef			MY_STRING_H
@@ -35,8 +35,11 @@ void			deleteCharAt(String string, int pos);
 String			formString(const char *str_raw);
 void			printString(String string);
 String			concatString(String string1, String string2);
+String			concatStringAt(String string1, String string2, int pos);
 void			freeString(String string);
 int			StringLenght(String string);
 char			*StringToArray(String string, char needFree);
+String			copyStringFrom(String string, int pos);
+void			deleteAfterI(String string, int pos);
 
 #endif			/*MY_STRING_H*/

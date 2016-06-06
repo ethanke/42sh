@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Sun Jun  5 03:26:37 2016 Gaëtan Léandre
+** Last update Sun Jun  5 21:00:56 2016 Victor Sousa
 */
 
 #ifndef 		_MINISHELL_
@@ -56,6 +56,7 @@ int			exec_pipe(t_dlist *dlist, t_cmd *cmd, int size);
 int			make_command(char **cmd, t_dlist *dlist);
 int			make_pipe(t_cmd *cmd, t_dlist *dlist);
 void			sighandler(int sig);
+String			modular_clip(char boolean, String new_buff, int pos);
 int		        modular_prog_status(char boolean, int value);
 char		        *modular_pwd(char boolean, char *new_pwd);
 char			*find_with_name(t_dlist *dlist, char *name);

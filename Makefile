@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Sun Jun  5 19:39:08 2016 tanguy lelievre
+## Last update Mon Jun  6 00:54:38 2016 Victor Sousa
 ##
 
 NAME	=	42sh
@@ -123,7 +123,9 @@ SRC		+=	src/cmd_input/string/concatString.c		\
 			src/cmd_input/string/pushChar.c			\
 			src/cmd_input/string/deleteCharAt.c		\
 			src/cmd_input/string/StringLenght.c		\
-			src/cmd_input/string/StringToArray.c
+			src/cmd_input/string/StringToArray.c		\
+			src/cmd_input/string/copyStringFrom.c		\
+			src/cmd_input/string/deleteAfterI.c
 
 
 OBJ             =       $(SRC:.c=.o)
