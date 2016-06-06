@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 20:58:01 2016 victor sousa
+** Last update Mon Jun  6 21:33:30 2016 Gaëtan Léandre
 */
 
 #ifndef 		MINISHELL_H_
@@ -82,5 +82,9 @@ char			**make_glob(char **cmd);
 char			*auto_compleat(char *cmd);
 int			my_tablestrlen(char **table);
 int			auto_complete(String string, int *pos_curs);
+int			launch_setenv(t_dlist *dlist, char **cmd);
+int			my_loop_unset(t_dlist *dlist, char **cmd);
+int			test_build(t_dlist *dlist, char **cmd, int *cont);
+int			launch(t_dlist *dlist, char **cmd);
 
 #endif			/*MINISHELL_H_*/

@@ -5,100 +5,22 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 17:03:28 2016 Victor Sousa
+** Last update Mon Jun  6 21:32:18 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
 
-int			launch_setenv(t_dlist *dlist, char **cmd)
-{
-  if (cmd[1] == NULL)
-    my_env(dlist);
-  else if (cmd[2] == NULL)
-    my_setenv(dlist, cmd[1], NULL);
-  else if (cmd[3] == NULL)
-    my_setenv(dlist, cmd[1], cmd[2]);
-  else
-    my_putstr("too many arguments\n");
-  return (0);
-}
-
-int			test_build(t_dlist *dlist, char **cmd, int *cont)
+char			*reverse_inib(char *str)
 {
   int			i;
-
-  i = 1;
-  if (my_strcmp(cmd[0], "exit") == 1 || my_strcmp(cmd[0], "quit") == 1)
-    return (my_exit(dlist, cmd));
-  else if (my_strcmp(cmd[0], "env") == 1 && cmd[1] == NULL)
-    return (my_env(dlist));
-  else if (my_strcmp(cmd[0], "setenv") == 1)
-    return (launch_setenv(dlist, cmd));
-  if (my_prompt_strcmp(cmd[0], "history") == 1)
-    return (history_buildin());
-  else if (my_strcmp(cmd[0], "unsetenv") == 1)
-    {
-      if (cmd[1] == NULL)
-	my_putstr("no arguments\n");
-      else
-	{
-	  while (cmd[i])
-	    my_unsetenv(dlist, cmd[i++]);
-	  return (1);
-	}
-      return (0);
-    }
-  else if (my_strcmp(cmd[0], "cd") == 1)
-    return (my_cd(dlist, cmd[1]));
-  *cont = 1;
-  return (0);
-}
-
-int			launch(t_dlist *dlist, char **cmd)
-{
-  int			pid;
-  int			pid_stat;
-
-  if ((pid = fork()) == 0)
-    {
-      if (execve(cmd[0], cmd, dlist->env) == -1)
-	{
-	  my_printf(2, "%s: Command not found.\n", cmd[0]);
-	  exit(1);
-	}
-    }
-  else
-    {
-      waitpid(pid, &pid_stat, 0);
-      if (WIFEXITED(pid_stat))
-	return (WEXITSTATUS(pid_stat));
-      else if (WIFSIGNALED(pid_stat))
-	disp_msg(WTERMSIG(pid_stat));
-    }
-  return (0);
-}
-
-int			make_command(char **cmd, t_dlist *dlist)
-{
-  int			tmp;
-  int			cont;
-
-  cont = 0;
-  find_name(dlist, cmd);
-  tmp = test_build(dlist, cmd, &cont);
-  if (cont == 1)
-    tmp = launch(dlist, cmd);
-  return (tmp);
-}
-
-void			reverse_inib(char *str)
-{
-  int			i;
+  int			j;
   char			flag;
+  char			*new;
 
-  flag = 0;
-  i = 0;
-  while (str[i])
+  if ((new = malloc(sizeof(char) * (my_strlen(str) + 1))) == NULL)
+    return (str);
+  j = ((i = -1) + (flag = 0)) * 0;
+  while (str[++i])
     {
       if (str[i] == '\"')
 	{
@@ -107,10 +29,32 @@ void			reverse_inib(char *str)
 	  else
 	    flag = 0;
 	}
-      if (flag)
-	str[i] = - str[i];
-      i++;
+      else if (flag)
+	new[j++] = - str[i];
+      else
+	new[j++] = str[i];
     }
+  new[j] = '\0';
+  free(str);
+  return (new);
+}
+
+int			init_line(t_edit_line *line)
+{
+  if ((line->fd_tty = open("/dev/tty", O_RDWR)) == -1)
+    return (-1);
+  my_put_termcap(line->fd_tty, NULL);
+  if (reset_save_mode(0, line->fd_tty) == EXIT_FAILURE)
+    {
+      dprintf(2, "Error SAVE termcap\n");
+      return (-1);
+    }
+  if (mode_raw(line->fd_tty) == EXIT_FAILURE)
+    {
+      dprintf(2, "Error mod_raw termcap\n");
+      return (-1);
+    }
+  return (0);
 }
 
 int			main(int ac, char **av, char **env)
@@ -124,19 +68,8 @@ int			main(int ac, char **av, char **env)
   (void)av;
   modular_history(1, NULL);
   result = 0;
-  if ((line.fd_tty = open("/dev/tty", O_RDWR)) == -1)
+  if (init_line(&line) == -1)
     return (-1);
-  my_put_termcap(line.fd_tty, NULL);
-  if (reset_save_mode(0, line.fd_tty) == EXIT_FAILURE)
-    {
-      dprintf(2, "Error SAVE termcap\n");
-      return (-1);
-    }
-  if (mode_raw(line.fd_tty) == EXIT_FAILURE)
-    {
-      dprintf(2, "Error mod_raw termcap\n");
-      return (-1);
-    }
   if ((dlist = create_dlist()) == NULL)
     return (-1);
   get_env(env, dlist);
@@ -147,7 +80,7 @@ int			main(int ac, char **av, char **env)
   modular_line(1, &line);
   while ((cmd = get_prompt_input(&line, dlist->env)) != NULL)
     {
-      reverse_inib(cmd);
+      cmd = reverse_inib(cmd);
       result = send_cmd(parsing(cmd, dlist->path), dlist);
       if (isatty(0) == 1)
 	disp_pwd(modular_pwd(0, NULL));
