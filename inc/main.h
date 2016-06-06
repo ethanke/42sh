@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 18:03:51 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:42:02 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -81,5 +81,6 @@ int			history_buildin(void);
 void			disp_msg(int error);
 char			**make_glob(char **cmd);
 char			*auto_compleat(char *cmd);
+int			my_tablestrlen(char **table);
 
 #endif			/*_MINISHELL_*/

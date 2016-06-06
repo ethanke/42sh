@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Mon Jun  6 07:05:19 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:32:58 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -43,7 +43,7 @@ int			my_tablestrlen(char **table)
   int			i;
 
   i = 0;
-  while (table[i])
+  while (table && table[i])
     i++;
   return (i);
 }
