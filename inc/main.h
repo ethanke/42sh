@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 07:06:37 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:03:51 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -15,6 +15,7 @@
 # include		<string.h>
 # include 		<sys/types.h>
 # include 		<stdio.h>
+# include		<glob.h>
 # include 		<sys/wait.h>
 # include		<signal.h>
 # include 		<dirent.h>
@@ -78,5 +79,7 @@ int			dleft_redir(char **start, char *end, t_dlist *dlist);
 int			send_cmd(t_cmd *cmd, t_dlist *dlist);
 int			history_buildin(void);
 void			disp_msg(int error);
+char			**make_glob(char **cmd);
+char			*auto_compleat(char *cmd);
 
 #endif			/*_MINISHELL_*/
