@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May 26 03:05:28 2016 Gaëtan Léandre
-** Last update Mon Jun  6 08:34:20 2016 Gaëtan Léandre
+** Last update Mon Jun  6 15:17:34 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -46,25 +46,23 @@ int			my_cd(t_dlist *dlist, char *command)
   i = 0;
   while (command && command[i] && command[i] == ' ')
     i++;
-  if ((!command || command[i] == '~') && (home = find_with_name(dlist, "HOME")) != NULL)
+  if ((!command || command[i] == '~')
+      && (home = find_with_name(dlist, "HOME")) != NULL)
     {
       while (command && command[++i] && command[i] == '/');
-      if (command)
-	new = my_strcat_no_free(home, &command[i]);
-      else
-	new = my_strcat_no_free(home, "");
+      new = (command) ? my_strcat_no_free(home, &command[i]) :
+	  my_strcat_no_free(home, "");
     }
   else if (command && my_strcmp(command, "-") == 1
 	   && (home = find_with_name(dlist, "OLDPWD")) != NULL)
     new = my_strcat_no_free_b("", home);
   else if (command)
     new = my_strcat_no_free_b("", &command[i]);
-  if (new == NULL)
+  if (home == NULL || new == NULL)
     return (1);
   if (chdir(new) == -1)
     my_printf(2, "bash: cd: %s: No such file or directory\n", command);
   else
     return (change_pwd(dlist));
-  free(new);
   return (1);
 }

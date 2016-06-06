@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 06:32:57 2016 Victor Sousa
+** Last update Mon Jun  6 15:00:01 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -21,7 +21,8 @@ int	init_edition_line(char **env, t_edit_line *line)
   my_put_termcap(line->fd_tty, NULL);
   if (reset_save_mode(SAVE, line->fd_tty) == EXIT_FAILURE)
     return (0);
-  init_capacity_termcap(&(line->termcap));
+  if (init_capacity_termcap(&line->termcap) == -1)
+    return (0);
   get_pos_curser(&line->start_pos_x, &line->start_pos_y, line->fd_tty);
   line->cur_pos_x = line->start_pos_x;
   line->cur_pos_y = line->start_pos_y;
@@ -46,9 +47,11 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   struct pollfd pfd = {0,0,0};
   int		pr;
 
-  if (isatty(0) != 1)
-    return (get_next_line(0));
-  init_edition_line(env, line);
+  if (isatty(0) != 1 || init_edition_line(env, line) == 0)
+    {
+      reset_save_mode(RESTORE, line->fd_tty);
+      return (get_next_line(0));
+    }
   ret = 1;
   modular_history(1, add_to_history(modular_history(0, NULL), get_last_history_id() + 1, StringToArray(line->output_string, STRING_NO_FREE)));
   while (modular_history(0, NULL)->next != NULL)

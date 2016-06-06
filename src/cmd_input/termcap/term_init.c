@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 03:54:21 2016 Victor Sousa
-** Last update Sat Jun  4 03:54:35 2016 Victor Sousa
+** Last update Mon Jun  6 14:55:22 2016 Victor Sousa
 */
 
 #include	"prompt.h"
@@ -22,13 +22,15 @@ char		*my_tgetstr(char *cap)
   return (s);
 }
 
-void		init_capacity_termcap(t_termcap *termcap)
+int		init_capacity_termcap(t_termcap *termcap)
 {
-  termcap->str_cl = my_tgetstr("cl");
-  termcap->str_do = my_tgetstr("do");
-  termcap->str_up = my_tgetstr("up");
-  termcap->str_le = my_tgetstr("le");
-  termcap->str_ce = my_tgetstr("ce");
-  termcap->str_cd = my_tgetstr("cd");
-  termcap->str_ri = my_tgetstr("nd");
+  if ((termcap->str_cl = my_tgetstr("cl")) == NULL ||
+      (termcap->str_do = my_tgetstr("do")) == NULL ||
+      (termcap->str_up = my_tgetstr("up")) == NULL ||
+      (termcap->str_le = my_tgetstr("le")) == NULL ||
+      (termcap->str_ce = my_tgetstr("ce")) == NULL ||
+      (termcap->str_cd = my_tgetstr("cd")) == NULL ||
+      (termcap->str_ri = my_tgetstr("nd")) == NULL)
+    return (-1);
+  return (0);
 }
