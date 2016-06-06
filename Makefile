@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 22:07:05 2016 victor sousa
+## Last update Mon Jun  6 22:15:37 2016 victor sousa
 ##
 
 NAME	=	42sh
@@ -112,6 +112,8 @@ SRC		+=	$(PARSDIR)/cmd.c			\
 
 ## TERMCAP
 SRC		+=	src/cmd_input/getPromptInput.c			\
+			src/cmd_input/conditional_key.c			\
+			src/cmd_input/conditional_arrow.c		\
 			src/cmd_input/history.c				\
 			src/cmd_input/termcap/my_put_termcap.c		\
 			src/cmd_input/termcap/term_mode.c		\
