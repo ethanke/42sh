@@ -5,15 +5,15 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Jun  6 17:40:20 2016 Gaëtan Léandre
-** Last update Mon Jun  6 18:01:01 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:02:09 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
 
-int globerr(const char *path, int eerrno)
+static int	globerr(const char *path, int eerrno)
 {
-	my_printf(2, "%s: %s\n", path, strerror(eerrno));
-	return 0;
+  my_printf(2, "%s: %s\n", path, strerror(eerrno));
+  return 0;
 }
 
 char		**make_glob(char **cmd)
