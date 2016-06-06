@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 06:52:30 2016 Gaëtan Léandre
+** Last update Mon Jun  6 06:55:09 2016 Ethan Kerdelhue
 */
 
 #include 		"main.h"
@@ -92,6 +92,28 @@ int			make_command(char **cmd, t_dlist *dlist)
   return (tmp);
 }
 
+void			reverse_inib(char *str)
+{
+  int			i;
+  char			flag;
+
+  flag = 0;
+  i = 0;
+  while (str[i])
+    {
+      if (str[i] == '\"')
+	{
+	  if (flag == 0)
+	    flag = 1;
+	  else
+	    flag = 0;
+	}
+      if (flag)
+	str[i] = - str[i];
+      i++;
+    }
+}
+
 int			main(int ac, char **av, char **env)
 {
   t_dlist		*dlist;
@@ -122,6 +144,7 @@ int			main(int ac, char **av, char **env)
   signal(SIGINT, sighandler);
   while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
+      reverse_inib(cmd);
       send_cmd(parsing(cmd, dlist->path), dlist);
       disp_pwd(modular_pwd(0, NULL));
       free(cmd);

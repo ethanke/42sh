@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Jun  6 04:06:14 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 06:22:25 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 06:56:38 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -80,18 +80,13 @@ void			list_print(t_pile *pile)
     }
 }
 
-t_cmd			*end_parsing(t_parser *parser)
+t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
 {
   t_cmd			*cmd;
   t_cmd			*tmp;
   t_pile		*pile;
-  int			i;
-  int			j;
-  char			flag;
 
-  i = 0;
-  j = 0;
-  flag = 0;
+
   pile = parser->pile->next;
   if ((cmd = init_list_cmd()) == NULL)
     return (NULL);
@@ -146,14 +141,28 @@ int			get_parse(char *str, t_parser *parser)
 {
   char			*tmp;
   char			**table;
+  int			i;
+  int			j;
 
   if ((tmp = pre_parse(str, parser)) == NULL)
     return (-1);
-  if ((table = str_to_wordtable(tmp, "  \t\n")) == NULL)
+  if ((table = str_to_wordtable(tmp, " \t\n")) == NULL)
     return (-1);
+  i = 0;
+  while (table[i])
+    {
+      j = 0;
+      while (table[i][j])
+	{
+	  if (table[i][j] < 0)
+	    table[i][j] = - table[i][j];
+	  j++;
+	}
+      i++;
+    }
   if ((start_parsing(table, parser)) == -1)
     return (-1);
-  if ((parser->cmd = end_parsing(parser)) == NULL)
+  if ((parser->cmd = end_parsing(parser, 0, 0, 0)) == NULL)
     return (-1);
   return (0);
 }
