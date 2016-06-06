@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Mon Jun  6 21:19:59 2016 Kerdelhue Ethan
-** Last update Mon Jun  6 22:58:35 2016 victor sousa
+** Last update Mon Jun  6 23:14:47 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -20,48 +20,19 @@ int			push_t_cmd(t_cmd *cmd, t_cmd *tmp, char flag, int j)
   return (0);
 }
 
-t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
+t_cmd			*end_parsing(t_parser *parser, int j)
 {
   t_cmd			*cmd;
   t_cmd			*tmp;
   t_pile		*pile;
 
   pile = parser->pile->next;
-  if ((cmd = init_list_cmd()) == NULL)
+  if ((cmd = init_list_cmd()) == NULL || (tmp = malloc(sizeof(t_cmd)
+			   * (malloc_size_count(pile) + 2))) == NULL
+      || (tmp[j].cmd = malloc(sizeof(char *)
+			      * malloc_size_count(pile) + 2)) == NULL)
     return (NULL);
-  if ((tmp = malloc(sizeof(t_cmd) * (malloc_size_count(pile) + 2))) == NULL)
-    return (NULL);
-  if ((tmp[j].cmd = malloc(sizeof(char *) *
-			   malloc_size_count(pile) + 2)) == NULL)
-    return (NULL);
-  while (pile != NULL)
-    {
-      tmp[j].token = 0;
-      if (pile->token == SEP || (my_strcmp(pile->content, "|") == 1))
-	{
-	  tmp[j].token = get_sep(parser, pile->content);
-	  tmp[j].cmd[i] = NULL;
-	  if (add_node_cmd(cmd, tmp[j].cmd, tmp[j].token) == -1)
-	    return (NULL);
-	  j++;
-	  i = 0;
-	  if ((tmp[j].cmd = malloc(sizeof(char *) *
-				   (malloc_size_count(pile) + 1))) == NULL)
-	    return (NULL);
-	  flag = 1;
-	}
-      else
-	{
-	  if ((tmp[j].cmd[i] = my_strdup(pile->content)) == NULL)
-	    return (NULL);
-	  flag = 0;
-	  i++;
-	}
-      pile = pile->next;
-    }
-  tmp[j].cmd[i] = NULL;
-  push_t_cmd(cmd, tmp, flag, j);
-  return (cmd);
+  return (make_pile(pile, cmd, parser, tmp));
 }
 
 int			get_parse(char *str, t_parser *parser, int i, int j)
@@ -86,7 +57,7 @@ int			get_parse(char *str, t_parser *parser, int i, int j)
     }
   if ((start_parsing(table, parser)) == -1)
     return (-1);
-  if ((parser->cmd = end_parsing(parser, 0, 0, 0)) == NULL)
+  if ((parser->cmd = end_parsing(parser, 0)) == NULL)
     return (-1);
   return (0);
 }

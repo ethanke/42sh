@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 21:33:30 2016 Gaëtan Léandre
+** Last update Mon Jun  6 23:14:02 2016 Gaëtan Léandre
 */
 
 #ifndef 		MINISHELL_H_
@@ -86,5 +86,9 @@ int			launch_setenv(t_dlist *dlist, char **cmd);
 int			my_loop_unset(t_dlist *dlist, char **cmd);
 int			test_build(t_dlist *dlist, char **cmd, int *cont);
 int			launch(t_dlist *dlist, char **cmd);
+t_cmd			*make_pile(t_pile *pile, t_cmd *cmd,
+				   t_parser *parser, t_cmd *tmp);
+char			*my_strcheat(char *str, int *flag, int *i);
+int			push_t_cmd(t_cmd *cmd, t_cmd *tmp, char flag, int j);
 
 #endif			/*MINISHELL_H_*/

@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 22:22:01 2016 Kerdelhue Ethan
+## Last update Mon Jun  6 23:08:44 2016 Gaëtan Léandre
 ##
 
 NAME	=	42sh
@@ -65,6 +65,7 @@ SRC		+=	$(UTILSDIR)/utils.c			\
 			$(UTILSDIR)/glob.c			\
 			$(UTILSDIR)/disp_msg.c			\
 			$(UTILSDIR)/exec_command.c		\
+			src/parser/endparsing.c			\
 			$(UTILSDIR)/auto_complete.c
 
 ## PRINTF ##
