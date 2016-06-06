@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat Apr  9 01:06:04 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:12:12 2016 Gaëtan Léandre
+** Last update Mon Jun  6 16:02:03 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -46,6 +46,7 @@ char			*size_word(char *str, char *separate, int *i)
       j++;
       (*i)++;
     }
+  (*i)--;
   result[j] = '\0';
   return (result);
 }
@@ -57,19 +58,16 @@ char			**str_to_wordtable(char *str, char *separate)
   int			i;
 
   words = 0;
-  i = 0;
-  while (str[i])
-    {
+  i = -1;
+  while (str[++i])
       if (i - 1 < 0 || (is_separate(str[i], separate) == 1
 			&& is_separate(str[i - 1], separate) == 0))
 	words++;
-      i++;
-    }
   if (words == 0 || (table = malloc(sizeof(char *) * (words + 1))) == NULL)
     return (NULL);
-  i = 0;
+  i = -1;
   words = 0;
-  while (str[i])
+  while (str[++i])
     {
       if (is_separate(str[i], separate) == 0)
 	{
@@ -77,8 +75,6 @@ char			**str_to_wordtable(char *str, char *separate)
 	    return (NULL);
 	  words++;
 	}
-      else
-	i++;
     }
   table[words] = NULL;
   return (table);
