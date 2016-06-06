@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 19:11:01 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 19:19:51 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
@@ -59,7 +59,7 @@ char                    *my_epurstr(char *in, char *to_delete)
     {
       if (is_a_to_delete(in[i], to_delete))
         {
-          if (in[i - 1] && (in[i - 1] != ';' || in[i - 1] != '|' || in[i - 1] != '<' || in[i - 1] != '>'))
+          if (in[i - 1] && in[i - 1] != ';')
             out[j++] = ' ';
           while (is_a_to_delete(in[i], to_delete))
             i++;
@@ -79,6 +79,7 @@ char		*epur_opt(char *str, char **lim, int i, int k)
   char		*new;
   char		flag;
 
+  printf("before : |%s|\n", str);
   if ((new = malloc(count_size_sep(str, lim) + 1)) == NULL)
     return (NULL);
   while (str[++i])
@@ -91,9 +92,9 @@ char		*epur_opt(char *str, char **lim, int i, int k)
 	      if ((str[i + 1] != '|' && str[i - 1] != '|'))
 		{
 		  new[k] = '\0';
-		  new = my_strcat_wm(new, my_my_strcat("  ", my_my_strcat(lim[j], "  ")));
-		  k += my_strlen(lim[j]) + 4;
-		  i += my_strlen(lim[j += 2]);
+		  new = my_strcat_wm(new, my_my_strcat(" ", my_my_strcat(lim[j], " ")));
+		  k += my_strlen(lim[j]) + 2;
+		  i += my_strlen(lim[j += my_strlen(lim[j])]);
 		  flag = 0;
 		}
 	    }
@@ -101,8 +102,7 @@ char		*epur_opt(char *str, char **lim, int i, int k)
 	new[k++] = str[i];
     }
   new[k] = 0;
-  new  = my_epurstr(new, " ");
-puts(new);
+printf("after : |%s|\n", new);
   return (new);
 }
 
