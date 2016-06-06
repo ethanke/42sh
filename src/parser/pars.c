@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Mon Jun  6 21:19:59 2016 Kerdelhue Ethan
-** Last update Mon Jun  6 22:05:41 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 22:12:07 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -31,7 +31,8 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
     return (NULL);
   if ((tmp = malloc(sizeof(t_cmd) * (malloc_size_count(pile) + 2))) == NULL)
     return (NULL);
-  if ((tmp[j].cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
+  if ((tmp[j].cmd = malloc(sizeof(char *) *
+			   malloc_size_count(pile) + 2)) == NULL)
     return (NULL);
   while (pile != NULL)
     {
@@ -44,7 +45,8 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
 	    return (NULL);
 	  j++;
 	  i = 0;
-	  if ((tmp[j].cmd = malloc(sizeof(char *) * (malloc_size_count(pile) + 1))) == NULL)
+	  if ((tmp[j].cmd = malloc(sizeof(char *) *
+				   (malloc_size_count(pile) + 1))) == NULL)
 	    return (NULL);
 	  flag = 1;
 	}
@@ -62,18 +64,15 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
   return (cmd);
 }
 
-int			get_parse(char *str, t_parser *parser)
+int			get_parse(char *str, t_parser *parser, int i, int j)
 {
   char			*tmp;
   char			**table;
-  int			i;
-  int			j;
 
   if ((tmp = pre_parse(str, parser)) == NULL)
     return (-1);
   if ((table = str_to_wordtable(tmp, " \t\n")) == NULL)
     return (-1);
-  i = 0;
   while (table[i])
     {
       j = 0;
@@ -105,7 +104,7 @@ t_cmd			*parsing(char *str, char **path)
     return (NULL);
   if (get_parse(str, &parser) == -1)
     return (NULL);
-  if (error_case(parser.cmd) == -1)
+  if (error_case(parser.cmd, 0, 0) == -1)
     return (NULL);
   return (parser.cmd);
 }
