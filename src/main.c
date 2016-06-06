@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 06:34:02 2016 Victor Sousa
+** Last update Mon Jun  6 06:52:30 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -63,7 +63,7 @@ int			launch(t_dlist *dlist, char **cmd)
     {
       if (execve(cmd[0], cmd, dlist->env) == -1)
 	{
-	  write(2, "Command-not-found\n", 19);
+	  my_printf(2, "%s\n", strerror(errno));
 	  exit(1);
 	}
     }

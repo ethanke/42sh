@@ -5,12 +5,13 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 04:22:11 2016 Gaëtan Léandre
+** Last update Mon Jun  6 06:53:10 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
 # define 		_MINISHELL_
 
+#include		<errno.h>
 # include		<string.h>
 # include 		<sys/types.h>
 # include 		<stdio.h>
