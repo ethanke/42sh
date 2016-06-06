@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:18:19 2016 Gaëtan Léandre
-** Last update Mon Jun  6 10:04:13 2016 tanguy lelievre
+** Last update Mon Jun  6 15:23:52 2016 tanguy lelievre
 */
 
 #include	"main.h"
@@ -78,9 +78,32 @@ int		left_redir(char **start, char *end, t_dlist *dlist)
 
 int		dleft_redir(char **start, char *end, t_dlist *dlist)
 {
-  (void)start;
-  (void)end;
-  (void)dlist;
-  puts("dlef");
-  return (1);
+  int		fd[2];
+  char		*str;
+  int		diff;
+  int		reset;
+  int		to_ret;
+
+  diff = 0;
+  to_ret = 1;
+  pipe(fd);
+  if ((reset = dup(0)) == -1)
+    return (0);
+  while (diff == 0)
+    {
+      str = get_next_line(0);
+      if ((diff = my_strcmp(str, end)) == 0)
+	{
+	  write(fd[1], str, my_strlen(str));
+	  write(fd[1], "\n", 1);
+	}
+      else
+	write(fd[1], NULL, 0);
+    }
+  close(fd[1]);
+  if (dup2(fd[0], 0) == -1 || make_command(start, dlist) == 0)
+    to_ret = 0;
+  close(fd[0]);
+  dup2(reset, 0);
+  return (to_ret);
 }
