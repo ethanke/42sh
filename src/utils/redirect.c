@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:18:19 2016 Gaëtan Léandre
-** Last update Mon Jun  6 02:02:40 2016 Gaëtan Léandre
+** Last update Mon Jun  6 10:04:13 2016 tanguy lelievre
 */
 
 #include	"main.h"
@@ -37,7 +37,7 @@ int		dright_redir(char **start, char *end, t_dlist *dlist)
   int		reset;
   int		to_ret;
 
-  to_ret = 0;
+  to_ret = 1;
   if ((reset = dup(1)) == -1)
     return (0);
   if (access(end, F_OK) == -1)
@@ -60,11 +60,20 @@ int		dright_redir(char **start, char *end, t_dlist *dlist)
 
 int		left_redir(char **start, char *end, t_dlist *dlist)
 {
-  (void)start;
-  (void)end;
-  (void)dlist;
-  puts("left");
-  return (1);
+  int		fd;
+  int		reset;
+  int		to_ret;
+
+  to_ret = 1;
+  if ((reset = dup(0)) == -1)
+    return (0);
+  if (access(end, F_OK) == -1 || (fd = open(end, O_RDWR)) == -1)
+    return (0);
+  if (dup2(fd, 0) == -1 || make_command(start, dlist) == 0)
+    to_ret = 0;
+  dup2(reset, 0);
+  close(fd);
+  return (to_ret);
 }
 
 int		dleft_redir(char **start, char *end, t_dlist *dlist)
