@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 04:24:50 2016 Gaëtan Léandre
+** Last update Mon Jun  6 06:32:36 2016 Victor Sousa
 */
 
 #include 		"main.h"
@@ -97,7 +97,6 @@ int			main(int ac, char **av, char **env)
   t_dlist		*dlist;
   char			*cmd;
   t_edit_line		line;
-  int			id = 0;
 
   (void)ac;
   (void)av;
@@ -123,7 +122,6 @@ int			main(int ac, char **av, char **env)
   signal(SIGINT, sighandler);
   while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
-      modular_history(1, add_to_history(modular_history(0, NULL), id++, my_strdup(cmd)));
       send_cmd(parsing(cmd, dlist->path), dlist);
       disp_pwd(modular_pwd(0, NULL));
       free(cmd);

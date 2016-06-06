@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 04:31:04 2016 Victor Sousa
+** Last update Mon Jun  6 06:32:57 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -30,6 +30,15 @@ int	init_edition_line(char **env, t_edit_line *line)
   return (1);
 }
 
+int		get_last_history_id()
+{
+  if (modular_history(0, NULL) == NULL)
+    return (-1);
+  while (modular_history(0, NULL)->next != NULL)
+    modular_history(1 , modular_history(0, NULL)->next);
+  return (modular_history(0, NULL)->id);
+}
+
 char		*get_prompt_input(t_edit_line *line, char **env)
 {
   int		ret;
@@ -41,17 +50,20 @@ char		*get_prompt_input(t_edit_line *line, char **env)
     return (get_next_line(0));
   init_edition_line(env, line);
   ret = 1;
-
+  modular_history(1, add_to_history(modular_history(0, NULL), get_last_history_id() + 1, StringToArray(line->output_string, STRING_NO_FREE)));
+  while (modular_history(0, NULL)->next != NULL)
+    modular_history(1 , modular_history(0, NULL)->next);
   while (ret > 0)
     {
+      if (modular_history(0, NULL)->cmd != NULL)
+	free(modular_history(0, NULL)->cmd);
+      modular_history(0, NULL)->cmd = StringToArray(line->output_string, STRING_NO_FREE);
       term_refresh(line);
       printString(line->output_string);
       curseur(line->cur_pos_x, line->cur_pos_y);
-
       pfd.fd = STDIN_FILENO;
       pfd.events = POLLIN;
       pr = poll(&pfd, 1, 5000);
-
       if (pr > 0)
 	{
 	  if ((ret = read(0, buff, 9)) == -1)
@@ -148,17 +160,39 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       /* TODO */
       if (my_prompt_strcmp(buff, KEY_UP) == 1)
 	{
-	  freeString(line->output_string);
-	  if (modular_history(0, NULL) != NULL && modular_history(0, NULL)->prev != NULL)
-	    modular_history(1, modular_history(0, NULL)->prev);
-	  line->output_string = formString(modular_history(0, NULL)->cmd);
+	  if (modular_history(0, NULL) != NULL)
+	    {
+	      freeString(line->output_string);
+	      if (modular_history(0, NULL)->prev == NULL)
+		{
+		  line->output_string = formString(modular_history(0, NULL)->cmd);
+		  modular_history(1, modular_history(0, NULL)->prev);
+		}
+	      else
+		{
+		  modular_history(1, modular_history(0, NULL)->prev);
+		  line->output_string = formString(modular_history(0, NULL)->cmd);
+		}
+	    }
 	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
 	  continue;
   	}
       if (my_prompt_strcmp(buff, KEY_DOWN) == 1)
 	{
-	  freeString(line->output_string);
-	  line->output_string = formString(modular_history(0, modular_history(1, modular_history(0, NULL)->next))->cmd);
+	  if (modular_history(0, NULL) != NULL)
+	    {
+	      freeString(line->output_string);
+              if (modular_history(0, NULL)->next == NULL)
+		{
+		  line->output_string = formString(modular_history(0, NULL)->cmd);
+		  modular_history(1, modular_history(0, NULL)->next);
+		}
+	      else
+		{
+		  modular_history(1, modular_history(0, NULL)->next);
+		  line->output_string = formString(modular_history(0, NULL)->cmd);
+		}
+	    }
 	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
   	  continue;
   	}
