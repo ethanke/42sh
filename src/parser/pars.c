@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Mon Jun  6 21:19:59 2016 Kerdelhue Ethan
-** Last update Mon Jun  6 21:33:15 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 21:35:36 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -63,14 +63,6 @@ int			push_t_cmd(t_cmd *cmd, t_cmd *tmp, char flag, int j)
   return (0);
 }
 
-int			push_tab()
-{
-  if ((tmp[j].cmd[i] = my_strdup(pile->content)) == NULL)
-    return (-1);
-  flag = 0;
-  i++;
-}
-
 t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
 {
   t_cmd			*cmd;
@@ -100,7 +92,12 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
 	  flag = 1;
 	}
       else
-	push_tab();
+	{
+	  if ((tmp[j].cmd[i] = my_strdup(pile->content)) == NULL)
+	    return (NULL);
+	  flag = 0;
+	  i++;
+	}
       pile = pile->next;
     }
   tmp[j].cmd[i] = NULL;
