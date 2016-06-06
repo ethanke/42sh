@@ -5,11 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-<<<<<<< HEAD
-## Last update Mon Jun  6 22:13:30 2016 Ethan Kerdelhue
-=======
-## Last update Mon Jun  6 22:15:37 2016 victor sousa
->>>>>>> f5eecbd77b080635a1d5af6a03e0461d8eb873ae
+## Last update Mon Jun  6 22:22:01 2016 Kerdelhue Ethan
 ##
 
 NAME	=	42sh
