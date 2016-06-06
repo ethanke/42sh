@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Mon Jun  6 21:19:59 2016 Kerdelhue Ethan
-** Last update Mon Jun  6 22:12:07 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 22:21:19 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -102,9 +102,9 @@ t_cmd			*parsing(char *str, char **path)
     return (NULL);
   if ((parser.sep = load_sep()) == NULL)
     return (NULL);
-  if (get_parse(str, &parser) == -1)
+  if (get_parse(str, &parser, 0, 0) == -1)
     return (NULL);
-  if (error_case(parser.cmd, 0, 0) == -1)
+  if (error_case(parser.cmd) == -1)
     return (NULL);
   return (parser.cmd);
 }
