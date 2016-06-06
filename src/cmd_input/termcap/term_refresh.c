@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 04:48:20 2016 Victor Sousa
-** Last update Sat Jun  4 20:56:54 2016 Victor Sousa
+** Last update Mon Jun  6 17:27:14 2016 Victor Sousa
 */
 
 #include	"prompt.h"

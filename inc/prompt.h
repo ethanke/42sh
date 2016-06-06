@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 14:55:34 2016 Victor Sousa
+** Last update Mon Jun  6 17:02:56 2016 Victor Sousa
 */
 
 #ifndef 		PROMPT_H_
@@ -106,5 +106,6 @@ int             	modular_prog_status(char boolean, int value);
 String			modular_clip(char boolean, String new_buff, int pos);
 t_history		*modular_history(char boolean, t_history *new_history);
 t_history		*add_to_history(t_history *list, int id, char *cmd);
+t_edit_line		*modular_line(char boolean, t_edit_line *new_line);
 
 #endif		/*PROMPT_H_*/
