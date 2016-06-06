@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.net>
 **
 ** Started on  Mon Jun  6 21:19:59 2016 Kerdelhue Ethan
-** Last update Mon Jun  6 21:30:41 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 21:31:13 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -53,7 +53,6 @@ void			list_print(t_pile *pile)
     }
 }
 
-
 int			push_t_cmd(t_cmd *cmd, t_cmd *tmp, char flag, int j)
 {
   if (flag == 0)
@@ -77,7 +76,6 @@ t_cmd			*end_parsing(t_parser *parser, int i, int j, char flag)
     return (NULL);
   if ((tmp[j].cmd = malloc(sizeof(char *) * malloc_size_count(pile) + 2)) == NULL)
     return (NULL);
-  return (0);
   while (pile != NULL)
     {
       tmp[j].token = 0;
