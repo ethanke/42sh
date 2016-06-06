@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 17:00:08 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 18:06:06 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
@@ -51,12 +51,13 @@ char		*epur_opt(char *str, char **lim, int i, int k)
 		  new[k] = '\0';
 		  new = my_strcat_wm(new, my_my_strcat(" ", my_my_strcat(lim[j], " ")));
 		  k += my_strlen(lim[j]) + 2;
-		  i += my_strlen(lim[j]) - 1;
+		  i += my_strlen(lim[j]);
 		  flag = 0;
 		}
       if (flag)
 	new[k++] = str[i];
     }
+puts(new);
   new[k] = 0;
   return (new);
 }
