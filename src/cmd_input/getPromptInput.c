@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 19:43:09 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 21:01:10 2016 victor sousa
 */
 
 #include	"main.h"
@@ -46,11 +46,15 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   char		buff[10];
   struct pollfd pfd = {0,0,0};
   int		pr;
+  int		pos;
 
   if (get_tty(env, line) != NULL)
     return (get_tty(env, line));
   ret = 1;
-  modular_history(1, add_to_history(modular_history(0, NULL), get_last_history_id() + 1, StringToArray(line->output_string, STRING_NO_FREE)));
+  modular_history(1, add_to_history(modular_history(0, NULL),
+				    get_last_history_id() + 1,
+				    StringToArray(line->output_string,
+						  STRING_NO_FREE)));
   while (modular_history(0, NULL)->next != NULL)
     modular_history(1 , modular_history(0, NULL)->next);
   while (ret > 0)
@@ -100,7 +104,8 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       if (my_prompt_strcmp(buff, KEY_RIGHT) == 1)
 	{
 	  if (line->cur_pos_x < get_termsize_x() &&
-	      line->cur_pos_x < StringLenght(line->output_string) + line->start_pos_x)
+	      line->cur_pos_x < StringLenght(line->output_string)
+	      + line->start_pos_x)
 	    line->cur_pos_x++;
 	  continue;
 	}
@@ -113,30 +118,38 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       if (my_prompt_strcmp(buff, KEY_END) == 1 ||
 	  (buff[0] == CTRLE && buff[1] == '\0'))
     	{
-    	  line->cur_pos_x = StringLenght(line->output_string) + line->start_pos_x;
+    	  line->cur_pos_x = StringLenght(line->output_string)
+	    + line->start_pos_x;
     	  continue;
     	}
       if (buff[0] == DEL && buff[1] == '\0')
 	{
 	  if (line->cur_pos_x > line->start_pos_x)
-	    deleteCharAt(line->output_string, line->cur_pos_x-- - line->start_pos_x);
+	    deleteCharAt(line->output_string, line->cur_pos_x--
+			 - line->start_pos_x);
   	  continue;
   	}
       if (buff[0] == 0x1B && buff[1] == 0x5B && buff[2] == 0x33 &&
 	  buff[3] == 0x7E && buff[4] == '\0')
   	{
-	  deleteCharAt(line->output_string, line->cur_pos_x - line->start_pos_x + 1);
+	  deleteCharAt(line->output_string, line->cur_pos_x -
+		       line->start_pos_x + 1);
     	  continue;
     	}
       if (buff[0] == CTRLK && buff[1] == '\0')
         {
-	  modular_clip(1, line->output_string, line->cur_pos_x - line->start_pos_x);
-	  deleteAfterI(line->output_string, line->cur_pos_x - line->start_pos_x);
+	  modular_clip(1, line->output_string, line->cur_pos_x
+		       - line->start_pos_x);
+	  deleteAfterI(line->output_string, line->cur_pos_x
+		       - line->start_pos_x);
 	  continue;
         }
       if (buff[0] == CTRLY && buff[1] == '\0')
 	{
-	  line->output_string = concatStringAt(line->output_string, modular_clip(0, NULL, 0), line->cur_pos_x - line->start_pos_x);
+	  line->output_string = concatStringAt(line->output_string,
+					       modular_clip(0, NULL, 0),
+					       line->cur_pos_x -
+					       line->start_pos_x);
 	  line->cur_pos_x += StringLenght(modular_clip(0, NULL, 0));
 	  continue;
 	}
@@ -148,8 +161,6 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	  line->output_string = formString("");
 	  continue;
 	}
-
-      /* TODO */
       if (my_prompt_strcmp(buff, KEY_UP) == 1)
 	{
 	  if (modular_history(0, NULL) != NULL)
@@ -165,11 +176,11 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   	}
       if (buff[0] == TAB && buff[1] == '\0')
 	{
-
+	  pos = line->cur_pos_x - line->start_pos_x;
+	  auto_complete(line->output_string, &pos);
+	  line->cur_pos_x = pos +line->start_pos_x;
 	  continue;
 	}
-      /* TODO */
-
       line->output_string->data = pushCharAt(line->output_string->data, buff[0], line->cur_pos_x++ - line->start_pos_x);
     }
   return (StringToArray(line->output_string, STRING_FREE));

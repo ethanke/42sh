@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Jun  6 18:12:09 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 19:31:25 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 20:51:56 2016 victor sousa
 */
 
 #include		"main.h"
@@ -27,7 +27,8 @@ int			set_value_start(t_edit_line *line,
 {
   if (modular_history(0, NULL)->cmd != NULL)
     free(modular_history(0, NULL)->cmd);
-  modular_history(0, NULL)->cmd = StringToArray(line->output_string, STRING_NO_FREE);
+  modular_history(0, NULL)->cmd = StringToArray(line->output_string,
+						STRING_NO_FREE);
   term_refresh(line);
   printString(line->output_string);
   curseur(line->cur_pos_x, line->cur_pos_y);
