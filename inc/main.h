@@ -5,11 +5,11 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 18:42:02 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:54:55 2016 Gaëtan Léandre
 */
 
-#ifndef 		_MINISHELL_
-# define 		_MINISHELL_
+#ifndef 		MINISHELL_H_
+# define 		MINISHELL_H_
 
 #include		<errno.h>
 # include		<string.h>
@@ -83,4 +83,4 @@ char			**make_glob(char **cmd);
 char			*auto_compleat(char *cmd);
 int			my_tablestrlen(char **table);
 
-#endif			/*_MINISHELL_*/
+#endif			/*MINISHELL_H_*/
