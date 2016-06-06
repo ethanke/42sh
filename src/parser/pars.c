@@ -200,5 +200,6 @@ t_cmd			*parsing(char *str, char **path)
     return (NULL);
   if (error_case(parser.cmd) == -1)
     return (NULL);
+  print_list(parser.cmd);
   return (parser.cmd);
 }
