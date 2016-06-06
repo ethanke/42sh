@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:16:02 2016 Gaëtan Léandre
-** Last update Mon Jun  6 02:56:08 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 03:00:13 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -71,7 +71,7 @@ int			get_sep(t_parser *parser, char *str)
 	return (i);
       i++;
     }
-  if (my_strcmp("|", str) == 0)
+  if (my_strcmp("|", str) == 1)
     return (PI);
   return (-1);
 }
