@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 00:54:38 2016 Victor Sousa
+## Last update Mon Jun  6 04:17:39 2016 Victor Sousa
 ##
 
 NAME	=	42sh
@@ -46,7 +46,8 @@ SRC		+=	$(LISTDIR)/list.c			\
 ## BUILTIN ##
 SRC		+=	$(BLTINDIR)/builds.c			\
 			$(BLTINDIR)/cd.c			\
-			$(BLTINDIR)/echo.c
+			$(BLTINDIR)/echo.c			\
+			$(BLTINDIR)/history_builtin.c
 
 ## UTILS ##
 SRC		+=	$(UTILSDIR)/utils.c			\
@@ -101,6 +102,7 @@ SRC		+=	$(PARSDIR)/cmd.c			\
 
 ## TERMCAP
 SRC		+=	src/cmd_input/getPromptInput.c			\
+			src/cmd_input/history.c				\
 			src/cmd_input/termcap/my_put_termcap.c		\
 			src/cmd_input/termcap/term_mode.c		\
 			src/cmd_input/termcap/term_init.c		\

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 01:38:14 2016 Gaëtan Léandre
+** Last update Mon Jun  6 04:17:12 2016 Victor Sousa
 */
 
 #include 		"main.h"
@@ -34,6 +34,8 @@ int			test_build(t_dlist *dlist, char **cmd, int *cont)
     return (my_env(dlist));
   else if (my_strcmp(cmd[0], "setenv") == 1)
     return (launch_setenv(dlist, cmd));
+  if (my_prompt_strcmp(cmd[0], "history") == 1)
+    return (history_buildin());
   else if (my_strcmp(cmd[0], "unsetenv") == 1)
     {
       if (cmd[1] == NULL)
@@ -95,9 +97,11 @@ int			main(int ac, char **av, char **env)
   t_dlist		*dlist;
   char			*cmd;
   t_edit_line		line;
+  int			id = 0;
 
   (void)ac;
   (void)av;
+  modular_history(1, NULL);
   if ((line.fd_tty = open("/dev/tty", O_RDWR)) == -1)
     return (-1);
   my_put_termcap(line.fd_tty, NULL);
@@ -117,9 +121,9 @@ int			main(int ac, char **av, char **env)
   modular_pwd(1, dlist->pwd);
   disp_pwd(modular_pwd(0, NULL));
   signal(SIGINT, sighandler);
-  /*changer l'env que j'envoie*/
   while ((cmd = get_prompt_input(&line, env)) != NULL)
     {
+      modular_history(1, add_to_history(modular_history(0, NULL), id++, my_strdup(cmd)));
       send_cmd(parsing(cmd, dlist->path), dlist);
       disp_pwd(modular_pwd(0, NULL));
       free(cmd);

@@ -5,24 +5,24 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Thu May 26 00:08:24 2016 Victor Sousa
-** Last update Sun Jun  5 17:37:53 2016 Victor Sousa
+** Last update Mon Jun  6 04:08:14 2016 Victor Sousa
 */
 
-#include	"main.h"
-#include	"my_string.h"
+#include		"main.h"
+#include		"my_string.h"
 
-int             modular_prog_status(char boolean, int value)
+int             	modular_prog_status(char boolean, int value)
 {
-  static int    status = 1;
+  static int    	status = 1;
 
   if (boolean)
     status = value;
   return (status);
 }
 
-char		*modular_pwd(char boolean, char *new_pwd)
+char			*modular_pwd(char boolean, char *new_pwd)
 {
-  static char	*pwd = NULL;
+  static char		*pwd = NULL;
 
   if (boolean && new_pwd)
     {
@@ -33,9 +33,18 @@ char		*modular_pwd(char boolean, char *new_pwd)
   return (pwd);
 }
 
-String		modular_clip(char boolean, String new_buff, int pos)
+t_history		*modular_history(char boolean, t_history *new_history)
 {
-  static String buff = NULL;
+  static t_history	*history = NULL;
+
+  if (boolean && new_history)
+    history = new_history;
+  return (history);
+}
+
+String			modular_clip(char boolean, String new_buff, int pos)
+{
+  static String 	buff = NULL;
 
   if (boolean && new_buff)
     {

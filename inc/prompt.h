@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 01:33:46 2016 Victor Sousa
+** Last update Mon Jun  6 04:10:54 2016 Victor Sousa
 */
 
 #ifndef 		PROMPT_H_
@@ -71,6 +71,14 @@ typedef struct		s_edit_line
   int			cur_pos_y;
 }			t_edit_line;
 
+typedef struct		s_history
+{
+  int			id;
+  char			*cmd;
+  struct s_history	*prev;
+  struct s_history	*next;
+}			t_history;
+
 char			*get_prompt_input(t_edit_line *line, char **env);
 
 /*TERMCAP*/
@@ -96,5 +104,7 @@ char			*get_env_var(char *var, char **env);
 int			my_clear_screen(t_edit_line *line);
 int             	modular_prog_status(char boolean, int value);
 String			modular_clip(char boolean, String new_buff, int pos);
+t_history		*modular_history(char boolean, t_history *new_history);
+t_history		*add_to_history(t_history *list, int id, char *cmd);
 
 #endif		/*PROMPT_H_*/
