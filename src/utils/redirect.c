@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:18:19 2016 Gaëtan Léandre
-** Last update Mon Jun  6 15:51:05 2016 tanguy lelievre
+** Last update Mon Jun  6 15:55:05 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
@@ -91,7 +91,7 @@ int		dleft_redir(char **start, char *end, t_dlist *dlist)
   while (diff == 0)
     {
       str = get_next_line(0);
-      if ((diff = my_strcmp(str, end)) == 0)
+      if (str && (diff = my_strcmp(str, end)) == 0)
 	my_printf(fd[1], "%s\n", str);
     }
   close(fd[1]);
