@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 19:19:51 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 19:41:28 2016 victor sousa
 */
 
 #include 	"parser.h"
@@ -75,34 +75,33 @@ char                    *my_epurstr(char *in, char *to_delete)
 
 char		*epur_opt(char *str, char **lim, int i, int k)
 {
-  int		j;
+   int		j;
   char		*new;
-  char		flag;
 
   printf("before : |%s|\n", str);
   if ((new = malloc(count_size_sep(str, lim) + 1)) == NULL)
     return (NULL);
   while (str[++i])
     {
-      flag = 1;
-      j = -1;
-      while (lim[++j])
-	  if ((my_strncmp(str + i, lim[j], my_strlen(lim[j])) == 0))
-	    {
+      j = 0;
+      while (lim[j])
+	{
+	  if (my_strncmp(str + i, lim[j], my_strlen(lim[j])) == 0)
+            {
 	      if ((str[i + 1] != '|' && str[i - 1] != '|'))
 		{
 		  new[k] = '\0';
-		  new = my_strcat_wm(new, my_my_strcat(" ", my_my_strcat(lim[j], " ")));
+		  sprintf(new, "%s %s ", new, lim[j]);
+		  i += my_strlen(lim[j]);
 		  k += my_strlen(lim[j]) + 2;
-		  i += my_strlen(lim[j += my_strlen(lim[j])]);
-		  flag = 0;
 		}
 	    }
-      if (flag)
-	new[k++] = str[i];
+	  j++;
+	}
+      new[k++] = str[i];
     }
   new[k] = 0;
-printf("after : |%s|\n", new);
+  printf("after  : |%s|\n", new);
   return (new);
 }
 
