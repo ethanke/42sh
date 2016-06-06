@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Jun  6 17:40:20 2016 Gaëtan Léandre
-** Last update Mon Jun  6 18:52:14 2016 Gaëtan Léandre
+** Last update Mon Jun  6 19:29:50 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
@@ -75,7 +75,8 @@ char		*auto_compleat(char *cmd)
   int		flags;
   char		*dup;
 
-  dup = my_strcat_no_free_b(cmd, "*");
+  if ((dup = my_strcat_no_free_b(cmd, "*")) == NULL)
+    return (cmd);
   flags = 0;
   ret = glob(dup, flags, globerr, &results);
   free(dup);
