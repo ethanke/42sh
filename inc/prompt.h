@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 19:43:50 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 21:10:52 2016 Ethan Kerdelhue
 */
 
 #ifndef 		PROMPT_H_
@@ -81,7 +81,7 @@ typedef struct		s_history
 
 char			*get_prompt_input(t_edit_line *line, char **env);
 
-/*TERMCAP*/
+			/*TERMCAP*/
 int			my_put_termcap(int flag, char *capacity);
 char			*my_tgetstr(char *cap);
 int			init_capacity_termcap(t_termcap *termcap);
@@ -94,7 +94,7 @@ void			term_refresh(t_edit_line *line);
 int			get_termsize_x(void);
 int			get_termsize_y(void);
 
-/*MISC*/
+			/*MISC*/
 void			xfree(void *ptr);
 int 			dprintf(int fd, const char *format, ...);
 int			my_prompt_strcmp(char *str1, char *str2);

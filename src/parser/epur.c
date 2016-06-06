@@ -5,45 +5,10 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 19:44:24 2016 victor sousa
+** Last update Mon Jun  6 21:18:38 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
-
-int		count_size_sep(char *str, char **sep)
-{
-  int		i;
-  int		j;
-  int		size;
-
-  i = -1;
-  j = 0;
-  size = my_strlen(str);
-  while (str[++i])
-    {
-      j = 0;
-      while (sep[j])
-	{
-	  if (my_strncmp(&str[i], sep[j], my_strlen(sep[j])) == 0)
-	    size += 2;
-	  j++;
-	}
-    }
-  return (size);
-}
-
-int                     is_a_to_delete(char c, char *to_delete)
-{
-  int                   i;
-
-  i = -1;
-  while (to_delete[++i])
-    {
-      if (c == to_delete[i])
-        return (1);
-    }
-  return (0);
-}
 
 char                    *my_epurstr(char *in, char *to_delete)
 {
@@ -75,7 +40,7 @@ char                    *my_epurstr(char *in, char *to_delete)
 
 char		*epur_opt(char *str, char **lim, int i, int k)
 {
-   int		j;
+  int		j;
   char		*new;
 
   if ((new = malloc(count_size_sep(str, lim) + 1)) == NULL)
@@ -83,8 +48,7 @@ char		*epur_opt(char *str, char **lim, int i, int k)
   while (str[++i])
     {
       j = 0;
-      while (lim[j])
-	{
+      while (lim[++j])
 	  if (my_strncmp(str + i, lim[j], my_strlen(lim[j])) == 0)
             {
 	      if ((str[i + 1] != '|' && str[i - 1] != '|'))
@@ -95,8 +59,6 @@ char		*epur_opt(char *str, char **lim, int i, int k)
 		  k += my_strlen(lim[j]) + 2;
 		}
 	    }
-	  j++;
-	}
       new[k++] = str[i];
     }
   new[k] = 0;
@@ -119,7 +81,7 @@ char		*epur_sep(char *str, char **delim, int i, int k)
 	  if (my_strncmp(str + i, delim[j], my_strlen(delim[j])) == 0)
 	    {
 	      new[k] = '\0';
-	      new = my_strcat_wm(new, my_my_strcat(" ", my_my_strcat(delim[j], " ")));
+	      new = my_strcat_wm(new, my_cat(" ", my_cat(delim[j], " ")));
 	      k += my_strlen(delim[j]) + 2;
 	      i += my_strlen(delim[j]) - 1;
 	      flag = 0;

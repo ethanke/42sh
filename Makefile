@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 19:10:32 2016 tanguy lelievre
+## Last update Mon Jun  6 21:28:23 2016 Ethan Kerdelhue
 ##
 
 NAME	=	42sh
@@ -33,7 +33,7 @@ RM              =       rm -f
 CC              =       gcc
 CFLAGS		=	-W -Wall -Wextra -Werror		\
 			-ansi -pedantic				\
-			-I$(INCDIR) -ggdb -g3			\
+			-I$(INCDIR)				\
 			-lncurses
 
 ##  MAIN  ##
@@ -95,6 +95,8 @@ SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c       \
 
 SRC		+=	$(PARSDIR)/cmd.c			\
 			$(PARSDIR)/epur.c			\
+			$(PARSDIR)/my_cat.c			\
+		   	$(PARSDIR)/utils.c			\
 			$(PARSDIR)/free_pars.c			\
 			$(PARSDIR)/link_list.c			\
 			$(PARSDIR)/opt.c			\

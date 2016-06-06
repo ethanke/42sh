@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May 25 07:15:37 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 18:52:16 2016 victor sousa
+** Last update Mon Jun  6 21:29:37 2016 Ethan Kerdelhue
 */
 
 #ifndef 		PARSER_H_
@@ -52,6 +52,9 @@ typedef struct		s_parser
   t_cmd			*cmd;
 }			t_parser;
 
+char			*my_cat(char *a, char *b);
+int			count_size_sep(char *str, char **sep);
+int                     is_a_to_delete(char c, char *to_delete);
 char			*my_my_strcat(char *a, char *b);
 void			list_print(t_pile *pile);
 int			free_for_all(char **table);
