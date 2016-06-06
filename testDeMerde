@@ -1,0 +1,1 @@
+echo -e "\t ls   -l\t/dev|\tgrep tty" | ./42sh
