@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 17:43:30 2016 Gaëtan Léandre
+## Last update Mon Jun  6 18:26:54 2016 Ethan Kerdelhue
 ##
 
 NAME	=	42sh
@@ -113,6 +113,7 @@ SRC		+=	src/cmd_input/getPromptInput.c			\
 			src/cmd_input/termcap/term_cursor.c		\
 			src/cmd_input/termcap/term_refresh.c		\
 			src/cmd_input/termcap/term_cursor_position.c	\
+			src/cmd_input/termcap/func_key.c		\
 		      	src/cmd_input/termcap/term_get_size.c
 
 ## MISC
