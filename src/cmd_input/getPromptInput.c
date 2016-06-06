@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 17:49:07 2016 Victor Sousa
+** Last update Mon Jun  6 18:53:50 2016 Ethan Kerdelhue
 */
 
 #include	"main.h"
@@ -58,15 +58,7 @@ char		*get_prompt_input(t_edit_line *line, char **env)
     modular_history(1 , modular_history(0, NULL)->next);
   while (ret > 0)
     {
-      if (modular_history(0, NULL)->cmd != NULL)
-	free(modular_history(0, NULL)->cmd);
-      modular_history(0, NULL)->cmd = StringToArray(line->output_string, STRING_NO_FREE);
-      term_refresh(line);
-      printString(line->output_string);
-      curseur(line->cur_pos_x, line->cur_pos_y);
-      pfd.fd = STDIN_FILENO;
-      pfd.events = POLLIN;
-      pr = poll(&pfd, 1, 5000);
+      set_value_start(line, &pfd, &pr);
       if (pr > 0)
 	{
 	  if ((ret = read(0, buff, 9)) == -1)
@@ -164,38 +156,13 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       if (my_prompt_strcmp(buff, KEY_UP) == 1)
 	{
 	  if (modular_history(0, NULL) != NULL)
-	    {
-	      freeString(line->output_string);
-	      if (modular_history(0, NULL)->prev == NULL)
-		{
-		  line->output_string = formString(modular_history(0, NULL)->cmd);
-		  modular_history(1, modular_history(0, NULL)->prev);
-		}
-	      else
-		{
-		  modular_history(1, modular_history(0, NULL)->prev);
-		  line->output_string = formString(modular_history(0, NULL)->cmd);
-		}
-	    }
+	    func_key_up(line);
 	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
 	  continue;
   	}
       if (my_prompt_strcmp(buff, KEY_DOWN) == 1)
 	{
-	  if (modular_history(0, NULL) != NULL)
-	    {
-	      freeString(line->output_string);
-              if (modular_history(0, NULL)->next == NULL)
-		{
-		  line->output_string = formString(modular_history(0, NULL)->cmd);
-		  modular_history(1, modular_history(0, NULL)->next);
-		}
-	      else
-		{
-		  modular_history(1, modular_history(0, NULL)->next);
-		  line->output_string = formString(modular_history(0, NULL)->cmd);
-		}
-	    }
+	  func_key_down(line);
 	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
   	  continue;
   	}

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 17:02:56 2016 Victor Sousa
+** Last update Mon Jun  6 18:52:58 2016 Ethan Kerdelhue
 */
 
 #ifndef 		PROMPT_H_
@@ -107,5 +107,10 @@ String			modular_clip(char boolean, String new_buff, int pos);
 t_history		*modular_history(char boolean, t_history *new_history);
 t_history		*add_to_history(t_history *list, int id, char *cmd);
 t_edit_line		*modular_line(char boolean, t_edit_line *new_line);
+int			func_key_up(t_edit_line *line);
+int			func_key_down(t_edit_line *line);
+int			set_value_start(t_edit_line *line,
+					struct pollfd *pfd,
+					int *pr);
 
 #endif		/*PROMPT_H_*/
