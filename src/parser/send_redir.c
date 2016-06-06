@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Mon Jun  6 18:32:58 2016 Gaëtan Léandre
+** Last update Mon Jun  6 22:05:05 2016 victor sousa
 */
 
 #include		"main.h"
@@ -98,17 +98,14 @@ int			exec_redir(char **cmd, t_dlist *dlist)
   char			**start;
   char			*end;
 
-  pos = what_redir(cmd);
-  result = 0;
+  pos = what_redir(cmd) + (result = 0) * 0;
   if (pos < 0)
     {
       my_printf(2, "Ambiguous output redirect.\n");
       return (0);
     }
   else if (pos == 0)
-    {
-      return (make_command(cmd, dlist));
-    }
+    return (make_command(cmd, dlist));
   else
     {
       start = take_start(cmd);
@@ -121,30 +118,4 @@ int			exec_redir(char **cmd, t_dlist *dlist)
 	free(start);
     }
    return (result);
-}
-
-int			send_cmd(t_cmd *cmd, t_dlist *dlist)
-{
-  t_cmd			*tmp;
-  int			result;
-
-  result = 0;
-  tmp = cmd == NULL ? cmd : cmd->next;
-  while (tmp != NULL)
-    {
-	  if (tmp->token == PI)
-	    {
-	      result = make_pipe(tmp, dlist);
-	      while (tmp && tmp->token == PI)
-		tmp = tmp->next;
-	    }
-	  else if (tmp->prev->cmd == NULL || (tmp->prev->token == ET && result == 0))
-	    result = exec_redir(tmp->cmd, dlist);
-	  else if (tmp->prev->token == OU && result != 0)
-	    result = exec_redir(tmp->cmd, dlist);
-	  else if (tmp->prev->token == PV)
-	    result = exec_redir(tmp->cmd, dlist);
-	  tmp = tmp->next;
-    }
-  return (result);
 }
