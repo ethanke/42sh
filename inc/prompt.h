@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 21:59:26 2016 victor sousa
+** Last update Mon Jun  6 22:15:00 2016 victor sousa
 */
 
 #ifndef 		PROMPT_H_
@@ -114,5 +114,15 @@ int			set_value_start(t_edit_line *line,
 					int *pr);
 int			get_tty(char **env, t_edit_line *line);
 int			init_edition_line(char **env, t_edit_line *line);
+int			init_edition_line(char **env, t_edit_line *line);
+int			get_last_history_id();
+int			get_read_ret(t_edit_line *line, char *buff, char *out, int ret);
+int			if_ctrld(char *buff, t_edit_line *line);
+int			if_enter(char *buff);
+int			if_ctrll(char *buff, t_edit_line *line);
+int			if_side(char *buff, t_edit_line *line);
+int			if_side2(char *buff, t_edit_line *line);
+int			if_delete(char *buff, t_edit_line *line);
+int			if_paste(char *buff, t_edit_line *line);
 
 #endif		/*PROMPT_H_*/
