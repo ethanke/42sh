@@ -5,11 +5,11 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Tue Nov 17 11:29:13 2015 Gaëtan Léandre
-** Last update Thu May 26 03:39:19 2016 Gaëtan Léandre
+** Last update Mon Jun  6 18:52:50 2016 victor sousa
 */
 
-#ifndef 		_LIST_
-# define 		_LIST_
+#ifndef 		LIST_H_
+# define 		LIST_H_
 
 #include 		<stdlib.h>
 
@@ -39,4 +39,4 @@ t_list			*pop_list_start(t_dlist *dlist);
 void			remove_list(t_dlist *dlist);
 void			pop_list(t_list *list, t_dlist *dlist);
 
-#endif
+#endif			/*LIST_H_*/
