@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:16:02 2016 Gaëtan Léandre
-** Last update Sun Jun  5 06:00:27 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 01:05:08 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -67,7 +67,7 @@ int			get_sep(t_parser *parser, char *str)
   i = 0;
   while (parser->sep[i])
     {
-      if (my_strcmp(parser->sep[i], str) == 0)
+      if (my_strcmp(parser->sep[i], str) == 1)
 	return (i);
       i++;
     }
