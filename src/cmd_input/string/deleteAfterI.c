@@ -5,11 +5,11 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sun Jun  5 22:28:01 2016 Victor Sousa
-** Last update Mon Jun  6 00:31:23 2016 Victor Sousa
+** Last update Mon Jun  6 18:55:01 2016 victor sousa
 */
 
-#include	"my_string.h"
 #include	<stdio.h>
+#include	"my_string.h"
 
 void		deleteAfterI(String string, int pos)
 {

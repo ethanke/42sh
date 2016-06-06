@@ -5,22 +5,16 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sun Jun  5 16:13:58 2016 Victor Sousa
-** Last update Sun Jun  5 21:14:49 2016 Victor Sousa
+** Last update Mon Jun  6 19:03:20 2016 victor sousa
 */
 
 #include	"my_string.h"
 
-String		copyStringFrom(String string, int pos)
+static String	norme_string(t_char *cur, int pos, String output)
 {
-  String	output;
-  t_char	*cur;
   int		ite;
 
-  if ((output = malloc(sizeof(String))) == NULL)
-    return (NULL);
   ite = 0;
-  output->data = NULL;
-  cur = string->data;
   while (cur != NULL && cur->next != NULL && ite < pos)
     {
       cur = cur->next;
@@ -38,6 +32,17 @@ String		copyStringFrom(String string, int pos)
 	return (NULL);
       cur = cur->next;
     }
-  printString(output);
   return (output);
+}
+
+String		copyStringFrom(String string, int pos)
+{
+  String	output;
+  t_char	*cur;
+
+  if ((output = malloc(sizeof(String))) == NULL)
+    return (NULL);
+  output->data = NULL;
+  cur = string->data;
+  return (norme_string(cur, pos, output));
 }
