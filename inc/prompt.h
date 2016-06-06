@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 18:52:58 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 19:43:50 2016 Ethan Kerdelhue
 */
 
 #ifndef 		PROMPT_H_
@@ -112,5 +112,7 @@ int			func_key_down(t_edit_line *line);
 int			set_value_start(t_edit_line *line,
 					struct pollfd *pfd,
 					int *pr);
+char			*get_tty(char **env, t_edit_line *line);
+int			init_edition_line(char **env, t_edit_line *line);
 
 #endif		/*PROMPT_H_*/

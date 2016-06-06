@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 19:27:10 2016 tanguy lelievre
+** Last update Mon Jun  6 19:43:09 2016 Ethan Kerdelhue
 */
 
 #include	"main.h"
@@ -47,11 +47,8 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   struct pollfd pfd = {0,0,0};
   int		pr;
 
-  if (isatty(0) != 1 || init_edition_line(env, line) == 0)
-    {
-      reset_save_mode(RESTORE, line->fd_tty);
-      return (get_next_line(0));
-    }
+  if (get_tty(env, line) != NULL)
+    return (get_tty(env, line));
   ret = 1;
   modular_history(1, add_to_history(modular_history(0, NULL), get_last_history_id() + 1, StringToArray(line->output_string, STRING_NO_FREE)));
   while (modular_history(0, NULL)->next != NULL)
@@ -168,7 +165,7 @@ char		*get_prompt_input(t_edit_line *line, char **env)
   	}
       if (buff[0] == TAB && buff[1] == '\0')
 	{
-	  auto_complete(line->output_string, &line->cur_pos_x);
+
 	  continue;
 	}
       /* TODO */

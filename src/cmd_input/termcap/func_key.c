@@ -5,10 +5,21 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Jun  6 18:12:09 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 18:52:34 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 19:31:25 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
+
+char			*get_tty(char **env, t_edit_line *line)
+{
+  if (isatty(0) != 1 || init_edition_line(env, line) == 0)
+    {
+      reset_save_mode(RESTORE, line->fd_tty);
+      return (get_next_line(0));
+    }
+  else
+    return (NULL);
+}
 
 int			set_value_start(t_edit_line *line,
 					struct pollfd *pfd,
