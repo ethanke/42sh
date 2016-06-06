@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue Apr 12 16:51:52 2016 Gaëtan Léandre
-** Last update Mon Jun  6 07:05:38 2016 Gaëtan Léandre
+** Last update Mon Jun  6 16:03:58 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
@@ -100,12 +100,9 @@ int			exec_pipe(t_dlist *dlist, t_cmd *cmd, int size)
 	  cmd = cmd->next;
 	}
       last_pipe(cmd->cmd, pip, dlist);
-      i = 0;
-      while (i < size)
-	{
-	  wait(&prev);
-	  i++;
-	}
+      i = -1;
+      while (++i < size)
+	wait(&prev);
       return (prev);
     }
   return (0);
