@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:16:02 2016 Gaëtan Léandre
-** Last update Mon Jun  6 01:05:08 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 02:07:12 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -17,6 +17,8 @@ int			start_parsing(char **table, t_parser *parser)
   i = 0;
   while (table[i])
     {
+
+      puts(table[i]);
       if (isopt(table[i], parser) == 1)
 	{
 	  if ((parser->pile = add_node(parser->pile, OPE, table[i])) == NULL)
