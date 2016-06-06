@@ -1,11 +1,11 @@
 /*
-** pars.c for parser in /Users/leandr_g/Documents/Shared folder/42SH/src/parser/
+** pars.c for  in /Users/ethankerdelhue/Documents/Shared/42sh/src/parser/
 **
-** Made by Gaëtan Léandre
-** Login   <leandr_g@epitech.eu>
+** Made by Ethan Kerdelhue
+** Login   <kerdel_e@epitech.eu>
 **
-** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Mon Jun  6 03:05:23 2016 Ethan Kerdelhue
+** Started on  Mon Jun  6 04:06:14 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 06:22:25 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -176,15 +176,16 @@ t_cmd			*parsing(char *str, char **path)
 {
   t_parser		parser;
 
+  (void) path;
   if ((parser.pile = init_list()) == NULL)
     return (NULL);
   if ((parser.opt = load_opt()) == NULL)
     return (NULL);
   if ((parser.sep = load_sep()) == NULL)
     return (NULL);
-  if ((parser.path = path) == NULL)
-    return (NULL);
   if (get_parse(str, &parser) == -1)
+    return (NULL);
+  if (error_case(parser.cmd) == -1)
     return (NULL);
   return (parser.cmd);
 }
