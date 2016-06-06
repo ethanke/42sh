@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 00:52:26 2016 Victor Sousa
+** Last update Mon Jun  6 01:04:27 2016 Victor Sousa
 */
 
 #include	"prompt.h"
@@ -118,7 +118,6 @@ char		*get_prompt_input(t_edit_line *line, char **env)
       if (buff[0] == 0x1B && buff[1] == 0x5B && buff[2] == 0x33 &&
 	  buff[3] == 0x7E && buff[4] == '\0')
   	{
-	  printf("   %d\n", line->cur_pos_x - line->start_pos_x + 1);
 	  deleteCharAt(line->output_string, line->cur_pos_x - line->start_pos_x + 1);
     	  continue;
     	}

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 06:16:44 2016 Victor Sousa
-** Last update Sat Jun  4 07:00:30 2016 Victor Sousa
+** Last update Mon Jun  6 01:03:55 2016 Victor Sousa
 */
 
 #include	"my_string.h"
@@ -17,6 +17,8 @@ void		deleteCharAt(String string, int pos)
   t_char	*tmp;
 
   ite = 0;
+  if (pos > StringLenght(string))
+    return;
   c = string->data;
   while (c != NULL && ite < pos - 1)
     {
