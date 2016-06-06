@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Mon Jun  6 03:04:02 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 03:05:23 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -186,6 +186,5 @@ t_cmd			*parsing(char *str, char **path)
     return (NULL);
   if (get_parse(str, &parser) == -1)
     return (NULL);
-  print_list(parser.cmd);
   return (parser.cmd);
 }
