@@ -5,35 +5,39 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:18:19 2016 Gaëtan Léandre
-** Last update Sun Jun  5 19:41:21 2016 tanguy lelievre
+** Last update Mon Jun  6 02:02:40 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
 
 int		right_redir(char **start, char *end, t_dlist *dlist)
 {
-  int	fd;
-  int	reset;
+  int		fd;
+  int		reset;
+  int		to_ret;
 
+  to_ret = 1;
   if ((reset = dup(1)) == -1)
     return (0);
-  if ((fd = open(end, O_WRONLY | O_CREAT | O_TRUNC,
+  else if ((fd = open(end, O_WRONLY | O_CREAT | O_TRUNC,
 		 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
     return (0);
-  if (dup2(fd, 1) == -1 || make_command(start, dlist) == 0 ||
-      dup2(reset, 1) == -1)
-    return (0);
+  else if (dup2(fd, 1) == -1 || make_command(start, dlist) == 0)
+    to_ret = 0;
+  dup2(reset, 1);
   close(fd);
-  return (1);
+  return (to_ret);
 }
 
 int		dright_redir(char **start, char *end, t_dlist *dlist)
 {
-   int		fd;
+  int		fd;
   char		*buff;
   struct stat	stats;
   int		reset;
+  int		to_ret;
 
+  to_ret = 0;
   if ((reset = dup(1)) == -1)
     return (0);
   if (access(end, F_OK) == -1)
@@ -44,15 +48,14 @@ int		dright_redir(char **start, char *end, t_dlist *dlist)
     }
   else if ((fd = open(end, O_RDWR)) == -1)
     return (0);
-  if (stat(end, &stats) == -1 ||
-      (buff = malloc(stats.st_size + 1)) == NULL ||
+  if (stat(end, &stats) == -1 || (buff = malloc(stats.st_size + 1)) == NULL ||
       read(fd, buff, stats.st_size) == -1)
     return (0);
-  if (dup2(fd, 1) == -1 || make_command(start, dlist) == 0 ||
-      dup2(reset, 1) == -1)
-    return (0);
+  if (dup2(fd, 1) == -1 || make_command(start, dlist) == 0)
+    to_ret = 0;
+  dup2(reset, 1);
   close(fd);
-  return (1);
+  return (to_ret);
 }
 
 int		left_redir(char **start, char *end, t_dlist *dlist)

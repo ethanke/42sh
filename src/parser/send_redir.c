@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 02:11:25 2016 Gaëtan Léandre
-** Last update Mon Jun  6 01:13:22 2016 Gaëtan Léandre
+** Last update Mon Jun  6 01:30:45 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -86,6 +86,7 @@ char			*take_end(char **cmd)
       if (my_strcmp(cmd[i], ">") || my_strcmp(cmd[i], ">>")
 	  || my_strcmp(cmd[i], "<") || my_strcmp(cmd[i], "<<"))
 	return (cmd[i + 1]);
+      i++;
     }
   return (NULL);
 }
