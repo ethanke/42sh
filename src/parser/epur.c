@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 18:41:23 2016 Victor Sousa
+** Last update Mon Jun  6 19:11:01 2016 Ethan Kerdelhue
 */
 
 #include 	"parser.h"
@@ -102,6 +102,7 @@ char		*epur_opt(char *str, char **lim, int i, int k)
     }
   new[k] = 0;
   new  = my_epurstr(new, " ");
+puts(new);
   return (new);
 }
 
