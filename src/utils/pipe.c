@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue Apr 12 16:51:52 2016 Gaëtan Léandre
-** Last update Sun Jun  5 01:50:09 2016 Gaëtan Léandre
+** Last update Mon Jun  6 03:12:54 2016 Gaëtan Léandre
 */
 
 #include	"main.h"
@@ -93,6 +93,7 @@ int			exec_pipe(t_dlist *dlist, t_cmd *cmd, int size)
     {
       first_pipe(cmd->cmd, pip, dlist, &prev);
       i = 1;
+      cmd = cmd->next;
       while (cmd && cmd->token == PI)
 	{
 	  mid_pipe(cmd->cmd, pip, dlist, &prev);
