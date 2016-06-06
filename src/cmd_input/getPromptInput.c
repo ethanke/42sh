@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Jun  3 15:04:01 2016 Victor Sousa
-** Last update Mon Jun  6 01:04:27 2016 Victor Sousa
+** Last update Mon Jun  6 01:41:35 2016 Victor Sousa
 */
 
 #include	"prompt.h"
@@ -143,20 +143,25 @@ char		*get_prompt_input(t_edit_line *line, char **env)
 	}
 
       /* TODO */
-        if (my_prompt_strcmp(buff, KEY_UP) == 1)
-  	{
-  	  freeString(line->output_string);
-  	  line->output_string = formString("history up");
-  	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
+      if (my_prompt_strcmp(buff, KEY_UP) == 1)
+	{
+	  freeString(line->output_string);
+	  line->output_string = formString("history up");
+	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
+	  continue;
+  	}
+      if (my_prompt_strcmp(buff, KEY_DOWN) == 1)
+	{
+	  freeString(line->output_string);
+	  line->output_string = formString("history down");
+	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
   	  continue;
   	}
-        if (my_prompt_strcmp(buff, KEY_DOWN) == 1)
-  	{
-  	  freeString(line->output_string);
-  	  line->output_string = formString("history down");
-  	  line->cur_pos_x = line->start_pos_x + StringLenght(line->output_string);
-  	  continue;
-  	}
+      if (buff[0] == TAB && buff[1] == '\0')
+	{
+
+	  continue;
+	}
       /* TODO */
 
       line->output_string->data = pushCharAt(line->output_string->data, buff[0], line->cur_pos_x++);

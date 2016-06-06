@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Sat Jun  4 08:03:57 2016 Victor Sousa
-** Last update Mon Jun  6 00:01:38 2016 Victor Sousa
+** Last update Mon Jun  6 01:33:46 2016 Victor Sousa
 */
 
 #ifndef 		PROMPT_H_
@@ -39,6 +39,7 @@
 
 # define 		ENTER		'\n'
 # define		DEL		127
+# define		TAB		'\t'
 # define 		CTRLK		11
 # define 		CTRLY		25
 # define 		CTRLU		21
