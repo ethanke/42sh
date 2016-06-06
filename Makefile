@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 04:17:39 2016 Victor Sousa
+## Last update Mon Jun  6 04:23:12 2016 Gaëtan Léandre
 ##
 
 NAME	=	42sh
@@ -60,7 +60,8 @@ SRC		+=	$(UTILSDIR)/utils.c			\
 			$(UTILSDIR)/pipe.c			\
 			$(UTILSDIR)/free.c			\
 			$(UTILSDIR)/pars_env.c			\
-			$(UTILSDIR)/redirect.c
+			$(UTILSDIR)/redirect.c			\
+			$(UTILSDIR)/disp_msg.c
 
 ## PRINTF ##
 SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \

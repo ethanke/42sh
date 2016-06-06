@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sun Jan 24 16:52:29 2016 Gaëtan Léandre
-** Last update Mon Jun  6 04:16:44 2016 Victor Sousa
+** Last update Mon Jun  6 04:22:11 2016 Gaëtan Léandre
 */
 
 #ifndef 		_MINISHELL_
@@ -24,6 +24,12 @@
 # include 		"get_next_line.h"
 # include		"prompt.h"
 # include		"parser.h"
+
+typedef struct		s_error
+{
+  int			sign;
+  char			*msg;
+}			t_error;
 
 char			*my_strdup(char *str);
 void			disp_pwd(char *pwd);
@@ -70,5 +76,6 @@ int			left_redir(char **start, char *end, t_dlist *dlist);
 int			dleft_redir(char **start, char *end, t_dlist *dlist);
 void			send_cmd(t_cmd *cmd, t_dlist *dlist);
 int			history_buildin(void);
+void			disp_msg(int error);
 
 #endif			/*_MINISHELL_*/

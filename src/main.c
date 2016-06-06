@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Sat Jan 23 02:27:31 2016 Gaëtan Léandre
-** Last update Mon Jun  6 04:17:12 2016 Victor Sousa
+** Last update Mon Jun  6 04:24:50 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -72,8 +72,8 @@ int			launch(t_dlist *dlist, char **cmd)
       waitpid(pid, &pid_stat, 0);
       if (WIFEXITED(pid_stat))
 	return (WEXITSTATUS(pid_stat));
-      else if (WIFSIGNALED(pid_stat) && (pid_stat = WTERMSIG(pid_stat)) == 11)
-	write(2, "Segmentation fault\n", 20);
+      else if (WIFSIGNALED(pid_stat))
+	disp_msg(WTERMSIG(pid_stat));
     }
   return (0);
 }
