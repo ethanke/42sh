@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May 31 06:44:24 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 22:51:42 2016 victor sousa
+** Last update Mon Jun  6 23:02:03 2016 victor sousa
 */
 
 #include 	"parser.h"
@@ -43,7 +43,6 @@ char		*epur_opt(char *str, char **lim, int i, int k)
   int		j;
   char		*new;
 
-  str = my_epurstr(str, "\t ");
   if ((new = malloc(count_size_sep(str, lim) + 1)) == NULL)
     return (NULL);
   while (str[++i])
