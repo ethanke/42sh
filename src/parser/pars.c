@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun Jun  5 01:18:10 2016 Gaëtan Léandre
-** Last update Mon Jun  6 02:55:43 2016 Ethan Kerdelhue
+** Last update Mon Jun  6 03:04:02 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -102,7 +102,7 @@ t_cmd			*end_parsing(t_parser *parser)
   while (pile != NULL)
     {
       tmp[j].token = 0;
-      if (pile->token == SEP)
+      if (pile->token == SEP || (my_strcmp(pile->content, "|") == 1))
 	{
 	  tmp[j].token = get_sep(parser, pile->content);
 	  tmp[j].cmd[i] = NULL;
@@ -186,5 +186,6 @@ t_cmd			*parsing(char *str, char **path)
     return (NULL);
   if (get_parse(str, &parser) == -1)
     return (NULL);
+  print_list(parser.cmd);
   return (parser.cmd);
 }
