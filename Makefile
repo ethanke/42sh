@@ -5,7 +5,7 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Sat Jan 23 02:23:24 2016 Gaëtan Léandre
-## Last update Mon Jun  6 04:32:36 2016 Kerdelhue Ethan
+## Last update Mon Jun  6 15:53:42 2016 Gaëtan Léandre
 ##
 
 NAME	=	42sh
@@ -52,6 +52,7 @@ SRC		+=	$(BLTINDIR)/builds.c			\
 ## UTILS ##
 SRC		+=	$(UTILSDIR)/utils.c			\
 			$(UTILSDIR)/utils2.c			\
+			$(UTILSDIR)/utils3.c			\
 			$(UTILSDIR)/get_next_line.c		\
 			$(UTILSDIR)/str_to_wordtab.c		\
 			$(UTILSDIR)/my_getnbr.c			\

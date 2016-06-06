@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May 26 03:05:28 2016 Gaëtan Léandre
-** Last update Mon Jun  6 15:17:34 2016 Gaëtan Léandre
+** Last update Mon Jun  6 15:31:07 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -43,9 +43,8 @@ int			my_cd(t_dlist *dlist, char *command)
   char			*home;
   char			*new;
 
-  i = 0;
-  while (command && command[i] && command[i] == ' ')
-    i++;
+  i = -1;
+  while (command && command[++i] && command[i] == ' ');
   if ((!command || command[i] == '~')
       && (home = find_with_name(dlist, "HOME")) != NULL)
     {
