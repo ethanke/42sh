@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Jun  6 17:40:20 2016 Gaëtan Léandre
-** Last update Mon Jun  6 19:29:50 2016 Gaëtan Léandre
+** Last update Mon Jun  6 22:00:31 2016 victor sousa
 */
 
 #include	"main.h"
@@ -15,8 +15,6 @@ static int	globerr(const char *path, int eerrno)
   my_printf(2, "%s: %s\n", path, strerror(eerrno));
   return 0;
 }
-
-
 
 char		**my_tabcat(char **a, char **b)
 {
