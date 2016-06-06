@@ -5,20 +5,19 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Jun  6 18:12:09 2016 Ethan Kerdelhue
-** Last update Mon Jun  6 20:51:56 2016 victor sousa
+** Last update Mon Jun  6 21:50:27 2016 victor sousa
 */
 
 #include		"main.h"
 
-char			*get_tty(char **env, t_edit_line *line)
+int			get_tty(char **env, t_edit_line *line)
 {
   if (isatty(0) != 1 || init_edition_line(env, line) == 0)
     {
       reset_save_mode(RESTORE, line->fd_tty);
-      return (get_next_line(0));
+      return (1);
     }
-  else
-    return (NULL);
+  return (0);
 }
 
 int			set_value_start(t_edit_line *line,
@@ -34,7 +33,7 @@ int			set_value_start(t_edit_line *line,
   curseur(line->cur_pos_x, line->cur_pos_y);
   pfd->fd = STDIN_FILENO;
   pfd->events = POLLIN;
-  *pr = poll(pfd, 1, 5000);
+  *pr = poll(pfd, 1, 5090000);
   return (0);
 }
 
